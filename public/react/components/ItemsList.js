@@ -1,10 +1,12 @@
 import React from 'react';
-import { Items } from './Items';
+import  {Items}  from './Items';
 
-export const ItemssList = ({items}) => {
+export const ItemsList = ({items}) => {
+
+	
 	return <>
 		{
-			items.map((items, idx) => {
+			items.map((item, idx) => {
 				return <Items items={items} key={idx} />
 			})
 		}
