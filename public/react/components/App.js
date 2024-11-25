@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api'
+import Navbar from './Navbar/Navbar'
 import ItemCard from './ItemCard/ItemCard'
 import ItemDescription from './ItemDescription/ItemDescription'
 
@@ -26,9 +27,9 @@ export const App = () => {
 	}, [singleItem])
 
 	return (
-		<main className="bg-zinc-300">	
-      		<h1 className='bg-zinc-300' style={{ fontSize : '5vw', justifySelf : 'center', paddingBottom : '40px' }} >Vaultry</h1>
+		<>	
+      		<Navbar />
 			{singleItem ? <ItemDescription singleItem={singleItem} /> : <ItemCard items={items} setSingleItem={setSingleItem} />} {/* // Change tis turnary to show the detail page once its created, when singleItem state is updated  */}
-		</main>
+		</>
 	)
 }
