@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ItemsList } from "./ItemsList";
+import { Item } from "./Item";
 import apiURL from "../api";
 
 export const App = () => {
   const [items, setItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null); // New state
 
   async function fetchItems() {
     try {
@@ -19,11 +21,28 @@ export const App = () => {
     fetchItems();
   }, []);
 
+  const handleSelectItem = (item) => {
+    setSelectedItem(item);
+  };
+
+  const handleBack = () => {
+    setSelectedItem(null);
+  };
+
   return (
     <main>
       <h1>Item Store</h1>
-      <h2>All Items</h2>
-      <ItemsList items={items} />
+      {selectedItem ? (
+        <div>
+          <button onClick={handleBack}>Back to Items</button>
+          <Item item={selectedItem} />
+        </div>
+      ) : (
+        <>
+          <h2>All Items</h2>
+          <ItemsList items={items} onSelectItem={handleSelectItem} />
+        </>
+      )}
     </main>
   );
 };
