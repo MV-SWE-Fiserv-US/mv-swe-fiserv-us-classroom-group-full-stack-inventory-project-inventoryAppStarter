@@ -44,6 +44,14 @@ export const App = () => {
     setSelectedItem(null);
   };
 
+  const handleSelectItem = (item) => {
+    setSelectedItem(item);
+  };
+
+  const handleBack = () => {
+    setSelectedItem(null);
+  };
+
   return (
     <main>
       <h1>Item Store</h1>
