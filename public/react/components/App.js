@@ -3,16 +3,12 @@ import React, { useState, useEffect } from 'react'
 // import and prepend the api url to any fetch calls
 import apiURL from '../api'
 import ItemCard from './ItemCard/ItemCard'
+import ItemDescription from './ItemDescription/ItemDescription'
 
 export const App = () => {
 
 	const [items, setItems] = useState([])
-	const [singleItem, setSingleItem] = useState({
-		name: "",
-		description: "",
-		price: 0,
-		image: ""
-	})
+	const [singleItem, setSingleItem] = useState(null)
 
 	async function fetchItems(){
 		try {
@@ -27,12 +23,12 @@ export const App = () => {
 
 	useEffect(() => {
 		fetchItems()
-	}, [])
+	}, [singleItem])
 
 	return (
 		<main>	
       		<h1 style={{ fontSize : '5vw', justifySelf : 'center', paddingBottom : '40px' }} >Vaultry</h1>
-			<ItemCard items={items}/>
+			{singleItem ? <ItemDescription singleItem={singleItem} /> : <ItemCard items={items} setSingleItem={setSingleItem} />} {/* // Change tis turnary to show the detail page once its created, when singleItem state is updated  */}
 		</main>
 	)
 }
