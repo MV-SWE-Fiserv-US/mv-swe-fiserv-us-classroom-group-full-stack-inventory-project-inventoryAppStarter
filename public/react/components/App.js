@@ -26,7 +26,7 @@ export const App = () => {
 			const response = await fetch(`${apiURL}/items`);
 			const itemsData = await response.json();
 			
-			setSauces(saucesData);
+			setSauces(itemsData);
 		} catch (err) {
 			console.log("Oh no an error! ", err)
 		}
