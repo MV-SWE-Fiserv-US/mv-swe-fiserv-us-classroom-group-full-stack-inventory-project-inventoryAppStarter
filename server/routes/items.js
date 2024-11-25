@@ -12,12 +12,7 @@ router.get('/', async (req, res) => {
         console.log("error getting items", error);
     }
 })
-
-router.get('/:id',async(req,res)=>{
-    const itemId = req.params.id;
-    const item = await Item.findByPk(itemId);
-    res.json(item);
-})
+//Get the specific item by ID /items/:id
 router.get('/:id', async (req, res) => {
     try {
         const itemId = req.params.id;
@@ -34,3 +29,20 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ error: 'An error occurred while fetching the item.' });
     }
 });
+//Post An Item 
+router.post('/', async(req,res)=>{
+    const item = await Item.create(req.body);
+    res.json(item);
+
+})
+//Update a specific Item
+router.put('/:id',async(req,res)=>{
+    const updatedItem = await Item.update(req.body,{where :{id : req.params.id}});
+    res.json(updatedItem);
+})
+//Delete a specific Item 
+router.delete('/:id',async(req,res)=>{
+    const deletedItem = await Item.destroy({where :{id : req.params.id}});
+    res.json(deletedItem);
+})
+module.exports = router;
