@@ -26,8 +26,8 @@ export const App = () => {
 	}, [singleItem])
 
 	return (
-		<main className="h-screen w-screen">	
-      		<h1 style={{ fontSize : '5vw', justifySelf : 'center', paddingBottom : '40px' }} >Vaultry</h1>
+		<main className="bg-zinc-300">	
+      		<h1 className='bg-zinc-300' style={{ fontSize : '5vw', justifySelf : 'center', paddingBottom : '40px' }} >Vaultry</h1>
 			{singleItem ? <ItemDescription singleItem={singleItem} /> : <ItemCard items={items} setSingleItem={setSingleItem} />} {/* // Change tis turnary to show the detail page once its created, when singleItem state is updated  */}
 		</main>
 	)
