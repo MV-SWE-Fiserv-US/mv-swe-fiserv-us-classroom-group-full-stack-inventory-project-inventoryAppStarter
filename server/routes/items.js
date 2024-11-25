@@ -21,4 +21,37 @@ router.get("/:id", async (req, res, next) => {
     }
 })
 
+router.post("/", async (req, res, next) => {
+  try {
+    const createdItem = await Item.create(req.body)
+    res.status(201).json(createdItem)
+  } catch(error) {
+    next(error)
+  }
+})
+
+router.put("/:id", async (req, res, next) => {
+  const id = req.params.id
+  try {
+    const updatedItem = await Item.update(req,body, {
+      where : { id }
+    })
+    res.status(202).json(updatedItem)
+  } catch(error) {
+    next(error)
+  }
+})
+
+router.delete("/:id", async (req, res, next) => {
+  const id = req.params.id
+  try {
+    await Item.destroy({
+      where : { id }
+    })
+    res.status(203)
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router;
