@@ -57,13 +57,13 @@ describe("Items", () => {
             "category": "Sample Category",
             "price": 19.99,
             "image": "http://example.com/sample-image.jpg"
-          }
+        }
         const response = await request(app).post("/items/").send(body)
         expect(response.status).toBe(201)
         expect(response.body).toMatchObject(body)
     })
 
-    test("POST /items/:id should return a correct data for single item",  async() => {
+    test("PUT /items/:id should return a correct data for single item",  async() => {
         const body = {
             "name": "Sample Item",
             "description": "This is a sample item description.",
@@ -71,9 +71,28 @@ describe("Items", () => {
             "price": 19.99,
             "image": "http://example.com/sample-image.jpg"
           }
-          await request(app).put("/items/20").send(body);
-          const response = await request(app).get("/items/20");
+        await request(app).put("/items/20").send(body)
+        const response = await request(app).get("/items/20")
         expect(response.status).toBe(200)
-        expect(response.body).toMatchObject(body);
+        expect(response.body).toMatchObject(body)
+    })
+
+    test("DELETE /items/:id should delete an item",  async() => {
+        const body = {
+            "name": "Sample Item",
+            "description": "This is a sample item description.",
+            "category": "Sample Category",
+            "price": 19.99,
+            "image": "http://example.com/sample-image.jpg"
+        }
+        const newItem = await request(app).post("/items/").send(body)
+        await request(app).get("/items/21")
+        const response = await request(app).get("/items/21")
+        expect(response.status).toBe(200)
+        expect(response.body).toMatchObject(body)
+
+        const deletedItem = await request(app).delete("/items/21").send(body)
+        const deletedResponse = await request(app).get("/items/21")
+        expect(deletedResponse.status).toBe(404)
     })
 })
