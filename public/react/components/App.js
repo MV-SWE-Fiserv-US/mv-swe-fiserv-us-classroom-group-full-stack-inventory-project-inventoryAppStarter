@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api'
+import Navbar from './Navbar/Navbar'
 import ItemCard from './ItemCard/ItemCard'
 import ItemDescription from './ItemDescription/ItemDescription'
+
 
 export const App = () => {
 
@@ -19,7 +21,7 @@ export const App = () => {
 			
 			const uniqueCategories = Array.from(new Set(itemsData.map(item => item.category)))
 			setCategories(uniqueCategories)
-			
+		
 			setItems(itemsData)
 		} catch (err) {
 			console.log("Oh no an error! ", err)
@@ -57,6 +59,9 @@ export const App = () => {
 				</select>
 			</div>
 			{singleItem ? <ItemDescription singleItem={singleItem} /> : filteredItems ? <ItemCard items={filteredItems} setSingleItem={setSingleItem} /> : <ItemCard items={items} setSingleItem={setSingleItem} />} {/* // Change tis turnary to show the detail page once its created, when singleItem state is updated  */}
+          <Navbar />
+			{singleItem ? <ItemDescription singleItem={singleItem} /> : <ItemCard items={items} setSingleItem={setSingleItem} />} 
 		</main>
+
 	)
 }

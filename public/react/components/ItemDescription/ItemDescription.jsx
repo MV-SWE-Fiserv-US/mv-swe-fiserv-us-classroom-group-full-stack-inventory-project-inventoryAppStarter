@@ -1,5 +1,3 @@
-import "./ItemDescription.css";
-
 export default function ItemDescription({ singleItem }) {
   return (
     <section className="max-w-4xl h-[70%] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex">
