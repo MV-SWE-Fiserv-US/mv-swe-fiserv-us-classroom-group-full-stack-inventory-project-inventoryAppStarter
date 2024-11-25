@@ -1,12 +1,13 @@
 const { Sequelize } = require('sequelize');
 const { sequelize } = require('../db');
 const User = require('./User');
-cosnt Item = require('./Item');
+const Item = require('./Item');
 
-// const Sauce = sequelize.define("sauces", {
-//   name: Sequelize.STRING,
-//   image: Sequelize.STRING,
-// });
+
+const Sauce = sequelize.define("sauces", {
+  name: Sequelize.STRING,
+  image: Sequelize.STRING,
+})
 
 Item.belongsToMany(User, {through: 'UserItem'});
 User.belongsToMany(Item, {through: 'UserItem'});
