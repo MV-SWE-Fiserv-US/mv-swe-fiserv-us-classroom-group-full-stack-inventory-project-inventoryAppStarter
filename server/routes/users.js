@@ -1,5 +1,5 @@
 const express = require("express");
-const { Order, User } = require("../models");
+const { Order, User, Item } = require("../models");
 const router = express.Router();
 
 // GET /users
@@ -25,7 +25,9 @@ router.get("/:id", async (req, res, next) => {
 // GET /users/:id/orders
 router.get("/:id/orders", async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.id, { include: Order });
+    const user = await User.findByPk(req.params.id, {
+      include: [Order],
+    });
     res.json(user);
   } catch (error) {
     next(error);
@@ -63,3 +65,5 @@ router.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;

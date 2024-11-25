@@ -1,5 +1,5 @@
 const express = require("express");
-const { Order } = require("../models");
+const { Order, Item } = require("../models");
 const router = express.Router();
 
 // GET /orders
@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 // GET /orders/:id
 router.get("/:id", async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id);
+    const order = await Order.findByPk(req.params.id, { include: [Item] });
     res.json(order);
   } catch (error) {
     next(error);
@@ -53,3 +53,5 @@ router.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;

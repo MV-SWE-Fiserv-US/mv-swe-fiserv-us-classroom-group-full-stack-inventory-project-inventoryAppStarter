@@ -19,8 +19,8 @@ const Item = sequelize.define("items", {
 User.hasMany(Order);
 Order.belongsTo(User);
 
-Order.belongsToMany(Item, { through: "Order Items" });
-Item.belongsToMany(Order, { through: "Order Items" });
+Order.belongsToMany(Item, { through: 'Order Items' });
+Item.belongsToMany(Order, { through: 'Order Items' });
 
 module.exports = {
   db: sequelize,
