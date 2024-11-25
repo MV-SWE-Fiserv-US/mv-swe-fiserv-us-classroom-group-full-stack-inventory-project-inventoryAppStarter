@@ -7,11 +7,6 @@ const Sauce = sequelize.define("sauces", {
 });
 
 const Item = sequelize.define("items", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
   name: DataTypes.STRING,
   description: DataTypes.STRING,
   category: DataTypes.STRING,

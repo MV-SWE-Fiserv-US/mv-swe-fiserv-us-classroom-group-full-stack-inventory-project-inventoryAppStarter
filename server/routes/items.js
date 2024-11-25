@@ -1,24 +1,29 @@
-const express = require("express");
-const router = express.Router();
-const { Item } = require("../models");
+const express = require("express")
+const router = express.Router()
+const { Item } = require("../models")
 
 // GET /items
 router.get("/", async (req, res, next) => {
   try {
-    const Items = await Item.findAll();
-    res.status(200).json(Items);
+    const Items = await Item.findAll()
+    res.status(200).json(Items)
   } catch (error) {
-    next(error);
+    next(error)
   }
-});
+})
 
 router.get("/:id", async (req, res, next) => {
-    try {
-        const targetItem = await Item.findByPk(req.params.id);
-        res.status(200).json(targetItem);
-    } catch(error) {
-        next(error);
+  const id = req.params.id
+  try {
+    const targetItem = await Item.findByPk(id)
+    if (targetItem) {
+      res.status(200).json(targetItem)
+    } else {
+      res.status(404).json({ message: "Item not found" })
     }
+  } catch(error) {
+    next(error)
+  }
 })
 
 router.post("/", async (req, res, next) => {
@@ -33,7 +38,7 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   const id = req.params.id
   try {
-    const updatedItem = await Item.update(req,body, {
+    const updatedItem = await Item.update(req.body, {
       where : { id }
     })
     res.status(202).json(updatedItem)
@@ -45,13 +50,17 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   const id = req.params.id
   try {
-    await Item.destroy({
+    const deletedItem = await Item.destroy({
       where : { id }
     })
-    res.status(203)
-  } catch (error) {
+    if (deletedItem) {
+      res.status(203).send("Item deleted")
+    } else {
+      res.status(404).json({ message: "Item not found" })
+    }
+  } catch(error) {
     next(error)
   }
 })
 
-module.exports = router;
+module.exports = router
