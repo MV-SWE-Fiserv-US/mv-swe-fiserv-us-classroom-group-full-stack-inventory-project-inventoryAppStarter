@@ -11,14 +11,14 @@ const router = require('./routes/Items');
 app.use(cors());
 // logging middleware
 app.use('/item', router);
-/*app.use(morgan('dev'));*/
+app.use(morgan('dev'));
 // parsing middleware for form input data & json
 /*app.use(express.urlencoded({ extended: false }));*/
 /*app.use(express.json());*/
 app.use(express.json());
 app.use(express.urlencoded({extended: true  }))
 // serve up static files (e.g. html and css files)
-/*app.use(express.static(path.join(__dirname, '../dist')));*/
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // api router
 /*app.use('/api', require('./routes'));*/
