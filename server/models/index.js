@@ -6,16 +6,7 @@ const Sauce = sequelize.define("sauces", {
   image: Sequelize.STRING,
 });
 
-const Item = sequelize.define("items", {
-  name: Sequelize.STRING,
-  price: Sequelize.FLOAT,
-  description: Sequelize.TEXT,
-  category: Sequelize.STRING,
-  image: Sequelize.STRING,
-});
-
 module.exports = {
   db: sequelize,
   Sauce,
-  Item,
 };
