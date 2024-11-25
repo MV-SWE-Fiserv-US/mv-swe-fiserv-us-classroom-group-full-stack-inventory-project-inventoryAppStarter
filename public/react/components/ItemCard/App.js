@@ -32,7 +32,8 @@ export const App = () => {
 	return (
 		<main>	
       		<h1 style={{ fontSize : '5vw', justifySelf : 'center', paddingBottom : '40px' }} >Vaultry</h1>
-			{items.length > 1 ? <ItemCard items={items}/> : ""}
+			{items.length > 1 ? <ItemCard items={items}/> : ""} {/* // Change tis turnary to show the detail page once its created, when singleItem state is updated  */}
+			
 		</main>
 	)
 }
