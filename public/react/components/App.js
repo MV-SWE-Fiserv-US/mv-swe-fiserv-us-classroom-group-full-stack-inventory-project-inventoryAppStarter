@@ -5,10 +5,10 @@ import { SaucesList } from './SaucesList';
 import apiURL from '../api';
 import ItemsList from './ItemsList';
 import ItemDetails from './ItemDetails';
+import ItemCard from './ItemCard/ItemCard'
 
 export const App = () => {
 
-	const [sauces, setSauces] = useState([]);
 	const [items, setItems] = useState([]);
 	const [singleItem, setSingleItem] = useState({
 		name: "",
@@ -16,17 +16,6 @@ export const App = () => {
 		price: 0,
 		image: ""
 	});
-
-	async function fetchSauces(){
-		try {
-			const response = await fetch(`${apiURL}/sauces`);
-			const saucesData = await response.json();
-			
-			setSauces(saucesData);
-		} catch (err) {
-			console.log("Oh no an error! ", err)
-		}
-	}
 
 	async function fetchItems(){
 		try {
@@ -40,16 +29,13 @@ export const App = () => {
 	}
 
 	useEffect(() => {
-		fetchSauces();
 		fetchItems();
 	}, []);
 
 	return (
 		<main>	
-      		<h1>Sauce Store</h1>
-			<h2>All things 🔥</h2>
-			<SaucesList sauces={sauces} />
-			{singleItem.name ? <ItemDetails singleItem={singleItem} /> : <ItemsList items={items} setSingleItem={setSingleItem} />}
+      		<h1 style={{ fontSize : '5vw', justifySelf : 'center', paddingBottom : '40px' }} >Vaultry</h1>
+			<ItemCard items={items}/>
 		</main>
 	)
 }
