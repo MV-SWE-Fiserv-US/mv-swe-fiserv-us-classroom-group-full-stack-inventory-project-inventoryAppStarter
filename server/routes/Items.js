@@ -1,7 +1,7 @@
-const {Item} = require('../models/index.js')
+const {Item} = require('../models/Item.js')
 const express = require('express');
 const router = express.Router();
-router.use(express.json());
+/*router.use(express.json());*/
 
 router.get('/', async (req, res) => {
     try {
@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
   }
 );
 
-routershows.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const fieldsToUpdate = req.body;
@@ -73,7 +73,7 @@ routershows.put('/:id', async (req, res) => {
 
 
 
-routershows.delete('/:id', async (req, res) => { 
+router.delete('/:id', async (req, res) => { 
     try {
       const deleted = await Item.destroy({ where: { id: req.params.id } });
       if (!deleted) return res.status(404).json({ error: 'Item not found' });
@@ -82,3 +82,5 @@ routershows.delete('/:id', async (req, res) => {
       res.status(500).json({ error: 'Unable to delete Item', details: error.message });
     }
   });
+
+module.exports = router;

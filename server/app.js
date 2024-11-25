@@ -2,24 +2,33 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
-const path = require("path");
-const cors = require("cors");
+
+const morgan = require('morgan');
+const path = require('path');
+const cors = require('cors');
+const router = require('./routes/Items');
+
 
 //Allow CORS requests
 app.use(cors());
 // logging middleware
-app.use(morgan("dev"));
-// parsing middleware for form input data & json
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
+app.use('/item', router);
+app.use(morgan('dev'));
+
+// parsing middleware for form input data & json
+/*app.use(express.urlencoded({ extended: false }));*/
+/*app.use(express.json());*/
+app.use(express.json());
+app.use(express.urlencoded({extended: true  }))
 // serve up static files (e.g. html and css files)
 app.use(express.static(path.join(__dirname, "../dist")));
 
 // api router
-app.use("/api", require("./routes"));
-app.use("/item", require("./routes/Items.js"));
+
+/*app.use('/api', require('./routes'));*/
+
+
 // 404 handler
 app.use((req, res) => {
   res
