@@ -3,7 +3,7 @@ import "./ItemDescription.css";
 export default function ItemDescription({ singleItem }) {
   return (
     <section className="max-w-4xl h-[70%] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex">
-      <img src={singleItem.image} alt={singleItem.name} className="w-full h-full object-contain" />
+      <img src={singleItem.image} alt={singleItem.name} className="h-full w-1/2 object-contain" />
       <div className="p-4 flex flex-col justify-around flex-wrap" >
         <h2 className="text-xl font-semibold text-gray-800">{singleItem.name}</h2>
         <p className="text-gray-600 mt-2">{singleItem.description}</p>
