@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { SaucesList } from './SaucesList'
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api'
-import ItemsList from './ItemsList'
-import ItemDetails from './ItemDetails'
 import ItemCard from './ItemCard/ItemCard'
 
 export const App = () => {
