@@ -9,8 +9,10 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 16px;
+    padding-bottom: 16px;
     width: 22vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
   
 .item-card img {

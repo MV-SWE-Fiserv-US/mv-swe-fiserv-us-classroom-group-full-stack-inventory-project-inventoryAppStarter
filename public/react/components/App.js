@@ -34,7 +34,7 @@ export const App = () => {
 
 	return (
 		<main>	
-      		<h1>Vaultry</h1>
+      		<h1 style={{ fontSize : '5vw', justifySelf : 'center', paddingBottom : '40px' }} >Vaultry</h1>
 			<ItemCard items={items}/>
 		</main>
 	)
