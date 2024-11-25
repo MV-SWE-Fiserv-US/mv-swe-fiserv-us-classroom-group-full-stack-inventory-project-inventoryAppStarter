@@ -1,8 +1,14 @@
 import React from 'react'
 
-const ItemsList = () => {
+const ItemsList = ({ items }) => {
   return (
-    <div>ItemsList</div>
+    <>
+		{
+			items.map((sauce, idx) => {
+				// return <Sauce sauce={sauce} key={idx} />
+			})
+		}
+	</>
   )
 }
 
