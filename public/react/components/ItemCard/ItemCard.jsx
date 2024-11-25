@@ -26,7 +26,7 @@ export default function ItemCard({ items, setSingleItem }) {
     }
 
     return (
-        <div className="item-container bg-zinc-300 font-black flex flex-wrap justify-center gap-4 mx-auto">
+        <div className="item-container bg-zinc-300 font-black flex flex-wrap justify-evenly gap-4 mx-auto">
             {items.map((item) => {
                 const num = Math.floor(Math.random() * 6)
                 return (
