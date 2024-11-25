@@ -10,4 +10,4 @@ export const Items = (props) => {
     <img src={props.items.image} alt={props.items.name} />
   </>
 } 
-	
+	 

@@ -18,7 +18,7 @@ export const App = () => {
 		} catch (err) {
 			console.log("Oh no an error! ", err)
 		}
-	}
+	} 
 
 	useEffect(() => {
 		fetchItems();
