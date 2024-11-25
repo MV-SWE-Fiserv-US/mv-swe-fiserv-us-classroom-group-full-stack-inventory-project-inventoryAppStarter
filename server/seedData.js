@@ -145,5 +145,45 @@ module.exports = {
        "category":"women's clothing",
        "image":"https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg"
     }
- ]
+ ],
+   users: [
+    {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "password": "hashedpassword123",
+      "cart": [],
+      "isAdmin": false,
+    },
+    {
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "password": "hashedpassword456", 
+      "cart": [],
+      "isAdmin": false,
+    },
+    {
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "adminpassword", 
+      "cart": [],
+      "isAdmin": true,
+    }
+  ],
+  orders: [
+    {
+      "userId": 1, 
+      "total": 154.55,
+      "status": "Shipped",
+    },
+    {
+      "userId": 2,
+      "total": 704.99,
+      "status": "Delivered",
+    },
+    {
+      "userId": 1, 
+      "total": 64,
+      "status": "Pending",
+    }
+  ]
 };
