@@ -137,17 +137,6 @@ describe("Users", () => {
     );
   });
 
-  //   router.get("/:id/orders", async (req, res, next) => {
-  //   try {
-  //     const user = await User.findByPk(req.params.id, {
-  //       include: [Order],
-  //     });
-  //     res.json(user);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // });
-
   test("GET /users/:id/orders should return a correct data for single user", async () => {
     const response = await request(app).get("/users/1/orders");
     expect(response.body.orders).toHaveLength(2);
@@ -181,6 +170,66 @@ describe("Users", () => {
   test("DELETE /users/:id should delete an user", async () => {
     await request(app).delete("/users/1");
     const response = await request(app).get("/users/");
+    expect(response.body).toHaveLength(2);
+  });
+});
+
+describe("Orders", () => {
+  beforeEach(async () => {
+    await sequelize.sync({ force: true });
+    execSync("npm run seed");
+  });
+
+  test("GET /orders should return a status code of 200", async () => {
+    const response = await request(app).get("/orders");
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("GET /orders should return an array", async () => {
+    const response = await request(app).get("/orders");
+    expect(response.body).toBeInstanceOf(Array);
+  });
+
+  test("GET /orders should return correct number of orders", async () => {
+    const response = await request(app).get("/orders");
+    expect(response.body).toHaveLength(3);
+  });
+
+  test("GET /orders/:id should return a correct data for single order", async () => {
+    const response = await request(app).get("/orders/1");
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        userId: 1,
+        total: 154.55,
+        status: "Shipped",
+      })
+    );
+  });
+
+  test("POST /orders should return a correct data for single order", async () => {
+    const body = {
+      userId: 3,
+      total: 54.1,
+      status: "Pending",
+    };
+    const response = await request(app).post("/orders/").send(body);
+    expect(response.body).toMatchObject(body);
+  });
+
+  test("PUT /orders/:id should return a correct data for single order", async () => {
+    const body = {
+      userId: 3,
+      total: 504.1,
+      status: "Shipped",
+    };
+    await request(app).put("/orders/3").send(body);
+    const response = await request(app).get("/orders/3");
+    expect(response.body).toMatchObject(body);
+  });
+
+  test("DELETE /orders/:id should delete an order", async () => {
+    await request(app).delete("/orders/1");
+    const response = await request(app).get("/orders/");
     expect(response.body).toHaveLength(2);
   });
 });
