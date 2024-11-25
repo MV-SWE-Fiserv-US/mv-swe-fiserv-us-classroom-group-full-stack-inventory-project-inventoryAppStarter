@@ -1,12 +1,14 @@
 import React from "react";
 import { Item } from "./Item";
 
-export const ItemsList = ({ items }) => {
+export const ItemsList = ({ items, onSelectItem }) => {
   return (
-    <>
-      {items.map((item, idx) => {
-        return <Item item={item} key={idx} />;
-      })}
-    </>
+    <div className="items-list">
+      {items.map((item) => (
+        <div key={item.id} onClick={() => onSelectItem(item)}>
+          <Item item={item} />
+        </div>
+      ))}
+    </div>
   );
 };
