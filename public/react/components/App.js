@@ -11,6 +11,7 @@ export const App = () => {
 	const [items, setItems] = useState([]);
 	const [item, setItem] = useState({});
 	const [itemId, setItemId] = useState(null);
+	const [refresh, setRefresh] = useState(false);
 
 	
 	async function fetchItem(){
@@ -42,14 +43,13 @@ export const App = () => {
 			fetchItems();
 		}
 		
-	}, [selectItem, itemId]);
+	}, [selectItem, itemId, refresh]);
 	
 
 	return (
 		<main>
-			{selectItem ? <Item item={item} setSelectItem ={setSelectItem} selectItem={selectItem} /> : <>
-      	<h1>ITEMS ? </h1>
-			<h2>ALL THINGS ITEMS</h2>
+			{selectItem ? <Item item={item} setSelectItem ={setSelectItem} selectItem={selectItem} setItem={setItem} setRefresh={setRefresh}/> : <>
+      	<h1>ITEMS</h1>
 			<ItemsList setItemId ={setItemId} setSelectItem= {setSelectItem} items={items} setItem={setItem}/> </> }
 		</main>
 	)
