@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router';
-import apiURL from '../../api'
 import vaultIcon from "../../../assets/vault-icon.svg";
 
 export default function Navbar({ setSingleItem }) {
@@ -81,7 +80,7 @@ export default function Navbar({ setSingleItem }) {
                             <NavLink to="/auth" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Login / Sign Up</NavLink>
                         </li>
                         <li>
-                            <NavLink to="" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Dashboard</NavLink>
+                            <NavLink to="/dashboard" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Dashboard</NavLink>
                         </li>
                     </ul>
                 </div>

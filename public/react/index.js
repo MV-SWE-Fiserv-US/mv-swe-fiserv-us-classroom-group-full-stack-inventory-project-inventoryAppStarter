@@ -7,6 +7,7 @@ import Cart from './components/Cart/Cart';
 import Navbar from './components/Navbar/Navbar';
 import Footer from "./components/Footer/Footer";
 import ItemDescription from "./components/ItemDescription/ItemDescription";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: "/item/:id",
                 element: <ItemDescription />
+            },
+            {
+                path: "/dashboard",
+                element: <Dashboard />
             }
         ]
     }
