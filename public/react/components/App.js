@@ -1,47 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 
 // import and prepend the api url to any fetch calls
-import apiURL from "../api";
-import Navbar from "./Navbar/Navbar";
-import ItemCard from "./ItemCard/ItemCard";
-import ItemDescription from "./ItemDescription/ItemDescription";
-import Cart from "./Cart/Cart";
-import Footer from "./Footer/Footer";
+import apiURL from "../api"
+import Navbar from "./Navbar/Navbar"
+import ItemCard from "./ItemCard/ItemCard"
+import ItemDescription from "./ItemDescription/ItemDescription"
+import Footer from "./Footer/Footer"
+
 
 
 export const App = () => {
-  const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState(null);
-  const [categories, setCategories] = useState([]);
-  const [singleItem, setSingleItem] = useState(null);
+  const [items, setItems] = useState([])
+  const [filteredItems, setFilteredItems] = useState(null)
+  const [categories, setCategories] = useState([])
+  const [singleItem, setSingleItem] = useState(null)
 
   async function fetchItems() {
     try {
-      const response = await fetch(`${apiURL}/items`);
-      const itemsData = await response.json();
+      const response = await fetch(`${apiURL}/items`)
+      const itemsData = await response.json()
 
       const uniqueCategories = Array.from(
         new Set(itemsData.map((item) => item.category))
-      );
-      setCategories(uniqueCategories);
+      )
+      setCategories(uniqueCategories)
 
-      setItems(itemsData);
+      setItems(itemsData)
     } catch (err) {
-      console.log("Oh no an error! ", err);
+      console.log("Oh no an error! ", err)
     }
   }
 
   const handleCategory = (e) => {
-    e.preventDefault();
-    const category = e.target.value;
+    e.preventDefault()
+    const category = e.target.value
     if (category === "All") {
-      setFilteredItems(null);
-      fetchItems();
+      setFilteredItems(null)
+      fetchItems()
     } else {
-      const filterItems = items.filter((item) => item.category === category);
-      setFilteredItems(filterItems);
+      const filterItems = items.filter((item) => item.category === category)
+      setFilteredItems(filterItems)
     }
-  };
+  }
 
   useEffect(() => {
     fetchItems()
@@ -60,7 +60,7 @@ export const App = () => {
         </select>
       </div>
     </section>
-  );
+  )
 
 
   return (
@@ -77,5 +77,5 @@ export const App = () => {
       {/* <Cart /> */}
       <Footer />
     </main>
-  );
-};
+  )
+}
