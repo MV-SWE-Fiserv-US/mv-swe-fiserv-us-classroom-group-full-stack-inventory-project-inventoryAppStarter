@@ -1,7 +1,6 @@
 const express = require('express')
 const { Item, User } = require('../models/index');
-const router = express.Router();
-const apiURL = require('../api');
+const router = express.Router()
 
 
 //Get All the items /items
