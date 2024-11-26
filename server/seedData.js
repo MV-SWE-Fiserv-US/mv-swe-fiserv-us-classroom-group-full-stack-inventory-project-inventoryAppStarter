@@ -145,21 +145,21 @@ module.exports = {
     {
       "name": "John Doe",
       "email": "john.doe@example.com",
-      "password": "hashedpassword123",
+      "password": "hashedPassword123!!",
       "cart": [],
       "isAdmin": false,
     },
     {
       "name": "Jane Smith",
       "email": "jane.smith@example.com",
-      "password": "hashedpassword456", 
+      "password": "@Hashedpassword456", 
       "cart": [],
       "isAdmin": false,
     },
     {
       "name": "Admin User",
       "email": "admin@example.com",
-      "password": "adminpassword", 
+      "password": "Adminpassword!123", 
       "cart": [],
       "isAdmin": true,
     }
