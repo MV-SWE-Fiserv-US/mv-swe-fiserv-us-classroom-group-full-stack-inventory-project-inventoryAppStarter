@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import  {ItemsList}  from './ItemsList';
 import {Item}  from './Item';
+import {Headers} from './Headers';
 
 
 // import and prepend the api url to any fetch calls
@@ -47,9 +48,8 @@ export const App = () => {
 
 	return (
 		<main>
+			<Headers />
 			{selectItem ? <Item item={item} setSelectItem ={setSelectItem} /> : <>
-      	<h1>ITEMS ? </h1>
-			<h2>ALL THINGS ITEMS</h2>
 			<ItemsList setItemId ={setItemId} setSelectItem= {setSelectItem} items={items} setItem={setItem}/> </> }
 		</main>
 	)
