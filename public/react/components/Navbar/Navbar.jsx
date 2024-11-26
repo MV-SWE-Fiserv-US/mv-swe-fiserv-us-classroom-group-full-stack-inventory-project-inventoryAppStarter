@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import vaultIcon from "../../../assets/vault-icon.svg";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,9 +11,9 @@ export default function Navbar() {
     return (
         <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap text-black">Vaultry</span>
+                <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src={vaultIcon} className="h-10" alt="Flowbite Logo" />
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap text-white rounded dark:text-white">Vaultry</span>
                 </a>
                 <button
                     onClick={toggleMenu}
