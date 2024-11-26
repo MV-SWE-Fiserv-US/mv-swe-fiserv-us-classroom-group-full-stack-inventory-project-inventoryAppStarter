@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import apiURL from "../../api";
+import apiURL from "../../../api";
 
 const AddItemForm = () => {
   const [formData, setFormData] = useState({
@@ -10,10 +10,10 @@ const AddItemForm = () => {
     imageUrl: "",
   });
 
-  async function postItem(item) {
+  async function postItem({ item }) {
     try {
         const response = await fetch(`${apiURL}/items`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
