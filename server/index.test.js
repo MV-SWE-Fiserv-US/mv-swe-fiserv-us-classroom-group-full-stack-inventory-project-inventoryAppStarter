@@ -220,14 +220,10 @@ describe("Orders", () => {
   });
 
   test("POST /orders/:userId should return a correct data for single order", async () => {
-    const body = {
-      userId: 3,
-      total: 504.1,
-      status: "Pending",
-    };
-    const response = await request(app).post("/orders/3").send(body);
-    expect(response.body).toMatchObject(body);
-  })
+    await request(app).put("/users/1/addToCart/1");
+    const response = await request(app).post("/orders/1");
+    expect(response.body.total).toBe('117.65');
+  });
 
   test("PUT /orders/:id should return a correct data for single order", async () => {
     const body = {
