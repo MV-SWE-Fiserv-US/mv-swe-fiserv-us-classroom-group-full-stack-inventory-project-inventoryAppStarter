@@ -4,15 +4,16 @@ import { Item } from "./Item";
 import { EditItem } from "./EditItem";
 import apiURL from "../api";
 import { DeleteButton } from "./DeleteButton";
+import {AddItem} from "./AddItem";
 
 export const App = () => {
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-
+  const [isAdding, setIsAdding]= useState(false);
   async function fetchItems() {
     try {
-      const response = await fetch(`${apiURL}/items`);
+      const response = await fetch(`http://localhost:3000/item`);
       const itemsData = await response.json();
       setItems(itemsData);
     } catch (err) {
@@ -22,7 +23,7 @@ export const App = () => {
 
   async function deleteItem(itemToDelete) {
     try {
-      const response = await fetch(`${apiURL}/items/${itemToDelete}`, {
+      const response = await fetch(`http://localhost:3000/item/${itemToDelete}`, {
         method: "DELETE",
       });
       setSelectedItem(null);
@@ -48,6 +49,36 @@ export const App = () => {
   const handleEdit = () => {
     setIsEditing(true);
   };
+
+  const handleAddItem = async (newItem) => {
+    try {
+      // Perform the POST request to add the new item
+      const response = await fetch("http://localhost:3000/item", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newItem), // Send the new item as the request body
+      });
+  
+      if (response.ok) {
+        const addedItem = await response.json();
+        console.log("Item added successfully:", addedItem);
+  
+        // Add the new item to the local state
+        setItems((prevItems) => [...prevItems, addedItem]);
+        setIsAdding(false); // Close the form after the item is added
+      } else {
+        console.error("Failed to add item.");
+      }
+    } catch (err) {
+      console.log("Error:", err);
+    }
+    
+  };
+
+  const handleCancelAddItem = () => {
+    setIsAdding(false); // Close the form
+  };
+
 
   const handleUpdateItem = async (id, updatedData) => {
     try {
@@ -77,30 +108,35 @@ export const App = () => {
 
   return (
     <main>
-      <h1>Item Store</h1>
-      {selectedItem ? (
-        <div>
-          <button onClick={handleBack}>Back to Items</button>
-          {isEditing ? (
-            <EditItem
-              item={selectedItem}
-              onUpdateItem={handleUpdateItem}
-              onCancel={() => setIsEditing(false)}
-            />
-          ) : (
-            <div>
-              <Item item={selectedItem} />
-              <button onClick={handleEdit}>Edit Item</button>
-              <DeleteButton deleteItem={deleteItem} item={selectedItem} />
-            </div>
-          )}
-        </div>
-      ) : (
-        <>
-          <h2>All Items</h2>
-          <ItemsList items={items} onSelectItem={handleSelectItem} />
-        </>
-      )}
+       <h1>Item Store</h1>
+      {isAdding ? (
+  <AddItem onAdd={handleAddItem} onCancel={handleCancelAddItem} />
+) : selectedItem ? (
+  <div>
+    <button onClick={handleBack}>Back to Items</button>
+    {isEditing ? (
+      <EditItem
+        item={selectedItem}
+        onUpdateItem={handleUpdateItem}
+        onCancel={() => setIsEditing(false)}
+      />
+    ) : (
+      <div>
+        <Item item={selectedItem} />
+        <button onClick={handleEdit}>Edit Item</button>
+        <DeleteButton deleteItem={deleteItem} item={selectedItem} />
+      </div>
+    )}
+  </div>
+) : (
+  <>
+    <h2>All Items</h2>
+    <ItemsList items={items} onSelectItem={handleSelectItem} />
+    <button onClick={() => setIsAdding(true)}>Create New Item</button>
+  </>
+)}
+   
+   
     </main>
   );
 };
