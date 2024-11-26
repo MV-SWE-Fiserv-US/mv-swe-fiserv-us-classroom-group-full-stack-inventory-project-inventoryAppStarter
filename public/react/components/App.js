@@ -41,6 +41,7 @@ export const App = () => {
 			fetchItem();
 		} else {
 			fetchItems();
+			
 		}
 		
 	}, [selectItem, itemId]);

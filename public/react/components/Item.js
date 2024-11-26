@@ -29,5 +29,6 @@ console.log(props.item);
     <button onClick={() => props.setSelectItem(false)}>Back</button>
       </div>
     </div>
+    
   </div>
 }

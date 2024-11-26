@@ -23,6 +23,7 @@ export const Headers = () => {
         <h4>Image</h4>
 
         </div>
+        
       
     </div>
 
