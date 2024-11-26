@@ -8,7 +8,10 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
 
   function onClick() {
     setBtn(!btn);
-    // myRef.current.scrollIntoView({behavior: 'smooth'})
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }, 200)
+
   }
 
   function generateStars(num) {
@@ -93,7 +96,7 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
       </div>
       {btn ? (
       <section ref={myRef}>
-        <UpdateItem item={singleItem} setSingleItem={setSingleItem} />
+        <UpdateItem item={singleItem} setSingleItem={setSingleItem} useRef={useRef} />
       </section>
       ) : (
         ""

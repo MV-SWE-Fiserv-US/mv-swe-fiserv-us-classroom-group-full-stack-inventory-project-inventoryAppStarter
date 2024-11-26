@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import apiURL from '../../../api'
 
-export default function UpdateItem({ item, setSingleItem }) {
+export default function UpdateItem({ item, setSingleItem, useRef }) {
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -111,8 +111,9 @@ export default function UpdateItem({ item, setSingleItem }) {
                 <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
-                >
-                    Update Item
+                > 
+                    Update Item 
+                    {/* {assign this button to useRef} */}
                 </button>
             </div>
         </form>
