@@ -5,7 +5,9 @@ import apiURL from "../api";
 import Navbar from "./Navbar/Navbar";
 import ItemCard from "./ItemCard/ItemCard";
 import ItemDescription from "./ItemDescription/ItemDescription";
+import Cart from "./Cart/Cart";
 import Footer from "./Footer/Footer";
+
 
 export const App = () => {
   const [items, setItems] = useState([]);
@@ -72,6 +74,7 @@ export const App = () => {
       ) : (
         <ItemCard items={filteredItems ? filteredItems : items} setSingleItem={setSingleItem} />
       )}
+      {/* <Cart /> */}
       <Footer />
     </main>
   );
