@@ -46,10 +46,10 @@ export const Item = (props) => {
 
     <div className='row'>
       <div className='col-3 item'>
-        <button>{props.item.name}</button>
+        <button className="itemButton">{props.item.name}</button>
       </div>
       <div className='col-4 item'>
-        <p>{props.item.description}</p>
+        <p className="itemDescription">{props.item.description}</p>
       </div>
       <div className='col-1 item'>
 
@@ -65,10 +65,6 @@ export const Item = (props) => {
       </div>
     </div>
     <>
-      {/* <button onClick={() => props.setSelectItem(false)}>Back</button>
-      <button onClick={() => setViewUpdateForm(!viewUpdateForm)}>
-        {viewUpdateForm ? "Cancel" : "Update"}
-      </button> */}
       {viewUpdateForm ? (
         <form onSubmit={handleSubmit}>
           <label>

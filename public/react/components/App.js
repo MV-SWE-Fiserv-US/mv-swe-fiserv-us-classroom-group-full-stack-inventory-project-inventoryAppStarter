@@ -3,6 +3,7 @@ import { ItemsList } from "./ItemsList";
 import { Item } from "./Item";
 import { AddItemForm } from "./AddItemForm";
 import { Headers } from "./Headers";
+import "./App.css"
 
 // import and prepend the api url to any fetch calls
 import apiURL from "../api";
@@ -64,33 +65,35 @@ export const App = () => {
   }, [selectItem, itemId, refresh]);
 
   return (
-    <main>
-      {selectItem ? (
-        <>
-          <Item
-            item={item}
-            setSelectItem={setSelectItem}
-            selectItem={selectItem}
-            setItem={setItem}
-            setRefresh={setRefresh}
-          />
-          <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
-        </>
-      ) : (
-        <>
-          <Headers/>
-          <ItemsList
-            setItemId={setItemId}
-            setSelectItem={setSelectItem}
-            items={items}
-            setItem={setItem}
-          />{" "}
-        </>
-      )}
-      <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
-
-      {/* Render AddItemForm if showForm is true */}
-      {showForm && <AddItemForm setItems={setItems} />}
+    <main className="mainContainer">
+      <div className="header">
+        <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+        {showForm && <AddItemForm setItems={setItems} />}
+      </div>
+      <div className="content">
+        {selectItem ? (
+          <>
+            <Item
+              item={item}
+              setSelectItem={setSelectItem}
+              selectItem={selectItem}
+              setItem={setItem}
+              setRefresh={setRefresh}
+            />
+            <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+          </>
+        ) : (
+          <>
+            <Headers />
+            <ItemsList
+              setItemId={setItemId}
+              setSelectItem={setSelectItem}
+              items={items}
+              setItem={setItem}
+            />
+          </>
+        )}
+      </div>
     </main>
   );
 };
