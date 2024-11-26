@@ -45,14 +45,13 @@ export const App = () => {
 			const response = await fetch(`${apiURL}/items/${itemId}`, {
 				method: 'DELETE'
 			});
-		if (response.status === 204) {
-		 	await fetchItems();
+		if (response.status === 200) {
 			setSelectItem(false);
 		}
 	} catch (err) {
 		console.log("Oh no an error! ", err) 
 	}}
-  
+	
    const toggleForm = () => {
         setShowForm(prevState => !prevState);
       };
