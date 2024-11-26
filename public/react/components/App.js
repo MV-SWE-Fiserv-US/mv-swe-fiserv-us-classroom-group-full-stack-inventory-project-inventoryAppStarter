@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import  {ItemsList}  from './ItemsList';
 import {Item}  from './Item';
+import { AddItemForm } from './AddItemForm';
 
 
 // import and prepend the api url to any fetch calls
@@ -11,6 +12,8 @@ export const App = () => {
 	const [items, setItems] = useState([]);
 	const [item, setItem] = useState({});
 	const [itemId, setItemId] = useState(null);
+	//To control the visibility of Add Item Form 
+	const [showForm, setShowForm] = useState(false);
 
 	
 	async function fetchItem(){
@@ -43,14 +46,37 @@ export const App = () => {
 		}
 		
 	}, [selectItem, itemId]);
+
+	const toggleForm = () => {
+		setShowForm(prevState => !prevState);
+	  };
 	
 
 	return (
 		<main>
-			{selectItem ? <Item item={item} setSelectItem ={setSelectItem} /> : <>
-      	<h1>ITEMS ? </h1>
-			<h2>ALL THINGS ITEMS</h2>
-			<ItemsList setItemId ={setItemId} setSelectItem= {setSelectItem} items={items} setItem={setItem}/> </> }
-		</main>
+		{selectItem ? (
+		  <Item item={item} setSelectItem={setSelectItem} />
+		) : (
+		  <>
+			<h1>ITEMS</h1>
+			<h2>All Things Items</h2>
+  
+			{/* Button to toggle the form */}
+			<button onClick={toggleForm}>
+			  {showForm ? 'Cancel' : 'Add Item'}
+			</button>
+  
+			{/* Render AddItemForm if showForm is true */}
+			{showForm && <AddItemForm setItems={setItems} />}
+  
+			<ItemsList
+			  setItemId={setItemId}
+			  setSelectItem={setSelectItem}
+			  items={items}
+			  setItem={setItem}
+			/>
+		  </>
+		)}
+	  </main>
 	)
 }
