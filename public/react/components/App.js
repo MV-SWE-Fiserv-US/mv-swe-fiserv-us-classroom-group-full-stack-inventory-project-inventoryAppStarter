@@ -41,21 +41,30 @@ export const App = () => {
   };
 
   useEffect(() => {
-    fetchItems();
-  }, [singleItem]);
+    fetchItems()
+  }, [singleItem])
+
+
+  const categorySection = (
+    <section className="my-8 bg-zinc-300 flex flex-col items-end pr-8">
+      <h2 className="text-2xl font-semibold mb-4 bg-zinc-300">Browse by Category</h2>
+      <div className="flex items-center">
+        <label htmlFor="category" className="mr-2 bg-zinc-300">Category:</label>
+        <select onChange={handleCategory} className="p-2 border rounded">
+          <option value="All">All</option>
+          {categories.map((item, id) => (
+            <option key={id} value={item}>{item}</option>
+          ))}
+        </select>
+      </div>
+    </section>
+  );
+
 
   return (
-    <main className="h-screen w-screen">
+    <main className="h-screen w-screen bg-zinc-300">
       <Navbar setSingleItem={setSingleItem} />
-      <label htmlFor="category">Category</label>
-      <select onChange={handleCategory}>
-        <option value="All">All</option>
-        {categories.map((item, id) => (
-          <option key={id} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+      {!singleItem && categorySection}
 
       {singleItem ? (
         <ItemDescription singleItem={singleItem} setSingleItem={setSingleItem} />
