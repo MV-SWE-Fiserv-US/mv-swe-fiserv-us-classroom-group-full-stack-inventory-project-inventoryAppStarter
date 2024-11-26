@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import apiURL from '../../api'
 import vaultIcon from "../../../assets/vault-icon.svg"
+import { NavLink } from 'react-router'
 
 export default function Navbar({ setSingleItem }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -100,7 +101,9 @@ export default function Navbar({ setSingleItem }) {
                     </ul>
                 </div>
             </div>
-            {/* {isModalOpen && (
+        </nav>
+    )
+            /* {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg">
                         <h2 className="text-xl font-semibold mb-4">Hello User</h2>
@@ -178,27 +181,23 @@ export default function Navbar({ setSingleItem }) {
                     </div>
                 </div>
 
-            )} */}
-
+            )} 
+            {errorModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg">
+                        <h2 className="text-xl font-semibold mb-4">Validation Errors</h2>
+                        <ul>
+                            {errorMessages.map((error, index) => (
+                                <li key={index} className="text-red-500">{error.msg}</li>
+                            ))}
+                        </ul>
+                        <button
+                            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            onClick={() => setErrorModal(false)}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
             )}
-//             {errorModal && (
-//                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-//                     <div className="bg-white p-6 rounded-lg shadow-lg">
-//                         <h2 className="text-xl font-semibold mb-4">Validation Errors</h2>
-//                         <ul>
-//                             {errorMessages.map((error, index) => (
-//                                 <li key={index} className="text-red-500">{error.msg}</li>
-//                             ))}
-//                         </ul>
-//                         <button
-//                             className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-//                             onClick={() => setErrorModal(false)}
-//                         >
-//                             Close
-//                         </button>
-//                     </div>
-//                 </div>
-//             )}
-        </nav>
-    )
-}
+*/
