@@ -1,7 +1,7 @@
 const {Item} = require('../models/Item.js')
 const express = require('express');
 const router = express.Router();
-/*router.use(express.json());*/
+router.use(express.json());
 
 router.get('/', async (req, res) => {
     try {
@@ -38,8 +38,10 @@ router.get('/', async (req, res) => {
 
     try {
       const { name,price, description,category, image } = req.body;
-      const newUser = await Item.create({ name,price, description,category, image });
-      res.status(200).json(newUser);
+      
+      const newItem = await Item.create({ name,price, description,category, image });
+      console.log(req.body)
+      res.status(201).json(newItem);
     } catch (error) {
       res.status(400).json({ error: 'Unable to create Item', details: error.message });
     }
