@@ -43,10 +43,15 @@ const Cart = () => {
 
   return (
     <section className="w-full h-[90%] bg-white p-6 flex flex-col px-20">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-        Shopping Cart
-      </h2>
-      <div className="w-full h-[90%] flex rounded-lg shadow-md border border-gray-200">
+      <div className="w-full flex justify-around">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            Shopping Cart
+        </h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            Checkout
+        </h2>
+      </div>
+      <div className="w-full h-[90%] flex rounded-lg shadow-lg border border-gray-300 divide-x divide-gray-400">
         <div className="w-1/2 h-full overflow-y-auto px-12 py-4">
           {cartItems.length === 0 ? (
             <p className="text-gray-600 text-center">Your cart is empty.</p>
