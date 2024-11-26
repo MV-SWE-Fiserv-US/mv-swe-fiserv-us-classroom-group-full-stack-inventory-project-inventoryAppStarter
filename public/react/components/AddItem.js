@@ -22,8 +22,6 @@ export const AddItem = ({ onAdd, onCancel }) => {
 
     // Call the onAdd callback passed from the parent component (App.js)
     await onAdd(formData); // Trigger the callback to add the item
-
-    
   };
 
   return (
