@@ -46,7 +46,7 @@ export const App = () => {
 
   return (
     <main className="h-screen w-screen">
-      <Navbar />
+      <Navbar setSingleItem={setSingleItem} />
       <label htmlFor="category">Category</label>
       <select onChange={handleCategory}>
         <option value="All">All</option>
