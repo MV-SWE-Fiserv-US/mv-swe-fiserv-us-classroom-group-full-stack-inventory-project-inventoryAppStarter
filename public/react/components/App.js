@@ -62,10 +62,10 @@ export const App = () => {
 
 	return (
 		<main>
-			{selectItem ? <Item item={item} setSelectItem ={setSelectItem} selectItem={selectItem} setItem={setItem} setRefresh={setRefresh}/> : <>
+			{selectItem ? <><Item item={item} setSelectItem ={setSelectItem} selectItem={selectItem} setItem={setItem} setRefresh={setRefresh}/> 	<button onClick={() => handleDeleteItem(itemId)}>Delete</button></> : <>
       	<h1>ITEMS</h1>
 			<ItemsList setItemId ={setItemId} setSelectItem= {setSelectItem} items={items} setItem={setItem}/> </> }
-			<button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+		
 		</main>
 	)
 }
