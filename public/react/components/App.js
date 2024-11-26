@@ -5,6 +5,7 @@ import apiURL from "../api";
 import Navbar from "./Navbar/Navbar";
 import ItemCard from "./ItemCard/ItemCard";
 import ItemDescription from "./ItemDescription/ItemDescription";
+import Cart from "./Cart/Cart";
 
 export const App = () => {
   const [items, setItems] = useState([]);
@@ -47,7 +48,7 @@ export const App = () => {
   return (
     <main className="h-screen w-screen">
       <Navbar />
-      <label htmlFor="category">Category</label>
+      {/* <label htmlFor="category">Category</label>
       <select onChange={handleCategory}>
         <option value="All">All</option>
         {categories.map((item, id) => (
@@ -61,7 +62,8 @@ export const App = () => {
         <ItemDescription singleItem={singleItem} setSingleItem={setSingleItem} />
       ) : (
         <ItemCard items={filteredItems ? filteredItems : items} setSingleItem={setSingleItem} />
-      )}
+      )} */}
+      <Cart />
     </main>
   );
 };
