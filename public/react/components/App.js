@@ -48,7 +48,7 @@ export const App = () => {
   return (
     <main className="h-screen w-screen">
       <Navbar />
-      {/* <label htmlFor="category">Category</label>
+      <label htmlFor="category">Category</label>
       <select onChange={handleCategory}>
         <option value="All">All</option>
         {categories.map((item, id) => (
@@ -62,8 +62,8 @@ export const App = () => {
         <ItemDescription singleItem={singleItem} setSingleItem={setSingleItem} />
       ) : (
         <ItemCard items={filteredItems ? filteredItems : items} setSingleItem={setSingleItem} />
-      )} */}
-      <Cart />
+      )}
+      {/* <Cart /> */}
     </main>
   );
 };
