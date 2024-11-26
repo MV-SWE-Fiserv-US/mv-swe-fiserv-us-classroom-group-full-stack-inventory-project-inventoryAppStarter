@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
         if (item) {
             res.json(item);
         } else {
-            res.status(404).json({ error: 'item not found.' });
+            res.status(404).json({ error: 'item not found.' + 'itemId' + itemId + error});
         }
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching the item.' });

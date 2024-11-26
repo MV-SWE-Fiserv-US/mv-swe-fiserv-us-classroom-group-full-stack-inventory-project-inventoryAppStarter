@@ -1,11 +1,19 @@
 import React from 'react';
-import { Items } from './Items';
+import  {Item}  from './Item';
 
-export const ItemssList = ({items}) => {
+export const ItemsList = ({items, setItemId, setSelectItem, setItem}) => {
+
+	function handleClick(item){
+		setSelectItem(true)
+		setItemId(item.id);
+		setItem(item);
+	}
+	
 	return <>
 		{
-			items.map((items, idx) => {
-				return <Items items={items} key={idx} />
+			items.map((item, idx) => {
+				console.log(item);
+				return <button onClick={() => handleClick(item)}><Item item={item} key={idx} /></button>
 			})
 		}
 	</>
