@@ -1,3 +1,4 @@
+// AddItemForm.js
 import React, { useState } from 'react';
 import apiURL from '../api';
 
@@ -6,8 +7,8 @@ export const AddItemForm = ({ setItems }) => {
     name: '',
     price: '',
     description: '',
-    category: '',
-    image: '',
+    category:'',
+    image:'',
   });
 
   // Handle changes in form input fields
@@ -33,7 +34,7 @@ export const AddItemForm = ({ setItems }) => {
       
       const data = await response.json();
       setItems(prevItems => [...prevItems, data]);  // Update items list with the new item
-      setNewItem({ name: '', description: '', price: '', category: '', image: '' });  // Reset form inputs
+      setNewItem({ name: '', description: '', price: ''  ,description:'',category:'',image:''});  // Reset form inputs
     } catch (err) {
       console.error('Error adding item:', err);
     }
