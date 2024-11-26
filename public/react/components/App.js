@@ -7,6 +7,8 @@ import ItemCard from "./ItemCard/ItemCard"
 import ItemDescription from "./ItemDescription/ItemDescription"
 import Footer from "./Footer/Footer"
 
+
+
 export const App = () => {
   const [items, setItems] = useState([])
   const [filteredItems, setFilteredItems] = useState(null)
@@ -72,6 +74,7 @@ export const App = () => {
       ) : (
         <ItemCard items={filteredItems ? filteredItems : items} setSingleItem={setSingleItem} />
       )}
+      {/* <Cart /> */}
       <Footer />
     </main>
   )

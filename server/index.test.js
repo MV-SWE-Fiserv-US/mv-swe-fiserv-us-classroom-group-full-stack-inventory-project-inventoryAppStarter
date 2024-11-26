@@ -1,11 +1,8 @@
 const { execSync } = require("child_process");
 execSync("npm install");
-const { describe, it, expect } = require("@jest/globals");
 const { sequelize } = require("./db");
 const request = require("supertest");
 const app = require("./app");
-const { seedSauces, seedItems } = require("./seedData");
-const { Item } = require("./models");
 
 describe("Items", () => {
   beforeEach(async () => {
@@ -146,7 +143,7 @@ describe("Users", () => {
     const body = {
       name: "Michael Scott",
       email: "m.scott@example.com",
-      password: "dundermifflin",
+      password: "DunderMifflin12!",
       cart: [],
       isAdmin: true,
     };
@@ -158,13 +155,19 @@ describe("Users", () => {
     const body = {
       name: "Michael Scott",
       email: "micheal.scott@example.com",
-      password: "dundermifflin",
+      password: "DunderMifflin12@",
       cart: [],
       isAdmin: true,
     };
     await request(app).put("/users/3").send(body);
     const response = await request(app).get("/users/3");
     expect(response.body).toMatchObject(body);
+  });
+
+  test("PUT /users/:id/addToCart/:itemId should add an item to the cart", async () => {
+    await request(app).put("/users/1/addToCart/1");
+    const response = await request(app).get("/users/1");
+    expect(response.body.cart).toHaveLength(1);
   });
 
   test("DELETE /users/:id should delete an user", async () => {
@@ -214,6 +217,12 @@ describe("Orders", () => {
     };
     const response = await request(app).post("/orders/").send(body);
     expect(response.body).toMatchObject(body);
+  });
+
+  test("POST /orders/:userId should return a correct data for single order", async () => {
+    await request(app).put("/users/1/addToCart/1");
+    const response = await request(app).post("/orders/1");
+    expect(response.body.total).toBe('117.65');
   });
 
   test("PUT /orders/:id should return a correct data for single order", async () => {
