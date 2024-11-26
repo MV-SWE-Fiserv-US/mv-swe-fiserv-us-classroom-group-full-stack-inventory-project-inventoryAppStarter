@@ -17,7 +17,7 @@ beforeAll(async() =>{
     restQuantity  = item.length
 });
 //test api/items Route
-test("should return 200 on Get" , async()=>{
+test("should return 200 on Get '/api/items'" , async()=>{
     const response = await request(app).get('/api/items');
     expect(response.statusCode).toEqual(200);
 });
@@ -83,6 +83,25 @@ test("should delete first item array in DB" , async()=>{
     const items = await Item.findAll({});
     expect(items.length).toEqual(restQuantity);
     expect(items[0].id).not.toEqual(1)
+});
+//Tests for user route
+test("should return 200 on Get '/api/users'" , async()=>{
+    const response = await request(app).get('/api/users');
+    expect(response.statusCode).toEqual(200);
+});
+test("should return all users" , async()=>{
+    const response = await request(app).get('/api/users');
+    expect(response.body[0].name).toBe('John Doe');
+});
+test("should return the specific user" , async()=>{
+    const response = await request(app).get('/api/users/1');
+    expect(response.body).toEqual(
+        expect.objectContaining({
+            name: "John Doe",
+            email: "johndoe@example.com",
+            password: "$2a$12$KIXG79ZKkmuQDP9fFkxzOeh1jklZ2pyrLprKvQk.bxYr1pQsbmjCq" 
+        })
+    )
 });
 
 
