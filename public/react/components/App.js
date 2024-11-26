@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import  {ItemsList}  from './ItemsList';
 import {Item}  from './Item';
+import { AddItemForm } from './AddItemForm';
 
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
 
 export const App = () => {
+
 	const [selectItem, setSelectItem] = useState(false);
 	const [items, setItems] = useState([]);
 	const [item, setItem] = useState({});
 	const [itemId, setItemId] = useState(null);
 	const [refresh, setRefresh] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
 	
 	async function fetchItem(){
@@ -49,6 +52,10 @@ export const App = () => {
 	} catch (err) {
 		console.log("Oh no an error! ", err) 
 	}}
+  
+   const toggleForm = () => {
+        setShowForm(prevState => !prevState);
+      };
 
 	useEffect(() => {
 		if (selectItem) {
@@ -66,6 +73,13 @@ export const App = () => {
       	<h1>ITEMS</h1>
 			<ItemsList setItemId ={setItemId} setSelectItem= {setSelectItem} items={items} setItem={setItem}/> </> }
 			<button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+            <button onClick={toggleForm}>
+              {showForm ? 'Cancel' : 'Add Item'}
+            </button>
+  
+            {/* Render AddItemForm if showForm is true */}
+            {showForm && <AddItemForm setItems={setItems} />}
 		</main>
 	)
 }
+
