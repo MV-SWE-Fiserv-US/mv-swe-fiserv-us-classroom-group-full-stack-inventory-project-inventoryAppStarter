@@ -47,7 +47,7 @@ export const App = () => {
 
 	return (
 		<main>
-			{selectItem ? <Item item={item} setSelectItem ={setSelectItem} /> : <>
+			{selectItem ? <Item item={item} setSelectItem ={setSelectItem} selectItem={selectItem} /> : <>
       	<h1>ITEMS ? </h1>
 			<h2>ALL THINGS ITEMS</h2>
 			<ItemsList setItemId ={setItemId} setSelectItem= {setSelectItem} items={items} setItem={setItem}/> </> }
