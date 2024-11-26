@@ -63,7 +63,7 @@ export const App = () => {
 			fetchItems();
 		}
 		
-	}, [selectItem, itemId, refresh ]);
+	}, [selectItem, itemId, refresh]);
 	
 
 	return (
