@@ -3,6 +3,7 @@ import { ItemsList } from "./ItemsList";
 import { Item } from "./Item";
 import { EditItem } from "./EditItem";
 import apiURL from "../api";
+import { DeleteButton } from "./DeleteButton";
 
 export const App = () => {
   const [items, setItems] = useState([]);
@@ -19,18 +20,29 @@ export const App = () => {
     }
   }
 
+  async function deleteItem(itemToDelete) {
+    try {
+      const response = await fetch(`${apiURL}/items/${itemToDelete}`, {
+        method: "DELETE",
+      });
+      setSelectedItem(null);
+    } catch (err) {
+      console.log("error deleting item", err);
+    }
+  }
+
   useEffect(() => {
     fetchItems();
-  }, []);
+  }, [selectedItem]); //selectedItem added to dependancy
+  //deleteItem sets selectedItem to null which will cause useEffect to trigger to update the list
+  //ternary will display list of items when selectedItem is null as well.
 
   const handleSelectItem = (item) => {
     setSelectedItem(item);
-    setIsEditing(false);
   };
 
   const handleBack = () => {
     setSelectedItem(null);
-    setIsEditing(false);
   };
 
   const handleEdit = () => {
@@ -79,6 +91,7 @@ export const App = () => {
             <div>
               <Item item={selectedItem} />
               <button onClick={handleEdit}>Edit Item</button>
+              <DeleteButton deleteItem={deleteItem} item={selectedItem} />
             </div>
           )}
         </div>
