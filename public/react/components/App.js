@@ -47,7 +47,6 @@ export const App = () => {
 
   const categorySection = (
     <section className="my-8 bg-zinc-300 flex flex-col items-end pr-8">
-      <h2 className="text-2xl font-semibold mb-4 bg-zinc-300">Browse by Category</h2>
       <div className="flex items-center">
         <label htmlFor="category" className="mr-2 bg-zinc-300">Category:</label>
         <select onChange={handleCategory} className="p-2 border rounded">
@@ -65,6 +64,7 @@ export const App = () => {
     <main className="h-screen w-screen bg-zinc-300">
       <Navbar setSingleItem={setSingleItem} />
       {!singleItem && categorySection}
+      <hr className="border-t border-gray-400 my-4" />
 
       {singleItem ? (
         <ItemDescription singleItem={singleItem} setSingleItem={setSingleItem} />
