@@ -55,6 +55,20 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
+// PUT /users/:id/addToCart
+router.put("/:id/addToCart/:itemId", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    const item = await Item.findByPk(req.params.itemId);
+    user.update({
+      cart: [...user.cart, item],
+    });
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+})
+
 // DELETE /users/:id
 router.delete("/:id", async (req, res, next) => {
   try {
