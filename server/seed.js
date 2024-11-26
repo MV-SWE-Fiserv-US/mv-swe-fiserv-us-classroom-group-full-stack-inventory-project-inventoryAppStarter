@@ -1,7 +1,7 @@
-const { sauces, items, users, orders } = require("./seedData.js");
+const { items, users, orders } = require("./seedData.js");
 
 const { sequelize } = require("./db");
-const { Sauce, Item, User, Order } = require("./models");
+const { Item, User, Order } = require("./models");
 
 const seed = async () => {
   try {
@@ -9,10 +9,9 @@ const seed = async () => {
     await sequelize.sync({ force: true });
 
     // insert data
-    await Promise.all(sauces.map((sauce) => Sauce.create(sauce)));
     const item = await Promise.all(items.map((item) => Item.create(item)));
     await Promise.all(users.map((user) => User.create(user)));
-   const order = await Promise.all(orders.map((order) => Order.create(order)));
+    const order = await Promise.all(orders.map((order) => Order.create(order)));
 
     order[0].addItems([item[0], item[1]]);
     order[1].addItems([item[6], item[8]]);
