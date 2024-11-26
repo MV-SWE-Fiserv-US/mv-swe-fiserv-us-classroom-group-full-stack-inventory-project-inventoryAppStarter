@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import apiURL from '../../api'
-import vaultIcon from "../../../assets/vault-icon.svg";
+import vaultIcon from "../../../assets/vault-icon.svg"
 
 export default function Navbar({ setSingleItem }) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [errorModal, setErrorModal] = useState(false)
+    const [errorMessages, setErrorMessages] = useState(null)
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -22,10 +24,19 @@ export default function Navbar({ setSingleItem }) {
                 },
                 body: JSON.stringify(formData)
             })
+
             if (!response.ok) {
-                throw new Error("Item could not be posted..")
+                const errorData = await response.json()
+                console.error("Validation errors:", errorData.errors)
+                setErrorMessages(errorData.errors)
+                setErrorModal(true)
+                throw new Error("Item could not be posted.")
             }
+
+            const createdItem = await response.json()
+            console.log("Item created successfully:", createdItem)
         } catch (error) {
+            console.log('hit')
             console.log("Oh no an error! ", error)
         }
     }
@@ -36,8 +47,12 @@ export default function Navbar({ setSingleItem }) {
         console.log(formData)
         setIsModalOpen(false)
         setTimeout(() => {
-            setSingleItem(formData)
-        }, 1000);
+            if (errorMessages) {
+                setTimeout(() => {
+                    setSingleItem(formData)
+                }, 1000)
+            }
+        }, 2000)
     }
 
     function handleChange(e) {
@@ -46,8 +61,8 @@ export default function Navbar({ setSingleItem }) {
     }
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+        setIsOpen(!isOpen)
+    }
 
     return (
         <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
@@ -77,7 +92,7 @@ export default function Navbar({ setSingleItem }) {
                             <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Cart</a>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Login / Sign Up</a>
+                            <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Login / Sign Up</a>
                         </li>
                         <li>
                             <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Create New</a>
@@ -163,6 +178,24 @@ export default function Navbar({ setSingleItem }) {
                     </div>
                 </div>
             )}
+            {errorModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg">
+                        <h2 className="text-xl font-semibold mb-4">Validation Errors</h2>
+                        <ul>
+                            {errorMessages.map((error, index) => (
+                                <li key={index} className="text-red-500">{error.msg}</li>
+                            ))}
+                        </ul>
+                        <button
+                            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            onClick={() => setErrorModal(false)}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </nav>
-    );
+    )
 }
