@@ -42,7 +42,7 @@ const Cart = () => {
   };
 
   return (
-    <section className="w-full h-[90%] bg-white p-6 flex flex-col px-20">
+    <section className="w-full h-screen bg-white p-6 flex flex-col px-20">
       <div className="w-full flex justify-around">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Shopping Cart

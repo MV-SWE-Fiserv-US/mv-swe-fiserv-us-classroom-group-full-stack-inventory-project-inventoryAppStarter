@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 
+
 // import and prepend the api url to any fetch calls
 import apiURL from "../api"
 import Navbar from "./Navbar/Navbar"
@@ -9,7 +10,7 @@ import Footer from "./Footer/Footer"
 
 
 
-export const App = () => {
+export default function App() {
   const [items, setItems] = useState([])
   const [filteredItems, setFilteredItems] = useState(null)
   const [categories, setCategories] = useState([])
@@ -49,7 +50,7 @@ export const App = () => {
 
 
   const categorySection = (
-    <section className="my-8 bg-zinc-300 flex flex-col items-end pr-8">
+    <section className="bg-zinc-300 flex flex-col items-end pr-8 py-2">
       <div className="flex items-center">
         <label htmlFor="category" className="mr-2 bg-zinc-300">Category:</label>
         <select onChange={handleCategory} className="p-2 border rounded">
@@ -64,8 +65,7 @@ export const App = () => {
 
 
   return (
-    <main className="h-screen w-screen bg-zinc-300">
-      <Navbar setSingleItem={setSingleItem} />
+    <main className="h-full w-screen bg-zinc-300">
       {!singleItem && categorySection}
       {!singleItem && (<hr className="border-t border-gray-400 my-4" />)}
 
@@ -74,8 +74,6 @@ export const App = () => {
       ) : (
         <ItemCard items={filteredItems ? filteredItems : items} setSingleItem={setSingleItem} />
       )}
-      {/* <Cart /> */}
-      <Footer />
     </main>
   )
 }

@@ -1,49 +1,50 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router';
 import apiURL from '../../api'
 import vaultIcon from "../../../assets/vault-icon.svg";
 
 export default function Navbar({ setSingleItem }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        category: '',
-        price: '',
-        image: ''
-    })
+    // const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [formData, setFormData] = useState({
+    //     name: '',
+    //     description: '',
+    //     category: '',
+    //     price: '',
+    //     image: ''
+    // })
 
-    async function addItem() {
-        try {
-            const response = await fetch(`${apiURL}/items/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            if (!response.ok) {
-                throw new Error("Item could not be posted..")
-            }
-        } catch (error) {
-            console.log("Oh no an error! ", error)
-        }
-    }
+    // async function addItem() {
+    //     try {
+    //         const response = await fetch(`${apiURL}/items/`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(formData)
+    //         })
+    //         if (!response.ok) {
+    //             throw new Error("Item could not be posted..")
+    //         }
+    //     } catch (error) {
+    //         console.log("Oh no an error! ", error)
+    //     }
+    // }
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        addItem()
-        console.log(formData)
-        setIsModalOpen(false)
-        setTimeout(() => {
-            setSingleItem(formData)
-        }, 1000);
-    }
+    // function handleSubmit(e) {
+    //     e.preventDefault()
+    //     addItem()
+    //     console.log(formData)
+    //     setIsModalOpen(false)
+    //     setTimeout(() => {
+    //         setSingleItem(formData)
+    //     }, 1000);
+    // }
 
-    function handleChange(e) {
-        const { name, value } = e.target
-        setFormData({ ...formData, [name]: value })
-    }
+    // function handleChange(e) {
+    //     const { name, value } = e.target
+    //     setFormData({ ...formData, [name]: value })
+    // }
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -71,21 +72,21 @@ export default function Navbar({ setSingleItem }) {
                 <div className={`${isOpen ? 'block' : 'hidden'} w-full`} id="navbar-hamburger">
                     <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                         <li>
-                            <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">Home</a>
+                            <NavLink to="/" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">Home</NavLink>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Cart</a>
+                            <NavLink to="/cart" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Cart</NavLink>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Login / Sign Up</a>
+                            <NavLink to="/auth" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Login / Sign Up</NavLink>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Create New</a>
+                            <NavLink to="" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Dashboard</NavLink>
                         </li>
                     </ul>
                 </div>
             </div>
-            {isModalOpen && (
+            {/* {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg">
                         <h2 className="text-xl font-semibold mb-4">Hello User</h2>
@@ -162,7 +163,7 @@ export default function Navbar({ setSingleItem }) {
                         </form>
                     </div>
                 </div>
-            )}
+            )} */}
         </nav>
     );
 }
