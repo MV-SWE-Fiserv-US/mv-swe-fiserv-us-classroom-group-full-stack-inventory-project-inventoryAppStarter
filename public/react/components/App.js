@@ -58,7 +58,7 @@ export const App = () => {
       </select>
 
       {singleItem ? (
-        <ItemDescription singleItem={singleItem} />
+        <ItemDescription singleItem={singleItem} setSingleItem={setSingleItem} />
       ) : (
         <ItemCard items={filteredItems ? filteredItems : items} setSingleItem={setSingleItem} />
       )}
