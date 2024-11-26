@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react"
 
-
 // import and prepend the api url to any fetch calls
 import apiURL from "../api"
 import ItemCard from "./ItemCard/ItemCard"
-import ItemDescription from "./ItemDescription/ItemDescription"
-
 
 export default function App() {
   const [items, setItems] = useState([])
   const [filteredItems, setFilteredItems] = useState(null)
-  const [categories, setCategories] = useState([])
-  const [singleItem, setSingleItem] = useState(null)
+  const [categories, setCategories] = useState([]);
 
   async function fetchItems() {
     try {
@@ -43,7 +39,7 @@ export default function App() {
 
   useEffect(() => {
     fetchItems()
-  }, [singleItem])
+  }, [])
 
 
   const categorySection = (
@@ -63,14 +59,9 @@ export default function App() {
 
   return (
     <main className="h-full w-screen bg-zinc-300">
-      {!singleItem && categorySection}
-      {!singleItem && (<hr className="border-t border-gray-400 my-4" />)}
-
-      {singleItem ? (
-        <ItemDescription singleItem={singleItem} setSingleItem={setSingleItem} />
-      ) : (
-        <ItemCard items={filteredItems ? filteredItems : items} setSingleItem={setSingleItem} />
-      )}
+      {categorySection}
+      {<hr className="border-t border-gray-400 my-4"></hr>}
+      <ItemCard items={filteredItems ? filteredItems : items} />
     </main>
   )
 }
