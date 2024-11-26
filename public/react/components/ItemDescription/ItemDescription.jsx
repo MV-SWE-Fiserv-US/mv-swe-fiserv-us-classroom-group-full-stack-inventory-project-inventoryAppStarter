@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import UpdateItem from "../Forms/UpdateItemForm/UpdateItem";
+import DeleteItem from '../Forms/DeleteItemForm/DeleteItem';
 
 export default function ItemDescription({ singleItem, setSingleItem }) {
   const [btn, setBtn] = useState(false);
@@ -97,6 +98,7 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
       ) : (
         ""
       )}
+      <DeleteItem item={singleItem} setSingleItem={setSingleItem} />
     </>
   );
 }
