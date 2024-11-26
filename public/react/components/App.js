@@ -42,8 +42,7 @@ export const App = () => {
       const response = await fetch(`${apiURL}/items/${itemId}`, {
         method: "DELETE",
       });
-      if (response.status === 204) {
-        await fetchItems();
+      if (response.status === 200) {
         setSelectItem(false);
       }
     } catch (err) {
@@ -66,13 +65,16 @@ export const App = () => {
   return (
     <main>
       {selectItem ? (
-        <Item
-          item={item}
-          setSelectItem={setSelectItem}
-          selectItem={selectItem}
-          setItem={setItem}
-          setRefresh={setRefresh}
-        />
+        <>
+          <Item
+            item={item}
+            setSelectItem={setSelectItem}
+            selectItem={selectItem}
+            setItem={setItem}
+            setRefresh={setRefresh}
+          />
+          <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+        </>
       ) : (
         <>
           <h1>ITEMS</h1>
@@ -84,7 +86,6 @@ export const App = () => {
           />{" "}
         </>
       )}
-      <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
       <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
 
       {/* Render AddItemForm if showForm is true */}
