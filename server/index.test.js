@@ -143,7 +143,7 @@ describe("Users", () => {
     const body = {
       name: "Michael Scott",
       email: "m.scott@example.com",
-      password: "dundermifflin",
+      password: "DunderMifflin12!",
       cart: [],
       isAdmin: true,
     };
@@ -155,7 +155,7 @@ describe("Users", () => {
     const body = {
       name: "Michael Scott",
       email: "micheal.scott@example.com",
-      password: "dundermifflin",
+      password: "DunderMifflin12@",
       cart: [],
       isAdmin: true,
     };
