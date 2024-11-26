@@ -51,7 +51,7 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
 
   return (
     <>
-      <section className="max-w-4xl h-[70%] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex">
+      <section className="max-w-4xl h-[70%] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex mt-4">
         <div className="w-1/2 h-full flex flex-col p-4 items-center justify-center">
           <div className="w-full">
             <button
@@ -78,7 +78,8 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
           <p className="text-gray-600 mt-2">{singleItem.description}</p>
           <div className="mt-4 flex justify-between items-center">
             <span className="text-lg font-bold text-gray-900">
-              ${singleItem.price.toFixed(2)}
+              {console.log(singleItem.price)}
+              ${Number(singleItem.price).toFixed(2)}
             </span>
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
               Add to Cart

@@ -6,6 +6,8 @@ import Navbar from "./Navbar/Navbar";
 import ItemCard from "./ItemCard/ItemCard";
 import ItemDescription from "./ItemDescription/ItemDescription";
 import Cart from "./Cart/Cart";
+import Footer from "./Footer/Footer";
+
 
 export const App = () => {
   const [items, setItems] = useState([]);
@@ -42,21 +44,30 @@ export const App = () => {
   };
 
   useEffect(() => {
-    fetchItems();
-  }, [singleItem]);
+    fetchItems()
+  }, [singleItem])
+
+
+  const categorySection = (
+    <section className="my-8 bg-zinc-300 flex flex-col items-end pr-8">
+      <div className="flex items-center">
+        <label htmlFor="category" className="mr-2 bg-zinc-300">Category:</label>
+        <select onChange={handleCategory} className="p-2 border rounded">
+          <option value="All">All</option>
+          {categories.map((item, id) => (
+            <option key={id} value={item}>{item}</option>
+          ))}
+        </select>
+      </div>
+    </section>
+  );
+
 
   return (
-    <main className="h-screen w-screen">
-      <Navbar />
-      <label htmlFor="category">Category</label>
-      <select onChange={handleCategory}>
-        <option value="All">All</option>
-        {categories.map((item, id) => (
-          <option key={id} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+    <main className="h-screen w-screen bg-zinc-300">
+      <Navbar setSingleItem={setSingleItem} />
+      {!singleItem && categorySection}
+      {!singleItem && (<hr className="border-t border-gray-400 my-4" />)}
 
       {singleItem ? (
         <ItemDescription singleItem={singleItem} setSingleItem={setSingleItem} />
@@ -64,6 +75,7 @@ export const App = () => {
         <ItemCard items={filteredItems ? filteredItems : items} setSingleItem={setSingleItem} />
       )}
       {/* <Cart /> */}
+      <Footer />
     </main>
   );
 };
