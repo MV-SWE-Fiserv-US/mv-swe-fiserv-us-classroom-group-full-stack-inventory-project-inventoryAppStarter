@@ -64,7 +64,7 @@ export const App = () => {
     <main className="h-screen w-screen bg-zinc-300">
       <Navbar setSingleItem={setSingleItem} />
       {!singleItem && categorySection}
-      <hr className="border-t border-gray-400 my-4" />
+      {!singleItem && (<hr className="border-t border-gray-400 my-4" />)}
 
       {singleItem ? (
         <ItemDescription singleItem={singleItem} setSingleItem={setSingleItem} />

@@ -51,7 +51,7 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
 
   return (
     <>
-      <section className="max-w-4xl h-[70%] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex">
+      <section className="max-w-4xl h-[70%] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex mt-4">
         <div className="w-1/2 h-full flex flex-col p-4 items-center justify-center">
           <div className="w-full">
             <button
