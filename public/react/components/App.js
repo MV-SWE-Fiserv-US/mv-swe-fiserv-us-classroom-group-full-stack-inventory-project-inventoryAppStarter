@@ -3,11 +3,8 @@ import React, { useState, useEffect } from "react"
 
 // import and prepend the api url to any fetch calls
 import apiURL from "../api"
-import Navbar from "./Navbar/Navbar"
 import ItemCard from "./ItemCard/ItemCard"
 import ItemDescription from "./ItemDescription/ItemDescription"
-import Footer from "./Footer/Footer"
-
 
 
 export default function App() {

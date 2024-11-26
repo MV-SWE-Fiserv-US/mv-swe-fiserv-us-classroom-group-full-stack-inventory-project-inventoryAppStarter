@@ -1,17 +1,28 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import UpdateItem from "../Forms/UpdateItemForm/UpdateItem";
 import DeleteItem from '../Forms/DeleteItemForm/DeleteItem';
+import apiURL from "../../api";
+import { useParams, useNavigate } from "react-router";
 
-export default function ItemDescription({ singleItem, setSingleItem }) {
-  const [btn, setBtn] = useState(false);
+export default function ItemDescription() {
   const myRef = useRef(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [btn, setBtn] = useState(false);
+  const [singleItem, setSingleItem] = useState({
+    id: 0,
+    name: "",
+    description: "",
+    category: "",
+    price: 0,
+    image: ""
+  });
 
   function onClick() {
     setBtn(!btn);
     setTimeout(() => {
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }, 200)
-
   }
 
   function generateStars(num) {
@@ -49,6 +60,21 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
 
   const num = Math.floor(Math.random() * 6);
 
+  async function fetchSingleItem(id) {
+    try {
+      const response = await fetch(`${apiURL}/items/${id}`)
+      const itemData = await response.json()
+      setSingleItem(itemData)
+    } catch (err) {
+      console.log("Oh no an error! ", err)
+    }
+  }
+
+  useEffect(() => {
+    fetchSingleItem(id);
+  }, [])
+
+
   return (
     <>
       <section className="max-w-4xl h-[70%] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex mt-4">
@@ -57,7 +83,7 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
             <button
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
               type="button"
-              onClick={() => setSingleItem(null)}
+              onClick={() => navigate("/")}
             >
               Back to Shop
             </button>
@@ -78,7 +104,6 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
           <p className="text-gray-600 mt-2">{singleItem.description}</p>
           <div className="mt-4 flex justify-between items-center">
             <span className="text-lg font-bold text-gray-900">
-              {console.log(singleItem.price)}
               ${Number(singleItem.price).toFixed(2)}
             </span>
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
