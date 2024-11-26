@@ -1,8 +1,8 @@
 const { sequelize, DataTypes } = require("../db");
 
 const Order = sequelize.define("orders", {
-  total: DataTypes.FLOAT,
-  status: DataTypes.STRING,
+  total: { type: DataTypes.FLOAT, allowNull: false },
+  status: { type: DataTypes.STRING, allowNull: false },
 });
 
 module.exports = Order;
