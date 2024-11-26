@@ -107,6 +107,7 @@ export const App = () => {
   };
 
   return (
+
     <main>
        <h1>Item Store</h1>
       {isAdding ? (
@@ -137,6 +138,7 @@ export const App = () => {
 )}
    
    
+
     </main>
   );
 };
