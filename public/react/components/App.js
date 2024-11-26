@@ -47,7 +47,6 @@ export const App = () => {
     fetchItems()
   }, [singleItem])
 
-
   const categorySection = (
     <section className="my-8 bg-zinc-300 flex flex-col items-end pr-8">
       <div className="flex items-center">
@@ -61,7 +60,6 @@ export const App = () => {
       </div>
     </section>
   )
-
 
   return (
     <main className="h-screen w-screen bg-zinc-300">
