@@ -15,7 +15,7 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
         <div className="w-1/2 h-full flex flex-col p-4 items-center justify-center">
           <div className="w-full">
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" type="button" onClick={() => setSingleItem(null)}>
-              Add to Cart
+              Go Back
             </button>
           </div>
           <img

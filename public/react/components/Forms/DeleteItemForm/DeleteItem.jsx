@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import apiURL from '../../../api';
 
 export default function DeleteItem({ item, setSingleItem }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     function handleDelete() {
-        fetch(`${apiURL}/${item.id}`, {
+        const url = `${apiURL}/items/${item.id}`;
+        console.log(`Deleting item at: ${url}`);
+    
+        fetch(url, {
             method: 'DELETE',
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Item could not be deleted.");
+            headers: {
+                'Content-Type': 'application/json'
             }
-            setSingleItem(null)
+        })
+        .then(() => {
+            setIsModalOpen(false);
+            setSingleItem(null);
         })
         .catch(error => {
             console.log("Oh no an error! ", error);
         });
-        setIsModalOpen(false);
     }
+
+    useEffect(() => {
+
+    }, [item])
 
     return (
         <>

@@ -24,8 +24,8 @@ export default function UpdateItem({ item, setSingleItem }) {
 
     async function updateItem() {
         try {
-            const response = await fetch(`${apiURL}/${item.id}`, {
-                method: 'POST',
+            const response = await fetch(`${apiURL}/items/${item.id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
