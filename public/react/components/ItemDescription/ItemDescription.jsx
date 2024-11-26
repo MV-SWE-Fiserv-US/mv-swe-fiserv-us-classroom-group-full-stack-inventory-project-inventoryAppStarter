@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import UpdateItem from "../Forms/UpdateItemForm/UpdateItem";
+import DeleteItem from '../Forms/DeleteItemForm/DeleteItem';
 
 export default function ItemDescription({ singleItem, setSingleItem }) {
 
@@ -36,6 +37,8 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
         </button>
       </div>
       {btn ? <UpdateItem item={singleItem} setSingleItem={setSingleItem} /> : ""}
+      <DeleteItem item={singleItem} setSingleItem={setSingleItem} />
+      
     </>
   );
 }
