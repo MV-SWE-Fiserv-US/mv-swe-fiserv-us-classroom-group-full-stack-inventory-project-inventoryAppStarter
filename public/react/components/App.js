@@ -41,7 +41,6 @@ export default function App() {
     fetchItems()
   }, [])
 
-
   const categorySection = (
     <section className="bg-zinc-300 flex flex-col items-end pr-8 py-2">
       <div className="flex items-center">
@@ -55,7 +54,6 @@ export default function App() {
       </div>
     </section>
   )
-
 
   return (
     <main className="h-full w-screen bg-zinc-300">
