@@ -4,7 +4,7 @@ export default function ItemDescription({ singleItem }) {
       <div className="w-1/2 h-full flex flex-col items-center just' p-4">
       <a href="/" className="w-full">
         <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-          Add to Cart
+          Back to Shop
         </button>
       </a>
         <img src={singleItem.image} alt={singleItem.name} className="h-full w-1/2 object-contain" />
