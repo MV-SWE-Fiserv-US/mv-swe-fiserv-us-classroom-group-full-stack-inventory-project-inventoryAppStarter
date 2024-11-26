@@ -31,13 +31,13 @@ export default function ItemCard({ items, setSingleItem }) {
             {items.map((item) => {
                 const num = Math.floor(Math.random() * 6)
                 return (
-                    <div className="item-card bg-white flex flex-col justify-between w-80" key={item.id} onClick={() => handleClick(item)}>
+                    <div className="item-card bg-white flex flex-col justify-between w-80 rounded-lg" key={item.id} onClick={() => handleClick(item)}>
                         <div>
                             <a href="#">
                                 <img className="bg-white p-8 rounded-t-lg font-mono" src={item.image} alt={item.name} />
                             </a>
                         </div>
-                        <div className="px-5 pb-5 bg-white mt-auto">
+                        <div className="px-5 pb-5 bg-white mt-auto rounded-b-lg">
                             <a href="#">
                                 <h5 className="bg-white text-xl font-semibold tracking-tight text-black font-mono">{item.name}</h5>
                             </a>
