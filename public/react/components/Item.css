@@ -1,10 +1,18 @@
 .image img {
     object-fit: contain;
-    width: 100%;
+    width: 30%;
     height: auto;
   }
-  .container{
-
+.Itemcontainer{
 justify-content: center;
   }
-  
+
+.item{
+    border-color: rgb(2, 9, 7);
+    background-color:#FAF9F6;
+    border-style: solid;
+}
+.row{
+    border: 0;
+}
+    

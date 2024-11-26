@@ -1,6 +1,6 @@
-import { React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import apiURL from "../api";
-import "./Item.css";
+import "./item.css";
 
 export const Item = (props) => {
 
@@ -42,91 +42,84 @@ export const Item = (props) => {
     }
   }
 
-  return (
-    < div className='container, mx-auto'>
-    
+  return < div className='Itemcontainer'>
+
     <div className='row'>
-      <div className='col-3'>
-    <button>{props.item.name}</button>
+      <div className='col-3 item'>
+        <button>{props.item.name}</button>
       </div>
-      <div className='col-3'>
-    <p>{props.item.description}</p>
+      <div className='col-4 item'>
+        <p>{props.item.description}</p>
       </div>
-      <div className='col-1'>
+      <div className='col-1 item'>
 
-    <p>{props.item.price}</p>
+        <p>{props.item.price}</p>
       </div>
-      <div className='col-1'>
+      <div className='col-1 item'>
 
-    <p>{props.item.category}</p>
+        <p>{props.item.category}</p>
       </div>
-      <div className='col-3 image' >
-    <img src={props.item.image} alt={props.item.name} />
+      <div className='col-3 image item' >
+        <img src={props.item.image} alt={props.item.name} />
 
-      </div>
-      <div className='col-1'>
-
-    <button onClick={() => props.setSelectItem(false)}>Back</button>
       </div>
     </div>
-      {props.selectItem ? (
-        <>
-          <button onClick={() => props.setSelectItem(false)}>Back</button>
-          <button onClick={() => setViewUpdateForm(!viewUpdateForm)}>
-            {viewUpdateForm ? "Cancel" : "Update"}
-          </button>
-          {viewUpdateForm ? (
-            <form onSubmit={handleSubmit}>
-              <label>
-                Name:
-                <input
-                  type="text"
-                  name="name"
-                  value={updatedItem.name}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Description:
-                <input
-                  type="text"
-                  name="description"
-                  value={updatedItem.description}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Price:
-                <input
-                  type="text"
-                  name="price"
-                  value={updatedItem.price}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Category:
-                <input
-                  type="text"
-                  name="category"
-                  value={updatedItem.category}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Image:
-                <input
-                  type="text"
-                  name="image"
-                  value={updatedItem.image}
-                  onChange={handleChange}
-                />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          ) : null}
-        </>
+    <>
+      {/* <button onClick={() => props.setSelectItem(false)}>Back</button>
+      <button onClick={() => setViewUpdateForm(!viewUpdateForm)}>
+        {viewUpdateForm ? "Cancel" : "Update"}
+      </button> */}
+      {viewUpdateForm ? (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              value={updatedItem.name}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Description:
+            <input
+              type="text"
+              name="description"
+              value={updatedItem.description}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Price:
+            <input
+              type="text"
+              name="price"
+              value={updatedItem.price}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Category:
+            <input
+              type="text"
+              name="category"
+              value={updatedItem.category}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Image:
+            <input
+              type="text"
+              name="image"
+              value={updatedItem.image}
+              onChange={handleChange}
+            />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       ) : null}
-    </div>
-  );
+    </>
+  </div>
+
 };

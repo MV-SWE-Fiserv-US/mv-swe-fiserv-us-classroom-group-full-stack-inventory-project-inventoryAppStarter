@@ -1,0 +1,13 @@
+.titleContainer{
+    background-color: #3a5a40;
+    /* padding: 0px 20 0 20px; */
+    
+
+
+}
+.itemTitle{
+    justify-content: center;
+    border-color: #344e41;
+    color: white;
+    border-style: solid;
+}
