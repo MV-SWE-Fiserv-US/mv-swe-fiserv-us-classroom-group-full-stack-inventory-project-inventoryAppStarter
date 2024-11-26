@@ -1,5 +1,6 @@
 const express = require("express");
 const { Order, User, Item } = require("../models");
+const { check, validationResult } = require("express-validator");
 const router = express.Router();
 
 // GET /users
@@ -35,25 +36,55 @@ router.get("/:id/orders", async (req, res, next) => {
 });
 
 // POST /users
-router.post("/", async (req, res, next) => {
-  try {
-    const user = await User.create(req.body);
-    res.json(user);
-  } catch (error) {
-    next(error);
+router.post(
+  "/",
+  [
+    check("name").notEmpty().trim(),
+    check("email").notEmpty().isEmail().trim(),
+    check("password").notEmpty().isStrongPassword(),
+    check("cart").isArray(),
+    check("isAdmin").notEmpty().isBoolean(),
+  ],
+  async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      } else {
+        const user = await User.create(req.body);
+        res.json(user);
+      }
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // PUT /users/:id
-router.put("/:id", async (req, res, next) => {
-  try {
-    const user = await User.findByPk(req.params.id);
-    await user.update(req.body);
-    res.json(user);
-  } catch (error) {
-    next(error);
+router.put(
+  "/:id",
+  [
+    check("name").notEmpty().trim(),
+    check("email").notEmpty().isEmail().trim(),
+    check("password").notEmpty().isStrongPassword(),
+    check("cart").isArray(),
+    check("isAdmin").notEmpty().isBoolean(),
+  ],
+  async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      } else {
+        const user = await User.findByPk(req.params.id);
+        await user.update(req.body);
+        res.json(user);
+      }
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // PUT /users/:id/addToCart
 router.put("/:id/addToCart/:itemId", async (req, res, next) => {
@@ -67,7 +98,7 @@ router.put("/:id/addToCart/:itemId", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-})
+});
 
 // DELETE /users/:id
 router.delete("/:id", async (req, res, next) => {

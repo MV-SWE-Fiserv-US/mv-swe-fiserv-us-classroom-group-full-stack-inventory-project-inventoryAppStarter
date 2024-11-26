@@ -44,6 +44,7 @@ router.post("/:userId", async (req, res, next) => {
       orderItems.push(item.id);
     });
     total += total * salesTax;
+    total = total.toFixed(2);
     const order = await Order.create({ total, status: "Pending" });
     await order.setItems(orderItems);
     await order.setUser(user);

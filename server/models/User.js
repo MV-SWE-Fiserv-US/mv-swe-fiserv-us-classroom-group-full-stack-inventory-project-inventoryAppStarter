@@ -4,7 +4,10 @@ const User = sequelize.define("users", {
   name: DataTypes.STRING,
   email: DataTypes.STRING,
   password: DataTypes.STRING,
-  cart: DataTypes.JSON,
+  cart: {
+    type: DataTypes.JSON,
+    defaultValue: [],
+  },
   isAdmin: DataTypes.BOOLEAN,
 });
 
