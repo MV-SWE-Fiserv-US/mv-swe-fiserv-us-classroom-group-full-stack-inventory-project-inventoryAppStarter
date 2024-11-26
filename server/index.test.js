@@ -219,6 +219,16 @@ describe("Orders", () => {
     expect(response.body).toMatchObject(body);
   });
 
+  test("POST /orders/:userId should return a correct data for single order", async () => {
+    const body = {
+      userId: 3,
+      total: 504.1,
+      status: "Pending",
+    };
+    const response = await request(app).post("/orders/3").send(body);
+    expect(response.body).toMatchObject(body);
+  })
+
   test("PUT /orders/:id should return a correct data for single order", async () => {
     const body = {
       userId: 3,
