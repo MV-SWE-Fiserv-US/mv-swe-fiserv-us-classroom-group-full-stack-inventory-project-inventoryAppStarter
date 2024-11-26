@@ -1,11 +1,8 @@
 const { execSync } = require("child_process");
 execSync("npm install");
-const { describe, it, expect } = require("@jest/globals");
 const { sequelize } = require("./db");
 const request = require("supertest");
 const app = require("./app");
-const { seedSauces, seedItems } = require("./seedData");
-const { Item } = require("./models");
 
 describe("Items", () => {
   beforeEach(async () => {
@@ -165,6 +162,12 @@ describe("Users", () => {
     await request(app).put("/users/3").send(body);
     const response = await request(app).get("/users/3");
     expect(response.body).toMatchObject(body);
+  });
+
+  test("PUT /users/:id/addToCart/:itemId should add an item to the cart", async () => {
+    await request(app).put("/users/1/addToCart/1");
+    const response = await request(app).get("/users/1");
+    expect(response.body.cart).toHaveLength(1);
   });
 
   test("DELETE /users/:id should delete an user", async () => {
