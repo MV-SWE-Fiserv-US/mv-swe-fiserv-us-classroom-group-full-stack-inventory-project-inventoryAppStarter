@@ -45,10 +45,10 @@ export const App = () => {
   };
 
   return (
-    <main>
-      <h1>Item Store</h1>
+    <main className="main">
+      <h1 className="title">Item Store</h1>
       {selectedItem ? (
-        <div>
+        <div className="main">
           <button onClick={handleBack}>Back to Items</button>
           <Item item={selectedItem} />
           <DeleteButton deleteItem={deleteItem} item={selectedItem}/>
