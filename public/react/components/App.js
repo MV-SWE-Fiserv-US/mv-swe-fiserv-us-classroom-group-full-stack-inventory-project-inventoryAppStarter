@@ -35,6 +35,20 @@ export const App = () => {
 			console.log("Oh no an error! ", err)
 		}
 	} 
+
+	const handleDeleteItem = async() => {
+		try {
+			const response = await fetch(`${apiURL}/items/${itemId}`, {
+				method: 'DELETE'
+			});
+		if (response.status === 204) {
+		 	await fetchItems();
+			setSelectItem(false);
+		}
+	} catch (err) {
+		console.log("Oh no an error! ", err) 
+	}}
+
 	useEffect(() => {
 		if (selectItem) {
 			fetchItem();
@@ -51,6 +65,7 @@ export const App = () => {
       	<h1>ITEMS ? </h1>
 			<h2>ALL THINGS ITEMS</h2>
 			<ItemsList setItemId ={setItemId} setSelectItem= {setSelectItem} items={items} setItem={setItem}/> </> }
+			<button onClick={() => handleDeleteItem(itemId)}>Delete</button>
 		</main>
 	)
 }
