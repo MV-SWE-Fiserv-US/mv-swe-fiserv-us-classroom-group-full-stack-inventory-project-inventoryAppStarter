@@ -43,7 +43,7 @@ export const Item = (props) => {
 
   return (
     <>
-      <button>{props.item.name}</button>
+      <h1>{props.item.name}</h1>
       <p>{props.item.description}</p>
       <p>{props.item.price}</p>
       <p>{props.item.category}</p>
