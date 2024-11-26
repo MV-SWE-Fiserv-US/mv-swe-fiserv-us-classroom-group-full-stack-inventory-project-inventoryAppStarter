@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import UpdateItem from "../Forms/UpdateItemForm/UpdateItem";
 
 export default function ItemDescription({ singleItem, setSingleItem }) {
   const [btn, setBtn] = useState(false);
+  const myRef = useRef(null);
 
   function onClick() {
     setBtn(!btn);
+    // myRef.current.scrollIntoView({behavior: 'smooth'})
   }
 
   function generateStars(num) {
@@ -89,7 +91,9 @@ export default function ItemDescription({ singleItem, setSingleItem }) {
         </button>
       </div>
       {btn ? (
+      <section ref={myRef}>
         <UpdateItem item={singleItem} setSingleItem={setSingleItem} />
+      </section>
       ) : (
         ""
       )}
