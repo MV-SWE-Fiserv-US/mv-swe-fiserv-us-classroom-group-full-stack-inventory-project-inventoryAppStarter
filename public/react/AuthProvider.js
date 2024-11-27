@@ -5,10 +5,12 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      setIsLoggedIn(true);
       const decoded = jwtDecode(token);
       if (decoded.isAdmin) {
         setIsAdmin(true);
@@ -17,6 +19,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAdmin }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ isAdmin, isLoggedIn }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
