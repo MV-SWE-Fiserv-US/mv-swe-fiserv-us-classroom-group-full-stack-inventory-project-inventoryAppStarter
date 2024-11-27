@@ -42,12 +42,12 @@ export default function ItemCard({ items, setSingleItem }) {
   }
 
   return (
-    <div className="bg-zinc-300 font-black flex flex-wrap justify-evenly gap-4 mx-auto pb-12">
+    <div className="bg-zinc-[#F8F7F5] font-black flex flex-wrap justify-evenly gap-4 mx-auto pb-12 px-4">
       {items.map((item) => {
         const num = Math.floor(Math.random() * 6);
         return (
           <div
-            className="bg-white flex flex-col justify-between items-center w-80 h-[600px] rounded-lg"
+            className="bg-white flex flex-col justify-between items-center w-80 h-[600px] rounded-lg border border-slate-400 shadow-lg"
             key={item.id}
             onClick={() => navigate(`/item/${item.id}`)}
           >
@@ -59,7 +59,7 @@ export default function ItemCard({ items, setSingleItem }) {
               />
             </div>
             <div className="px-5 pb-5 bg-white mt-auto rounded-b-lg h-1/2 flex flex-col justify-end w-full">
-              <h5 className="bg-white text-xl font-semibold tracking-tight text-black font-mono text-pretty">
+              <h5 className="bg-white text-lg font-semibold tracking-tight text-black font-mono text-pretty">
                 {item.name}
               </h5>
 
