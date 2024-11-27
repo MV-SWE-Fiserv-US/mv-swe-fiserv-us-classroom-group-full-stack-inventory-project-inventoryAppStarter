@@ -1,5 +1,5 @@
 .mainContainer {
-    padding: 20px 100px 20px 100px; /* Add units to padding values */
+    padding: 120px 150px 70px 150px; /* Add units to padding values */
     height: 100vh; 
     display: flex;
     flex-direction: column;
@@ -8,6 +8,8 @@
     left: 0;  
     right: 0; 
     bottom: 0; 
+    overflow: hidden;
+    background-color: #dad7cd;
 }
 
 .header {
@@ -19,6 +21,7 @@
     flex: 1 1 auto; 
     overflow-y: auto; 
     overflow-x: hidden; 
+    box-shadow: 10px 40px 40px rgb(130, 130, 130);
 }
 /* Customize the scrollbar */
 ::-webkit-scrollbar {
@@ -35,3 +38,23 @@
     background-color:#dad7cd; /* Set the color of the scrollbar track */
     border-radius: 10px; /* Round the corners of the scrollbar track */
 }
+
+.itemPadding {
+    padding-top: 30px; /* Add units to padding values */
+}
+
+.addItem{
+    background-color: #3a5a40;
+    color: white;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+input{
+    /* border-radius: 15px; */
+    border: none; 
+    border-bottom: 2px solid #3a5a40; 
+    border-radius: 0;
+    outline: none; /* Remove the default outline */
+    
+}
+

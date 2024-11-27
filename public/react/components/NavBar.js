@@ -1,11 +1,12 @@
 import { React, useState, useEffect } from "react";
 import LoginForm from "./LoginForm";
+import "./NavBar.css";
 
 export default function NavBar({ user, setUser }) {
   const [viewLoginForm, setViewLoginForm] = useState(false);
   return (
     <>
-      <nav>
+      <nav className="navbar navbar-expand-lg nav-pills flex-column flex-sm-row">
         {user ? (
           <>
             <p>Welcome {user.username}</p>
@@ -17,8 +18,9 @@ export default function NavBar({ user, setUser }) {
           <button onClick={() => setViewLoginForm(!viewLoginForm)}>{viewLoginForm ? "Cancel" : "Login"}</button>
         )}
         {viewLoginForm ? (
-            <LoginForm setUser={setUser} setViewLoginForm={setViewLoginForm} />
+          <LoginForm setUser={setUser} setViewLoginForm={setViewLoginForm} />
         ) : null}
+        <a className="navbar-brand flex-fill text-center nav-link" href="#" style={{ color: 'white', fontSize: '2em' }}>Thread & Trend</a>
       </nav>
     </>
   );
