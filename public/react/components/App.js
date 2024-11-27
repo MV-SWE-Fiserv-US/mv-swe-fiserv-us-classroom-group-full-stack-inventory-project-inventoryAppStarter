@@ -67,7 +67,7 @@ export const App = () => {
     }
   }, [selectItem, itemId, refresh]);
 
-  return (
+  return
 <>
 	<NavBar user={user} setUser={setUser}/>
     <main className="mainContainer">
@@ -105,5 +105,5 @@ export const App = () => {
       {showForm && <AddItemForm setItems={setItems} />}
 
     </main>
-  );
+</>
 };

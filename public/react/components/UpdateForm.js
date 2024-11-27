@@ -34,7 +34,7 @@ export default function UpdateForm({ item, setItem, setSelectItem }) {
           const data = await response.json();
           props.setItem(data);
           setViewUpdateForm(false);
-        //   props.setRefresh((prev) => !prev);
+        // props.setRefresh((prev) => !prev);
         } catch (err) {
           console.log("Error updating item:", err);
         }
