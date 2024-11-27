@@ -5,6 +5,7 @@ import { AddItemForm } from "./AddItemForm";
 import { Headers } from "./Headers";
 import "./App.css";
 import NavBar from "./NavBar";
+import { Cart } from "./Cart";
 
 // import and prepend the api url to any fetch calls
 import apiURL from "../api";
@@ -18,6 +19,7 @@ export const App = () => {
   const [showForm, setShowForm] = useState(false);
   const [user, setUser] = useState(null);
   const [viewUpdateForm, setViewUpdateForm] = useState(false);
+  const [viewCart, setViewCart] = useState(false);
 
   async function fetchItem() {
     try {
@@ -79,7 +81,8 @@ export const App = () => {
           {showForm && <AddItemForm setItems={setItems} />}
         </div>
         <div className="content">
-      <NavBar user={user} setUser={setUser} />
+      <NavBar user={user} setUser={setUser} viewCart={viewCart} setViewCart={setViewCart}/>
+    { viewCart ? <Cart /> : null }
           {selectItem ? (
             <>
               <Item

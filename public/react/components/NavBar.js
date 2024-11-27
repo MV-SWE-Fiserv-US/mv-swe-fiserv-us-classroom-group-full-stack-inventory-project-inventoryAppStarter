@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import LoginForm from "./LoginForm";
 
-export default function NavBar({ user, setUser }) {
+export default function NavBar({ user, setUser, viewCart, setViewCart }) {
   const [viewLoginForm, setViewLoginForm] = useState(false);
   return (
     <>
@@ -9,8 +9,7 @@ export default function NavBar({ user, setUser }) {
         {user ? (
           <>
             <p>Welcome {user.username}</p>
-            {/* Add Logic to Display Cart */}
-            <p>View Cart</p>
+            <button onClick={() => setViewCart(!viewCart)}>View Cart</button>
             <button onClick={() => setUser(null)}>Log Out</button>
           </>
         ) : (
