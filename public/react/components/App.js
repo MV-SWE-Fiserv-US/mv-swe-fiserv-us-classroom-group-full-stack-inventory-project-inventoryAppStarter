@@ -42,9 +42,9 @@ export default function App() {
   }, [])
 
   const categorySection = (
-    <section className="bg-zinc-300 flex flex-col items-end pr-8 py-2">
+    <section className="flex flex-col items-end pr-8 py-2">
       <div className="flex items-center">
-        <label htmlFor="category" className="mr-2 bg-zinc-300">Category:</label>
+        <label htmlFor="category" className="mr-2">Category:</label>
         <select onChange={handleCategory} className="p-2 border rounded">
           <option value="All">All</option>
           {categories.map((item, id) => (
@@ -56,9 +56,9 @@ export default function App() {
   )
 
   return (
-    <main className="h-full w-screen bg-zinc-300">
+    <main className="h-full w-screen bg-gradient-to-b from-slate-100 to-slate-300">
       {categorySection}
-      {<hr className="border-t border-gray-400 my-4"></hr>}
+      {<hr className="border-t border-slate-800 mb-4"></hr>}
       <ItemCard items={filteredItems ? filteredItems : items} />
     </main>
   )
