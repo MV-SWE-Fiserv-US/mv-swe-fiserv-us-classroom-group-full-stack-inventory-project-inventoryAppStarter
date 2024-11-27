@@ -9,6 +9,7 @@ export default function Login() {
     password: ""
   })
   const [registerFormData, setRegisterFormData] = useState({
+    name: "",
     email: "",
     password: ""
   })
@@ -20,7 +21,7 @@ export default function Login() {
 
   const handleChangeRegister = (e) => {
     const { name, value } = e.target
-    setRegisterFormData({ ...loginFormData, [name]: value })
+    setRegisterFormData({ ...registerFormData, [name]: value })
   }
 
   const handleSubmit = (e) => {
