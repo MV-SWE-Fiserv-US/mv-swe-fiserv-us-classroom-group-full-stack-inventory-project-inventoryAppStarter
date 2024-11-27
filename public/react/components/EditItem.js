@@ -26,68 +26,72 @@ export const EditItem = ({ item, onUpdateItem, onCancel, className }) => {
       onSubmit={handleSubmit}
       className={`p-6 rounded shadow-md w-full max-w-md ${className}`}
     >
-      <h2 className="text-2xl font-bold mb-4 text-white">Edit Item</h2>
+      <h2 className="text-2xl font-bold mb-4">Edit Item</h2>
       <label className="block mb-4">
-        <span className="text-gray-300">Name:</span>
+        <span className="mb-1">Name:</span>
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="mt-1 block w-full p-2 text-white rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+          className="mt-1 block w-full p-2 rounded border focus:outline-none"
+          required
         />
       </label>
       <label className="block mb-4">
-        <span className="text-gray-300">Price:</span>
+        <span className="mb-1">Price:</span>
         <input
           type="number"
           step="0.01"
           name="price"
           value={formData.price}
           onChange={handleChange}
-          className="mt-1 block w-full p-2 text-white rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+          className="mt-1 block w-full p-2 rounded border focus:outline-none"
+          required
         />
       </label>
       <label className="block mb-4">
-        <span className="text-gray-300">Description:</span>
+        <span className="mb-1">Description:</span>
         <textarea
           name="description"
           value={formData.description}
           onChange={handleChange}
-          className="mt-1 block w-full p-2 text-white rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+          className="mt-1 block w-full p-2 rounded border focus:outline-none"
+          required
         />
       </label>
       <label className="block mb-4">
-        <span className="text-gray-300">Category:</span>
+        <span className="mb-1">Category:</span>
         <input
           type="text"
           name="category"
           value={formData.category}
           onChange={handleChange}
-          className="mt-1 block w-full p-2 text-white rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+          className="mt-1 block w-full p-2 rounded border focus:outline-none"
+          required
         />
       </label>
       <label className="block mb-6">
-        <span className="text-gray-300">Image URL:</span>
+        <span className="mb-1">Image URL:</span>
         <input
           type="text"
           name="image"
           value={formData.image}
           onChange={handleChange}
-          className="mt-1 block w-full p-2 text-white rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+          className="mt-1 block w-full p-2 rounded border focus:outline-none"
         />
       </label>
       <div className="flex justify-end space-x-4">
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+          className="px-4 py-2 bg-blue-600 text-white rounded transition"
         >
           Update Item
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition"
+          className="px-4 py-2 bg-red-600 text-white rounded transition"
         >
           Cancel
         </button>
