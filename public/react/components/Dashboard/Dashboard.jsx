@@ -31,8 +31,8 @@ const Dashboard = () => {
 
 
   return (
-    <section className="h-screen w-full flex justify-center py-12 px-12">
-      <div className="w-full rounded-lg shadow-lg border border-gray-300 py-4 px-4">
+    <section className="h-screen w-full flex justify-center py-12 px-12 bg-gradient-to-b from-slate-100 to-slate-300">
+      <div className="w-full rounded-lg shadow-lg border border-gray-300 py-4 px-4 bg-white">
         <div className="px-4 sm:px-0">
           <h3 className="text-2xl font-semibold text-gray-900">
             User Dashboard
