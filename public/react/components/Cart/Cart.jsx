@@ -119,7 +119,7 @@ const Cart = () => {
           <article className="text-pretty">
             {cartItems.map((item) => {
               return (
-                <div className="flex justify-between w-full text-xs">
+                <div className="flex justify-between w-full text-xs" key={item.id}>
                   <p className="w-1/2">
                     {item.name} x {item.quantity}
                   </p>

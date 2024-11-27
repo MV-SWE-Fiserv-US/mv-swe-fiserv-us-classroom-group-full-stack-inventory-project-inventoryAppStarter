@@ -44,8 +44,8 @@ export default function App() {
   const categorySection = (
     <section className="flex flex-col items-end pr-8 py-2">
       <div className="flex items-center">
-        <label htmlFor="category" className="mr-2">Category:</label>
-        <select onChange={handleCategory} className="p-2 border rounded">
+        <label htmlFor="categorySelector" className="mr-2">Category:</label>
+        <select onChange={handleCategory} className="p-2 border rounded" name="categorySelector" id="categorySelector">
           <option value="All">All</option>
           {categories.map((item, id) => (
             <option key={id} value={item}>{item}</option>
