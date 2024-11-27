@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "morgan": "1.10.0",
     "nodemon": "^2.0.19",
     "parcel": "^2.8.3",
