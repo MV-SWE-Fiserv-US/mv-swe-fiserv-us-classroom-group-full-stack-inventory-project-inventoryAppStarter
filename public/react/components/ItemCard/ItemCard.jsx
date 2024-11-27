@@ -1,14 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../AuthProvider";
+import { jwtDecode } from "jwt-decode";
+import apiURL from "../../api";
 
 export default function ItemCard({ items }) {
   const navigate = useNavigate();
+  const [userId, setUserId] = useState(null);
   const { isLoggedIn } = useContext(AuthContext);
 
   async function addItemToCart(userId, itemId) {
     try {
-      const response = await fetch(`${apiURL}/${userId}/addToCart/${itemId}`, {
+      const response = await fetch(`${apiURL}/users/${userId}/addToCart/${itemId}`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json'
@@ -20,6 +23,10 @@ export default function ItemCard({ items }) {
     } catch (err) {
       console.log("Oh no an error! ", err)
     }
+  }
+
+  function handleAddItem(itemId) {
+    addItemToCart(userId, itemId);
   }
 
   function generateStars(num) {
@@ -55,19 +62,30 @@ export default function ItemCard({ items }) {
     return stars;
   }
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decoded = jwtDecode(token);
+      console.log(decoded);
+      if (decoded.id) {
+        setUserId(decoded.id);
+      }
+    }
+  }, [])
+
   return (
     <div className="bg-zinc-[#F8F7F5] font-black flex flex-wrap justify-evenly gap-4 mx-auto pb-12 px-4">
       {items.map((item) => {
         const num = Math.floor(Math.random() * 6);
         return (
           <div
-            className="bg-white flex flex-col justify-between items-center w-80 h-[600px] rounded-lg border border-slate-200 shadow-lg cursor-pointer"
+            className="bg-white flex flex-col justify-between items-center w-80 h-[600px] rounded-lg border border-slate-200 shadow-lg"
             key={item.id}
-            onClick={() => navigate(`/item/${item.id}`)}
           >
             <div className="h-1/2">
               <img
-                className="bg-white p-8 rounded-t-lg  h-full aspect-auto object-contain"
+                className="bg-white p-8 rounded-t-lg  h-full aspect-auto object-contain cursor-pointer"
+                onClick={() => navigate(`/item/${item.id}`)}
                 src={item.image}
                 alt={item.name}
               />
@@ -92,6 +110,7 @@ export default function ItemCard({ items }) {
                 <button
                   type="button"
                   disabled={!isLoggedIn}
+                  onClick={() => handleAddItem(item.id)}
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:bg-gray-300 disabled:transition-none disabled:cursor-not-allowed"
                 >
                   {isLoggedIn ? "Add to Cart" : "Login to Add to Cart"}
