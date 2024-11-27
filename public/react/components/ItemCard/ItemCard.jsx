@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../../AuthProvider";
 
 export default function ItemCard({ items }) {
   const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
 
   async function addItemToCart(userId, itemId) {
     try {
@@ -89,9 +91,10 @@ export default function ItemCard({ items }) {
                 </span>
                 <button
                   type="button"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  disabled={!isLoggedIn}
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:bg-gray-300 disabled:transition-none disabled:cursor-not-allowed"
                 >
-                  Add to cart
+                  {isLoggedIn ? "Add to Cart" : "Login to Add to Cart"}
                 </button>
               </div>
             </div>
