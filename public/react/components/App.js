@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { ItemsList } from "./ItemsList";
 import { Item } from "./Item";
 import { AddItemForm } from "./AddItemForm";
+import { Headers } from "./Headers";
+import "./App.css"
 import NavBar from "./NavBar";
+
 
 // import and prepend the api url to any fetch calls
 import apiURL from "../api";
@@ -62,35 +65,42 @@ export const App = () => {
   }, [selectItem, itemId, refresh]);
 
   return (
-	<>
+<>
 	<NavBar user={user} setUser={setUser}/>
-    <main>
-      {selectItem ? (
-        <>
-          <Item
-            item={item}
-            setSelectItem={setSelectItem}
-            selectItem={selectItem}
-            setItem={setItem}
-            setRefresh={setRefresh}
-          />
-          <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
-        </>
-      ) : (
-        <>
-          <h1>ITEMS</h1>
-          <ItemsList
-            setItemId={setItemId}
-            setSelectItem={setSelectItem}
-            items={items}
-            setItem={setItem}
-          />{" "}
-        </>
-      )}
-      <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+    <main className="mainContainer">
+      <div className="header">
+        <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+        {showForm && <AddItemForm setItems={setItems} />}
+      </div>
+      <div className="content">
+        {selectItem ? (
+          <>
+            <Item
+              item={item}
+              setSelectItem={setSelectItem}
+              selectItem={selectItem}
+              setItem={setItem}
+              setRefresh={setRefresh}
+            />
+            <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+          </>
+        ) : (
+          <>
+            <Headers />
+            <ItemsList
+              setItemId={setItemId}
+              setSelectItem={setSelectItem}
+              items={items}
+              setItem={setItem}
+            />
+          </>
+        )}
+      </div>
+//       <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
 
       {/* Render AddItemForm if showForm is true */}
       {showForm && <AddItemForm setItems={setItems} />}
+
     </main>
 	</>
   );
