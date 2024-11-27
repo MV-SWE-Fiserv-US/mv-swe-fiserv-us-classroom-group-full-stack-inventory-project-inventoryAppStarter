@@ -42,24 +42,24 @@ export default function ItemCard({ items, setSingleItem }) {
   }
 
   return (
-    <div className="item-container bg-zinc-300 font-black flex flex-wrap justify-evenly gap-4 mx-auto">
+    <div className="bg-zinc-300 font-black flex flex-wrap justify-evenly gap-4 mx-auto pb-12">
       {items.map((item) => {
         const num = Math.floor(Math.random() * 6);
         return (
           <div
-            className="item-card bg-white flex flex-col justify-between w-80 rounded-lg"
+            className="bg-white flex flex-col justify-between items-center w-80 h-[600px] rounded-lg"
             key={item.id}
             onClick={() => navigate(`/item/${item.id}`)}
           >
-            <div>
+            <div className="h-1/2">
               <img
-                className="bg-white p-8 rounded-t-lg font-mono"
+                className="bg-white p-8 rounded-t-lg font-mono h-full aspect-auto object-contain"
                 src={item.image}
                 alt={item.name}
               />
             </div>
-            <div className="px-5 pb-5 bg-white mt-auto rounded-b-lg">
-              <h5 className="bg-white text-xl font-semibold tracking-tight text-black font-mono">
+            <div className="px-5 pb-5 bg-white mt-auto rounded-b-lg h-1/2 flex flex-col justify-end w-full">
+              <h5 className="bg-white text-xl font-semibold tracking-tight text-black font-mono text-pretty">
                 {item.name}
               </h5>
 
@@ -71,8 +71,8 @@ export default function ItemCard({ items, setSingleItem }) {
                   {num}.0
                 </span>
               </div>
-              <div className="flex items-center justify-between bg-white font-mono mt-2">
-                <span className="bg-white text-3xl font-bold text-black font-mono">
+              <div className="flex items-center justify-between bg-white font-mono mt-2 w-full">
+                <span className="bg-white text-xl font-bold text-black font-mono">
                   ${item.price.toFixed(2)}
                 </span>
                 <a
