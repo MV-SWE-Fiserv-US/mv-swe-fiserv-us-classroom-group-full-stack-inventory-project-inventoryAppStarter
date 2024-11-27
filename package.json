@@ -26,6 +26,7 @@
     "react-router": "^7.0.1",
     "react-router-dom": "^7.0.1",
     "react-test-renderer": "^18.2.0",
+    "react-toastify": "^10.0.6",
     "sequelize": "^6.23.2",
     "sqlite3": "^5.1.1"
   },
