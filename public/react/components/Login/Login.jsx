@@ -1,10 +1,14 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import apiURL from "../../api"
 
 export default function Login() {
 
+  const [showPassword, setShowPassword] = useState(false)
   const [loginOrRegister, setLoginOrRegister] = useState(null)
   const [loginFormData, setLoginFormData] = useState({
     email: "",
@@ -109,16 +113,22 @@ export default function Login() {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password</label>
+          <div className="relative mb-6">
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
-              value={loginFormData.password}
-              onChange={handleChange}
+              value={registerFormData.password}
+              onChange={handleChangeRegister}
             />
+            <button
+              type="button"
+              className="absolute inset-y-0 right-0 flex items-center px-3 py-2"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </button>
           </div>
           <div className="mt-auto flex space-x-4">
             <button
@@ -170,16 +180,23 @@ export default function Login() {
               onChange={handleChangeRegister}
             />
           </div>
-          <div className="mb-6">
+          <div className="relative mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password</label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={registerFormData.password}
               onChange={handleChangeRegister}
             />
+            <button
+              type="button"
+              className="absolute top-1/2 right-0 transform +translate-y-1/2 px-3"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </button>
           </div>
           <div className="mt-auto flex space-x-4">
             <button
