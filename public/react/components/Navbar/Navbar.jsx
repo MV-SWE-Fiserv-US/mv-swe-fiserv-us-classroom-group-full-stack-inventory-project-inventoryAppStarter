@@ -65,6 +65,11 @@ export default function Navbar({ setSingleItem }) {
         setIsOpen(!isOpen)
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        window.location.reload()
+    }
+
     return (
         <nav className="">
             <div className="flex flex-wrap items-center justify-between mx-auto p-4">
