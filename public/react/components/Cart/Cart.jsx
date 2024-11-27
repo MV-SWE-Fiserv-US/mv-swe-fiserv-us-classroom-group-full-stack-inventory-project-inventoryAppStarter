@@ -19,10 +19,6 @@ const Cart = () => {
       .toFixed(2);
   };
 
-  useEffect(() => {
-    setTotal(calculateTotal());
-  }, [cartItems]);
-
   const updateQuantity = (id, newQuantity) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -41,15 +37,17 @@ const Cart = () => {
     );
   };
 
+  useEffect(() => {
+    setTotal(calculateTotal());
+  }, [cartItems]);
+
   return (
     <section className="w-full h-screen bg-gradient-to-b from-slate-100 to-slate-300 p-6 flex flex-col px-20">
       <div className="w-full flex justify-around">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            Shopping Cart
+          Shopping Cart
         </h2>
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            Checkout
-        </h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Checkout</h2>
       </div>
       <div className="w-full h-[90%] flex rounded-lg shadow-lg border border-gray-300 divide-x divide-gray-400 bg-white">
         <div className="w-1/2 h-full overflow-y-auto px-12 py-4">
@@ -119,7 +117,10 @@ const Cart = () => {
           <article className="text-pretty">
             {cartItems.map((item) => {
               return (
-                <div className="flex justify-between w-full text-xs" key={item.id}>
+                <div
+                  className="flex justify-between w-full text-xs"
+                  key={item.id}
+                >
                   <p className="w-1/2">
                     {item.name} x {item.quantity}
                   </p>

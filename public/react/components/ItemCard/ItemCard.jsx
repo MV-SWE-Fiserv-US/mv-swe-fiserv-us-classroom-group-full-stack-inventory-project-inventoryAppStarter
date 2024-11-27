@@ -47,7 +47,7 @@ export default function ItemCard({ items, setSingleItem }) {
         const num = Math.floor(Math.random() * 6);
         return (
           <div
-            className="bg-white flex flex-col justify-between items-center w-80 h-[600px] rounded-lg border border-slate-200 shadow-lg"
+            className="bg-white flex flex-col justify-between items-center w-80 h-[600px] rounded-lg border border-slate-200 shadow-lg cursor-pointer"
             key={item.id}
             onClick={() => navigate(`/item/${item.id}`)}
           >
@@ -75,12 +75,12 @@ export default function ItemCard({ items, setSingleItem }) {
                 <span className="bg-white text-xl font-bold text-black ">
                   ${item.price.toFixed(2)}
                 </span>
-                <a
-                  href="#"
+                <button
+                  type="button"
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Add to cart
-                </a>
+                </button>
               </div>
             </div>
           </div>
