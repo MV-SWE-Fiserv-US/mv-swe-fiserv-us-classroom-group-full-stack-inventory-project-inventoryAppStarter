@@ -1,23 +1,19 @@
 module.exports = {
   users: [
    {
-     "name": "John Doe",
-     "email": "johndoe@example.com",
+     "username": "John Doe",
      "password": "$2a$12$KIXG79ZKkmuQDP9fFkxzOeh1jklZ2pyrLprKvQk.bxYr1pQsbmjCq" 
    },
    {
-     "name": "Jane Smith",
-     "email": "janesmith@example.com",
+     "username": "Jane Smith",
      "password": "$2a$12$KIXG79ZKkmuQDP9fFkxzOeh1jklZ2pyrLprKvQk.bxYr1pQsbmjCq"
    },
    {
-     "name": "Alice Brown",
-     "email": "alicebrown@example.com",
+     "username": "Alice Brown",
      "password": "$2a$12$6F.JG5yfjINzQkSyF82YMe9r74g8K3uFXVuayBG.vHRL14/d3Tr4u"
    },
    {
-     "name": "Bob Johnson",
-     "email": "bobjohnson@example.com",
+     "username": "Bob Johnson",
      "password": "$2a$12$G3YyZ9d2U7LtFhrJ3Pb4x.T1GpAwJ54lSoZBlt4e1Vt7evyO3S8A6"
    }
  ],

@@ -4,6 +4,8 @@ import { Item } from "./Item";
 import { AddItemForm } from "./AddItemForm";
 import { Headers } from "./Headers";
 import "./App.css"
+import NavBar from "./NavBar";
+
 
 // import and prepend the api url to any fetch calls
 import apiURL from "../api";
@@ -15,10 +17,10 @@ export const App = () => {
   const [itemId, setItemId] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [user, setUser] = useState(null);
 
   async function fetchItem() {
     try {
-      console.log("item id is:", itemId);
       const response = await fetch(`${apiURL}/items/${itemId}`);
       const itemData = await response.json();
       setItem(itemData);
@@ -31,8 +33,6 @@ export const App = () => {
     try {
       const response = await fetch(`${apiURL}/items`);
       const itemsData = await response.json();
-      console.log(itemsData);
-
       setItems(itemsData);
     } catch (err) {
       console.log("Oh no an error! ", err);
@@ -65,6 +65,8 @@ export const App = () => {
   }, [selectItem, itemId, refresh]);
 
   return (
+<>
+	<NavBar user={user} setUser={setUser}/>
     <main className="mainContainer">
       <div className="header">
         <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
@@ -94,6 +96,12 @@ export const App = () => {
           </>
         )}
       </div>
+//       <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+
+      {/* Render AddItemForm if showForm is true */}
+      {showForm && <AddItemForm setItems={setItems} />}
+
     </main>
+	</>
   );
 };
