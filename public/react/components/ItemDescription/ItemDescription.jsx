@@ -181,9 +181,7 @@ export default function ItemDescription() {
       </div>
       {adminView && (
         <section ref={adminRef}>
-          <UpdateItem
-            item={singleItem}
-          />
+          <UpdateItem item={singleItem} />
           <DeleteItem item={singleItem} />
         </section>
       )}

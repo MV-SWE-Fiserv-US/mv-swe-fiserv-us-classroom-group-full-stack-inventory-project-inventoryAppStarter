@@ -47,9 +47,9 @@ export default function UpdateItem({ item }) {
       });
     } catch (error) {
       console.log("Oh no an error! ", error);
-      toast.error("Item could not be added to cart 😰 Try again later.", {
-        position: "top-center"
-      })
+      toast.error("Item could not be updated 😰 Try again later.", {
+        position: "top-center",
+      });
     }
   }
 
