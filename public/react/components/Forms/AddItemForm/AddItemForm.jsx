@@ -13,7 +13,7 @@ const AddItemForm = () => {
   async function postItem({ item }) {
     try {
         const response = await fetch(`${apiURL}/items`, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },

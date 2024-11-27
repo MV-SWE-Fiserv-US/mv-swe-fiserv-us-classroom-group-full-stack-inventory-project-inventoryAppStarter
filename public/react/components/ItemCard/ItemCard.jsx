@@ -1,11 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-export default function ItemCard({ items, setSingleItem }) {
+export default function ItemCard({ items }) {
   const navigate = useNavigate();
 
-  function handleClick(item) {
-    setSingleItem(item);
+  async function addItemToCart(userId, itemId) {
+    try {
+      const response = await fetch(`${apiURL}/${userId}/addToCart/${itemId}`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+      if(!response.ok) {
+        throw new Error("Item could not be added to your cart!");
+      }
+    } catch (err) {
+      console.log("Oh no an error! ", err)
+    }
   }
 
   function generateStars(num) {
