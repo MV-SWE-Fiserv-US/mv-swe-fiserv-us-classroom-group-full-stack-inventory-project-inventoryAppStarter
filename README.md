@@ -88,8 +88,7 @@ Don't forget to give the project a star! Thanks again!
 ### Top contributors:
 
 <a href="https://github.com/MV-SWE-Fiserv-US/group-full-stack-inventory-project-cos/graphs/contributors">
-  
-  ![image](https://github.com/user-attachments/assets/bd8916e0-b234-4e9c-a9bb-d65fc3b590b7)
+  <img src="https://contrib.rocks/image?repo=MV-SWE-Fiserv-US/group-full-stack-inventory-project-cos" />
 </a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
