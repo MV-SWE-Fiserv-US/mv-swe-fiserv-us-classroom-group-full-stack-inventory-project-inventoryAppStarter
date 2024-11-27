@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router";
+
 import apiURL from "../../api"
 
 export default function Login() {
@@ -11,29 +13,77 @@ export default function Login() {
   const [registerFormData, setRegisterFormData] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
+    isAdmin: false
   })
 
-  const handleChange = (e) => {
+  const navigate = useNavigate();
+
+  function handleChange(e) {
     const { name, value } = e.target
     setLoginFormData({ ...loginFormData, [name]: value })
   }
 
-  const handleChangeRegister = (e) => {
+  function handleChangeRegister(e) {
     const { name, value } = e.target
     setRegisterFormData({ ...registerFormData, [name]: value })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle login logic here
-    console.log("Login submitted", loginFormData)
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log(loginFormData)
+    try {
+        const response = await fetch(`${apiURL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginFormData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Login failed');
+        }
+
+        const data = await response.json();
+        console.log("Login successful", data);
+        setLoginOrRegister(null)
+        setLoginFormData({
+          email: "",
+          password: ""
+        })
+        navigate('/');
+    } catch (error) {
+        console.error("Error during registration:", error);
+    }
   }
 
-  const handleSubmitRegister = (e) => {
-    e.preventDefault()
-    // Handle login logic here
-    console.log("Login submitted", registerFormData)
+  async function handleSubmitRegister(e) {
+      e.preventDefault();
+      console.log(registerFormData)
+      try {
+          const response = await fetch(`${apiURL}/auth/register`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(registerFormData)
+          });
+  
+          if (!response.ok) {
+              throw new Error('Registration failed');
+          }
+  
+          const data = await response.json();
+          console.log("Registration successful", data);
+          setLoginOrRegister('login')
+          setLoginFormData({
+            email: "",
+            password: ""
+          })
+      } catch (error) {
+          console.error("Error during registration:", error);
+      }
   }
 
   const loginPrompts = {
@@ -188,3 +238,4 @@ export default function Login() {
       )}
     </>
   );
+}
