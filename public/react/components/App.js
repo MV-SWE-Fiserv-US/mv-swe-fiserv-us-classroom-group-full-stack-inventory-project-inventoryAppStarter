@@ -18,6 +18,7 @@ export const App = () => {
 
   async function fetchItem() {
     try {
+      console.log("item id is:", itemId);
       const response = await fetch(`${apiURL}/items/${itemId}`);
       const itemData = await response.json();
       setItem(itemData);
@@ -30,6 +31,8 @@ export const App = () => {
     try {
       const response = await fetch(`${apiURL}/items`);
       const itemsData = await response.json();
+      console.log(itemsData);
+
       setItems(itemsData);
     } catch (err) {
       console.log("Oh no an error! ", err);
@@ -62,9 +65,8 @@ export const App = () => {
   }, [selectItem, itemId, refresh]);
 
   return (
-	<>
-	<NavBar user={user} setUser={setUser}/>
     <main>
+      <NavBar user={user} setUser={setUser}/>
       {selectItem ? (
         <>
           <Item
@@ -92,6 +94,5 @@ export const App = () => {
       {/* Render AddItemForm if showForm is true */}
       {showForm && <AddItemForm setItems={setItems} />}
     </main>
-	</>
   );
 };
