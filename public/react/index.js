@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from "./components/Footer/Footer";
 import ItemDescription from "./components/ItemDescription/ItemDescription";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Login from "./components/Login/Login";
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard",
                 element: <Dashboard />
+            },
+            {
+                path: "/auth",
+                element: <Login />
             }
         ]
     }

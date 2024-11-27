@@ -1,44 +1,60 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router';
-import vaultIcon from "../../../assets/vault-icon.svg";
+import React, { useState } from 'react'
+import apiURL from '../../api'
+import vaultIcon from "../../../assets/vault-icon.svg"
+import { NavLink } from 'react-router'
 
 export default function Navbar({ setSingleItem }) {
-    const [isOpen, setIsOpen] = useState(false);
-    // const [isModalOpen, setIsModalOpen] = useState(false);
-    // const [formData, setFormData] = useState({
-    //     name: '',
-    //     description: '',
-    //     category: '',
-    //     price: '',
-    //     image: ''
-    // })
+    const [isOpen, setIsOpen] = useState(false)
+//     const [isModalOpen, setIsModalOpen] = useState(false)
+//     const [errorModal, setErrorModal] = useState(false)
+//     const [errorMessages, setErrorMessages] = useState(null)
+//     const [formData, setFormData] = useState({
+//         name: '',
+//         description: '',
+//         category: '',
+//         price: '',
+//         image: ''
+//     })
 
-    // async function addItem() {
-    //     try {
-    //         const response = await fetch(`${apiURL}/items/`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(formData)
-    //         })
-    //         if (!response.ok) {
-    //             throw new Error("Item could not be posted..")
-    //         }
-    //     } catch (error) {
-    //         console.log("Oh no an error! ", error)
-    //     }
-    // }
+//     async function addItem() {
+//         try {
+//             const response = await fetch(`${apiURL}/items/`, {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify(formData)
+//             })
 
-    // function handleSubmit(e) {
-    //     e.preventDefault()
-    //     addItem()
-    //     console.log(formData)
-    //     setIsModalOpen(false)
-    //     setTimeout(() => {
-    //         setSingleItem(formData)
-    //     }, 1000);
-    // }
+//             if (!response.ok) {
+//                 const errorData = await response.json()
+//                 console.error("Validation errors:", errorData.errors)
+//                 setErrorMessages(errorData.errors)
+//                 setErrorModal(true)
+//                 throw new Error("Item could not be posted.")
+//             }
+
+//             const createdItem = await response.json()
+//             console.log("Item created successfully:", createdItem)
+//         } catch (error) {
+//             console.log('hit')
+//             console.log("Oh no an error! ", error)
+//         }
+//     }
+
+//     function handleSubmit(e) {
+//         e.preventDefault()
+//         addItem()
+//         console.log(formData)
+//         setIsModalOpen(false)
+//         setTimeout(() => {
+//             if (errorMessages) {
+//                 setTimeout(() => {
+//                     setSingleItem(formData)
+//                 }, 1000)
+//             }
+//         }, 2000)
+//     }
 
     // function handleChange(e) {
     //     const { name, value } = e.target
@@ -46,8 +62,8 @@ export default function Navbar({ setSingleItem }) {
     // }
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+        setIsOpen(!isOpen)
+    }
 
     return (
         <nav className="">
@@ -71,16 +87,16 @@ export default function Navbar({ setSingleItem }) {
                 <div className={`${isOpen ? 'block' : 'hidden'} w-full`} id="navbar-hamburger">
                     <ul className="flex flex-col font-medium mt-4 rounded-lg">
                         <li>
-                            <NavLink to="/" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" aria-current="page">Home</NavLink>
+                            <NavLink to="/" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" aria-current="page" onClick={() => setIsOpen(false)} >Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/cart" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white">Cart</NavLink>
+                            <NavLink to="/cart" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" onClick={() => setIsOpen(false)}>Cart</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/auth" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" onClick={() => setIsModalOpen(true)} >Login / Sign Up</NavLink>
+                            <NavLink to="/auth" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" onClick={() => setIsOpen(false)}>Login / Sign Up</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" onClick={() => setIsModalOpen(true)} >Dashboard</NavLink>
+                            <NavLink to="/dashboard" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" onClick={() => setIsOpen(false)} >Dashboard</NavLink>
                         </li>
                     </ul>
                 </div>

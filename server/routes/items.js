@@ -31,24 +31,25 @@ router.get("/:id", async (req, res, next) => {
 router.post(
   "/",
   [
-    check("name").notEmpty().trim(),
-    check("description").notEmpty().trim(),
-    check("category").notEmpty().trim(),
-    check("price").notEmpty().isFloat(),
-    check("image").notEmpty().trim(),
+    check("name").notEmpty().withMessage("Name is required").trim(),
+    check("description").notEmpty().withMessage("Description is required").trim(),
+    check("category").notEmpty().withMessage("Category is required").trim(),
+    check("price").notEmpty().withMessage("Price is required").isFloat().withMessage("Price must be a number"),
+    check("image").notEmpty().withMessage("Image URL is required").trim(),
   ],
   async (req, res, next) => {
     try {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        res.status(400).json({ errors: errors.array() });
-        return;
+        console.log("Validation errors:", errors.array());
+        return res.status(400).json({ errors: errors.array() });
       } else {
         const createdItem = await Item.create(req.body);
-        res.status(201).json(createdItem);
+        return res.status(201).json(createdItem);
       }
     } catch (error) {
+      console.error("Error creating item:", error);
       next(error);
     }
   }

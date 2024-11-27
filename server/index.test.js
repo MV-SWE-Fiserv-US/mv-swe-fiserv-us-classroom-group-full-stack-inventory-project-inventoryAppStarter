@@ -127,7 +127,7 @@ describe("Users", () => {
       expect.objectContaining({
         name: "John Doe",
         email: "john.doe@example.com",
-        password: "hashedpassword123",
+        password: "hashedPassword123!!",
         cart: [],
         isAdmin: false,
       })

@@ -11,16 +11,20 @@
   "dependencies": {
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "16.0.0",
     "express": "^4.17.1",
     "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "morgan": "1.10.0",
     "nodemon": "^2.0.19",
     "parcel": "^2.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^7.0.1",
+    "react-router-dom": "^7.0.1",
     "react-test-renderer": "^18.2.0",
     "sequelize": "^6.23.2",
     "sqlite3": "^5.1.1"
@@ -28,6 +32,7 @@
   "devDependencies": {
     "@testing-library/react": "^12.0.0",
     "babel-jest": "^27.1.0",
+    "buffer": "^5.7.1",
     "jest": "^27.1.0",
     "postcss": "^8.4.49",
     "process": "^0.11.10",
