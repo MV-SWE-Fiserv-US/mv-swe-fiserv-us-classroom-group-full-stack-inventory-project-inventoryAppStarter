@@ -1,7 +1,7 @@
 const express = require('express')
 const { Item, User } = require('../models/index');
 const router = express.Router()
-
+const { Op } = require('sequelize');
 
 //Get All the items /items
 router.get('/', async (req, res) => {
@@ -45,4 +45,53 @@ router.delete('/:id',async(req,res)=>{
     const deletedItem = await Item.destroy({where :{id : req.params.id}});
     res.json(deletedItem);
 })
+
+//const response = await fetch(`${apiURL}/items/search?${queryString}`);
+router.get('/search', async (req, res) => {
+    try {
+      const { name, price, category } = req.query;
+      console.log(name,price,category)
+      const filters = {};
+  
+      if (name) {
+        filters.name = { [Op.like]: `%${name}%` };
+      }
+  
+      if (category) {
+        filters.category = { [Op.like]: `%${category}%` };
+      }
+  
+      if (price && !isNaN(price)) {
+        filters.price = { [Op.lte]: parseFloat(price) };
+      }
+  
+      if (Object.keys(filters).length === 0) {
+        return res.status(400).json({ error: 'At least one search parameter is required' });
+      }
+  
+      console.log('Filters:', filters);
+  
+      const items = await Item.findAll({ where: filters });
+  
+      if (items.length === 0) {
+        return res.status(404).json({ message: 'No items found' });
+      }
+  
+      return res.json(items);
+    } catch (err) {
+      console.error('Error fetching items:', err);  // Log the error stack
+      res.status(500).json({
+        error: 'An error occurred while fetching items',
+        message: err.message,
+        stack: err.stack,  // Include stack trace for debugging
+      });
+    }
+  });
+  
+
+
+
+
+
+  
 module.exports = router;
