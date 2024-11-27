@@ -103,7 +103,7 @@ export const App = () => {
           </>
         )}
       </div>
-//       <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+       <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
 
       {/* Render AddItemForm if showForm is true */}
       {showForm && <AddItemForm setItems={setItems} />}
