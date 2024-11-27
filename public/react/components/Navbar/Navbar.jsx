@@ -87,16 +87,16 @@ export default function Navbar({ setSingleItem }) {
                 <div className={`${isOpen ? 'block' : 'hidden'} w-full`} id="navbar-hamburger">
                     <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                         <li>
-                            <NavLink to="/" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">Home</NavLink>
+                            <NavLink to="/" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page" onClick={() => setIsOpen(false)} >Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/cart" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Cart</NavLink>
+                            <NavLink to="/cart" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsOpen(false)}>Cart</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/auth" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" >Login / Sign Up</NavLink>
+                            <NavLink to="/auth" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsOpen(false)}>Login / Sign Up</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsModalOpen(true)} >Dashboard</NavLink>
+                            <NavLink to="/dashboard" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => setIsOpen(false)} >Dashboard</NavLink>
                         </li>
                     </ul>
                 </div>
