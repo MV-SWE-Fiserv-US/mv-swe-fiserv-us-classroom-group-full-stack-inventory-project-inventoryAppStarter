@@ -1,0 +1,37 @@
+.mainContainer {
+    padding: 20px 100px 20px 100px; /* Add units to padding values */
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    position: fixed; 
+    top: 0; 
+    left: 0;  
+    right: 0; 
+    bottom: 0; 
+}
+
+.header {
+    flex: 0 0 auto; 
+}
+
+.content {
+    border: none;
+    flex: 1 1 auto; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+}
+/* Customize the scrollbar */
+::-webkit-scrollbar {
+    width: 8px; /* Set the width of the vertical scrollbar */
+    height: 8px; /* Set the height of the horizontal scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #3a5a40; /* Set the color of the scrollbar thumb */
+    border-radius: 10px; /* Round the corners of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-track {
+    background-color:#dad7cd; /* Set the color of the scrollbar track */
+    border-radius: 10px; /* Round the corners of the scrollbar track */
+}
