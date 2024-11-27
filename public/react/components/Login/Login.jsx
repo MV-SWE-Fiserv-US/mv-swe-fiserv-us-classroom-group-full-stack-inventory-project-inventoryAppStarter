@@ -9,11 +9,13 @@ import apiURL from "../../api"
 export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const [loginOrRegister, setLoginOrRegister] = useState(null)
   const [loginFormData, setLoginFormData] = useState({
     email: "",
     password: ""
   })
+
   const [registerFormData, setRegisterFormData] = useState({
     name: "",
     email: "",
@@ -31,6 +33,12 @@ export default function Login() {
   function handleChangeRegister(e) {
     const { name, value } = e.target
     setRegisterFormData({ ...registerFormData, [name]: value })
+    console.log(registerFormData.name)
+    if(registerFormData.name == "TacoBel") {
+      setIsVisible(true)
+      console.log('TACOBELLLLLL')
+    }
+
   }
 
   async function handleSubmit(e) {
@@ -119,8 +127,8 @@ export default function Login() {
               id="password"
               type={showPassword ? "text" : "password"}
               name="password"
-              value={registerFormData.password}
-              onChange={handleChangeRegister}
+              value={loginFormData.password}
+              onChange={handleChange}
             />
             <button
               type="button"
@@ -148,7 +156,7 @@ export default function Login() {
       </div>
     </section>),
     register: (<section className="h-screen w-full flex justify-center py-12 px-12">
-      <div className="w-full max-w-md rounded-lg shadow-lg border border-gray-300 py-2 px-4 max-h-[50vh] flex flex-col">
+      <div className="w-full max-w-md rounded-lg shadow-lg border border-gray-300 py-2 px-4 max-h-[60vh] flex flex-col">
         <div className="px-4 sm:px-0">
           <h3 className="text-2xl font-semibold text-gray-900">
             Register
@@ -192,11 +200,22 @@ export default function Login() {
             />
             <button
               type="button"
-              className="absolute top-1/2 right-0 transform +translate-y-1/2 px-3"
+              className="absolute top-1/2 right-0 transform translate-y-1 px-3"
               onClick={() => setShowPassword(!showPassword)}
             >
               <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
             </button>
+          </div>
+          <div className={isVisible ? "" : "hidden"}>
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="isAdmin">Admin</label>
+            <input
+              className="mr-2 leading-tight"
+              id="isAdmin"
+              type="checkbox"
+              name="isAdmin"
+              checked={registerFormData.isAdmin}
+              onChange={(e) => setRegisterFormData({ ...registerFormData, isAdmin: e.target.checked })}
+            />
           </div>
           <div className="mt-auto flex space-x-4">
             <button
