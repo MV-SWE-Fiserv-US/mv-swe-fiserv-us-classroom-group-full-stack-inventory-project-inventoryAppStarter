@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiURL from '../../../api';
 
-export default function DeleteItem({ item, setSingleItem }) {
+export default function DeleteItem({ item }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     function handleDelete() {
@@ -16,7 +16,6 @@ export default function DeleteItem({ item, setSingleItem }) {
         })
         .then(() => {
             setIsModalOpen(false);
-            setSingleItem(null);
         })
         .catch(error => {
             console.log("Oh no an error! ", error);
@@ -29,7 +28,7 @@ export default function DeleteItem({ item, setSingleItem }) {
 
     return (
         <>
-            <div className="flex justify-center">
+            <div className="flex justify-center my-8">
                 <button
                     className="bg-rose-600 hover:bg-rose-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     onClick={() => setIsModalOpen(true)}

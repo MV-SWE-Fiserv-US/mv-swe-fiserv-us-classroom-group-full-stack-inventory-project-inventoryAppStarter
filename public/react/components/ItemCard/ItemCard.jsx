@@ -27,7 +27,7 @@ export default function ItemCard({ items }) {
       }
       toast.success("Item added to cart 🛒", {
         position: "top-center",
-        autoClose: 3000, //3 seconds
+        autoClose: 3000, 
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -36,7 +36,9 @@ export default function ItemCard({ items }) {
       });
     } catch (err) {
       console.log("Oh no an error! ", err);
-      toast.error("Item could not be added to cart 😰 Try again later.")
+      toast.error("Item could not be added to cart 😰 Try again later.", {
+        position: "top-center"
+      })
     }
   }
 
@@ -81,7 +83,6 @@ export default function ItemCard({ items }) {
     const token = localStorage.getItem("token");
     if (token) {
       const decoded = jwtDecode(token);
-      console.log(decoded);
       if (decoded.id) {
         setUserId(decoded.id);
       }
@@ -93,7 +94,7 @@ export default function ItemCard({ items }) {
       <div className="toast-container">
         <ToastContainer />
       </div>
-      <div className="bg-zinc-[#F8F7F5] font-black flex flex-wrap justify-evenly gap-4 mx-auto pb-12 px-4">
+      <div className="font-black flex flex-wrap justify-evenly gap-4 mx-auto pb-12 px-4">
         {items.map((item) => {
           const num = Math.floor(Math.random() * 6);
           return (
