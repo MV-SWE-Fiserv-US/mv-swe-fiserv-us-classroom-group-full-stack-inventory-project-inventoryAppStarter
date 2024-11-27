@@ -17,6 +17,7 @@ export const App = () => {
   const [refresh, setRefresh] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [user, setUser] = useState(null);
+  const [viewUpdateForm, setViewUpdateForm] = useState(false);
 
   async function fetchItem() {
     try {
@@ -64,7 +65,7 @@ export const App = () => {
     } else {
       fetchItems();
     }
-  }, [selectItem, itemId, refresh]);
+  }, [selectItem, itemId, refresh, viewUpdateForm]);
 
   return (
     <>
@@ -78,7 +79,7 @@ export const App = () => {
           {showForm && <AddItemForm setItems={setItems} />}
         </div>
         <div className="content">
-        <NavBar user={user} setUser={setUser} />
+      <NavBar user={user} setUser={setUser} />
           {selectItem ? (
             <>
               <Item
@@ -87,6 +88,8 @@ export const App = () => {
                 selectItem={selectItem}
                 setItem={setItem}
                 setRefresh={setRefresh}
+                viewUpdateForm={viewUpdateForm}
+                setViewUpdateForm={setViewUpdateForm}
               />
               <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
             </>

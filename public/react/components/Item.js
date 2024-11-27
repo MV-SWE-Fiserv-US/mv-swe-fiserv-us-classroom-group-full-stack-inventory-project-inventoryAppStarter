@@ -1,11 +1,9 @@
-import { React, useState} from "react";
+import { React, useState } from "react";
 import UpdateForm from "./UpdateForm";
 import apiURL from "../api";
 import "./item.css";
 
-export const Item = (props) => {
-
-  const [viewUpdateForm, setViewUpdateForm] = useState(false);
+export const Item = ({ item, setItem, setSelectItem, setRefresh, viewUpdateForm, setViewUpdateForm }) => {
   // const [updatedItem, setUpdatedItem] = useState({
   //   name: props.item.name,
   //   description: props.item.description,
@@ -13,7 +11,6 @@ export const Item = (props) => {
   //   category: props.item.category,
   //   image: props.item.image,
   // });
-
 
   // function handleChange(e) {
   //   const { name, value } = e.target;
@@ -43,88 +40,49 @@ export const Item = (props) => {
   //   }
   // }
 
-  return < div className='Itemcontainer'>
+  return (
+    <div className="Itemcontainer">
+      <div className="row">
+        <div className="col-3 item">
+          <button className="itemButton">{item.name}</button>
+        </div>
+        <div className="col-4 item">
+          <p className="itemDescription">{item.description}</p>
+        </div>
+        <div className="col-1 item">
+          <p>{item.price}</p>
+        </div>
+        <div className="col-1 item">
+          <p>{item.category}</p>
+        </div>
+        <div className="col-3 image item">
+          <img src={item.image} alt={item.name} />
+        </div>
+      </div>
+      <div>
+        {setSelectItem ? (
+          <>
+            <button onClick={() => setSelectItem(false)}>Back</button>
+            <button
+              onClick={() => setViewUpdateForm((prev) => !prev)}
+            >
+              {viewUpdateForm ? "Cancel" : "Update"}
+            </button>
+          </>
+        ) : (
+          ""
+        )}
 
-  <div className='row'>
-    <div className='col-3 item'>
-      <button className="itemButton">{props.item.name}</button>
+        {viewUpdateForm && (
+          <UpdateForm
+            item={item}
+            setItem={setItem}
+            setSelectItem={setSelectItem}
+            setViewUpdateForm={setViewUpdateForm}
+            setRefresh={setRefresh}
+          />
+        )}
+      </div>
     </div>
-    <div className='col-4 item'>
-      <p className="itemDescription">{props.item.description}</p>
-    </div>
-    <div className='col-1 item'>
-
-      <p>{props.item.price}</p>
-    </div>
-    <div className='col-1 item'>
-
-      <p>{props.item.category}</p>
-    </div>
-    <div className='col-3 image item' >
-      <img src={props.item.image} alt={props.item.name} />
-
-    </div>
-  </div>
-  <>
-
-      {props.selectItem ? (
-        <>
-          <button onClick={() => props.setSelectItem(false)}>Back</button>
-          <button onClick={() => setViewUpdateForm(!viewUpdateForm)}>
-            {viewUpdateForm ? "Cancel" : "Update"}
-          </button>
-          {viewUpdateForm ? (
-            <form onSubmit={handleSubmit}>
-              <label>
-                Name:
-                <input
-                  type="text"
-                  name="name"
-                  value={updatedItem.name}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Description:
-                <input
-                  type="text"
-                  name="description"
-                  value={updatedItem.description}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Price:
-                <input
-                  type="text"
-                  name="price"
-                  value={updatedItem.price}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Category:
-                <input
-                  type="text"
-                  name="category"
-                  value={updatedItem.category}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Image:
-                <input
-                  type="text"
-                  name="image"
-                  value={updatedItem.image}
-                  onChange={handleChange}
-                />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          ) : null}
-        </>
-      ) : null}
-    </>
-    </div>
+  );
 };
