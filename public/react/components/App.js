@@ -68,47 +68,47 @@ export const App = () => {
   }, [selectItem, itemId, refresh, viewUpdateForm]);
 
   return (
-    <>
-      <main className="mainContainer">
-
-        <div className="header">
-
-          <button onClick={toggleForm}>
-            {showForm ? "Cancel" : "Add Item"}
-          </button>
-          {showForm && <AddItemForm setItems={setItems} />}
-        </div>
-        <div className="content">
-      <NavBar user={user} setUser={setUser} />
-          {selectItem ? (
-            <>
-              <Item
-                item={item}
-                setSelectItem={setSelectItem}
-                selectItem={selectItem}
-                setItem={setItem}
-                setRefresh={setRefresh}
-                viewUpdateForm={viewUpdateForm}
-                setViewUpdateForm={setViewUpdateForm}
-              />
-              <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
-            </>
-          ) : (
-            <>
-              <Headers />
-              <ItemsList
-                setItemId={setItemId}
-                setSelectItem={setSelectItem}
-                items={items}
-                setItem={setItem}
-              />
-            </>
-          )}
-        </div>{" "}
+<>
+	<NavBar user={user} setUser={setUser}/>
+    <main className="mainContainer">
+      <div className="header">
         <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
-        {/* Render AddItemForm if showForm is true */}
         {showForm && <AddItemForm setItems={setItems} />}
-      </main>
-    </>
+      </div>
+      <div className="content">
+        {selectItem ? (
+          <>
+            <Item
+              item={item}
+              setSelectItem={setSelectItem}
+              selectItem={selectItem}
+              setItem={setItem}
+              setRefresh={setRefresh}
+              viewUpdateForm={viewUpdateForm}
+              setViewUpdateForm={setViewUpdateForm}
+            />
+            <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+          </>
+        ) : (
+          <>
+            <Headers />
+            <div className="itemPadding">
+            <ItemsList
+              setItemId={setItemId}
+              setSelectItem={setSelectItem}
+              items={items}
+              setItem={setItem}
+            />
+            </div>
+          </>
+        )}
+      </div>
+       <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+
+      {/* Render AddItemForm if showForm is true */}
+      {showForm && <AddItemForm setItems={setItems} />}
+
+    </main>
+	</>
   );
 };
