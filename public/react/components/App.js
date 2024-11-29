@@ -112,5 +112,6 @@ export const App = () => {
       {/* Render AddItemForm if showForm is true */}
       {showForm && <AddItemForm setItems={setItems} />}
     </main>
+    </>
   );
 };
