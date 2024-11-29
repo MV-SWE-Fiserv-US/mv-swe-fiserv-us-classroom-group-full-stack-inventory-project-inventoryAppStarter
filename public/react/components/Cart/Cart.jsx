@@ -1,31 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider";
-import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router";
 import apiURL from "../../api";
 
 const Cart = () => {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, userId, username } = useContext(AuthContext);
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
-  const [userInfo, setUserInfo] = useState({
-    id: null,
-    name: null,
-    email: null,
-  });
-  
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    let decoded; 
-    if(token) {
-      decoded = jwtDecode(token);
-      setUserInfo({...userInfo, 
-        id: decoded.id,
-        name: decoded.name,
-        email: decoded.email
-      })
-    }
-  }, [])
 
   const calculateTotal = () => {
     return cartItems
@@ -61,7 +42,19 @@ const Cart = () => {
         throw new Error("Item could not be added to your cart!");
       }
       const data = await response.json();
-      const cart = await data.cart;
+      const cartData = await data.cart;
+      const cart = await cartData.reduce((acc, product) => {
+        const existingProduct = acc.find(item => item.id === product.id);
+        
+        if (existingProduct) {
+          existingProduct.quantity += 1;
+        } else {
+          acc.push({ ...product, quantity: 1 });
+        }
+      
+        return acc;
+      }, []);
+      
       setCartItems(cart);
     } catch (err) {
       console.log("Oh no an error! ", err);
@@ -74,17 +67,17 @@ const Cart = () => {
 
   useEffect(() => {
     if(isLoggedIn) {
-      fetchUserCart(userInfo.id);
+      fetchUserCart(userId);
     }
   }, []);
 
   return (
     <section className="w-full h-screen bg-gradient-to-b from-slate-100 to-slate-300 p-6 flex flex-col items-center justify-center px-20">
-      {isLoggedIn && userInfo.id ? 
+      {isLoggedIn ? 
       (<>
         <div className="w-full flex justify-between px-12">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            {isLoggedIn && userInfo.name}'s Shopping Cart
+            {isLoggedIn && username}'s Shopping Cart
           </h2>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Checkout</h2>
         </div>
