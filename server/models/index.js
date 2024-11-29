@@ -4,15 +4,8 @@ const User = require('./User');
 const Item = require('./Item');
 
 
-
-const Sauce = sequelize.define("sauces", {
-  name: Sequelize.STRING,
-  image: Sequelize.STRING,
-})
-
-Item.belongsToMany(User, {through: 'UserItem'});
-User.belongsToMany(Item, {through: 'UserItem'});
-
+User.belongsToMany(Item, { through: 'UserItem', as: 'Items' });
+Item.belongsToMany(User, { through: 'UserItem', as: 'Users' });
 
 module.exports = {
   db: sequelize,

@@ -1,17 +1,23 @@
 import { React, useState } from "react";
 import LoginForm from "./LoginForm";
 import "./NavBar.css";
+import Cart from "./Cart";
 
-export default function NavBar({ user, setUser }) {
+export default function NavBar({ user, setUser, viewCart, setViewCart, setSelectItem, selectItem }) {
   const [viewLoginForm, setViewLoginForm] = useState(false);
+
+  function handleViewCart() {
+    setViewCart(!viewCart);
+    setSelectItem(false);
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg nav-pills flex-column flex-sm-row">
         {user ? (
           <>
             <p>Welcome {user.username}</p>
-            {/* Add Logic to Display Cart */}
-            <p>View Cart</p>
+            
+            <button onClick={handleViewCart}>{viewCart ? "Back to Items" : "View Cart"}</button>
             <button onClick={() => setUser(null)}>Log Out</button>
           </>
         ) : (

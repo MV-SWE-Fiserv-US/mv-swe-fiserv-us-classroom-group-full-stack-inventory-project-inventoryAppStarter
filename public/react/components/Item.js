@@ -3,13 +3,44 @@ import UpdateForm from "./UpdateForm";
 import apiURL from "../api";
 import "./item.css";
 
-export const Item = ({ item, setItem, setSelectItem, setRefresh, viewUpdateForm, setViewUpdateForm }) => {
+export const Item = ({
+  item,
+  setItem,
+  setSelectItem,
+  selectItem,
+  setRefresh,
+  viewUpdateForm,
+  setViewUpdateForm,
+  viewCart,
+  setViewCart,
+  setAddedItem,
+  user,
+}) => {
 
-  // function handleClick(item){
-	// 	setSelectItem(true)
-	// 	setItem(item);
-	// }
-  // onClick= {()=>handleClick(item)}
+  async function handleAddToCart() {
+    console.log(user.id, item.id);
+    try {
+    
+      const response = await fetch(`${apiURL}/users/${user.id}/addToCart/${item.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data.message);
+      } else {
+        console.error(data.error);
+      }
+    } catch (error) {
+      console.error(
+        "An error occurred while adding the item to the cart:",
+        error
+      );
+    }
+  }
+
   return (
     <div className="Itemcontainer">
       <div className="row">
@@ -27,15 +58,20 @@ export const Item = ({ item, setItem, setSelectItem, setRefresh, viewUpdateForm,
         </div>
         <div className="col-3 image item">
           <img src={item.image} alt={item.name} />
+          {selectItem  && user ? (
+            <div>
+              <button onClick={handleAddToCart}>Add to Cart</button>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div>
         {setSelectItem ? (
           <>
             <button onClick={() => setSelectItem(false)}>Back</button>
-            <button
-              onClick={() => setViewUpdateForm((prev) => !prev)}
-            >
+            <button onClick={() => setViewUpdateForm((prev) => !prev)}>
               {viewUpdateForm ? "Cancel" : "Update"}
             </button>
           </>
