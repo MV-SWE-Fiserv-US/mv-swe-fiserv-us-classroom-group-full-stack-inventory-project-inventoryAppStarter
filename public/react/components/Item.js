@@ -4,15 +4,21 @@ import apiURL from "../api";
 import "./item.css";
 
 export const Item = ({ item, setItem, setSelectItem, setRefresh, viewUpdateForm, setViewUpdateForm }) => {
+
+  // function handleClick(item){
+	// 	setSelectItem(true)
+	// 	setItem(item);
+	// }
+  // onClick= {()=>handleClick(item)}
   return (
     <div className="Itemcontainer">
       <div className="row">
-        <div className="col-3 item">
-          <button className="itemButton">{item.name}</button>
+        <div  className="col-3 item">
+          <button  className="itemButton">{item.name}</button>
         </div>
         <div className="col-4 item">
-          <p className="itemDescription">{item.description}</p>
-        </div>
+        <p>{item.description}</p>
+       </div>
         <div className="col-1 item">
           <p>{item.price}</p>
         </div>

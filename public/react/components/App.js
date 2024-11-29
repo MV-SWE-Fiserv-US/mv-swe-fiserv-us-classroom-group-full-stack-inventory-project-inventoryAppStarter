@@ -77,8 +77,8 @@ export const App = () => {
 	<NavBar user={user} setUser={setUser}/>
     <main className="mainContainer">
       <div className="header">
-        <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
-        {showForm && <AddItemForm setItems={setItems} />}
+        {/* <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button> */}
+        {/* {showForm && <AddItemForm setItems={setItems} />} */}
       </div>
       <div className="content">
         {selectItem ? (
@@ -108,7 +108,7 @@ export const App = () => {
           </>
         )}
       </div>
-       <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+       <button className="addCancelItem"onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
       {/* Render AddItemForm if showForm is true */}
       {showForm && <AddItemForm setItems={setItems} />}
     </main>
