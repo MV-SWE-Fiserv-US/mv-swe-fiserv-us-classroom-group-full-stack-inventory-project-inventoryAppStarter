@@ -26,11 +26,7 @@ const CheckoutForm = () => {
         "Content-Type": "application/json",
       },
     });
-    console.log(response);
-
     const order = await response.json();
-    console.log(order);
-
     return order.id;
   };
 
