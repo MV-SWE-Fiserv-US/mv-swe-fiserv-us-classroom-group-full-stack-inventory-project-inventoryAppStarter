@@ -11,6 +11,8 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./AuthProvider";
 import { ToastContainer } from "react-toastify";
+import Checkout from "./components/Forms/CheckoutForm/Checkout";
+import Success from "./components/Success/Success";
 
 const router = createBrowserRouter([
   {
