@@ -10,9 +10,9 @@ Order.belongsToMany(Item, { through: "Order Items" });
 Item.belongsToMany(Order, { through: "Order Items" });
 
 module.exports = {
-  db: sequelize,
-  Item,
-  User,
-  Order,
-  DataTypes,
+    db: sequelize,
+    Item,
+    User,
+    Order,
+    DataTypes,
 };

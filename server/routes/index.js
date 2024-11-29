@@ -6,5 +6,6 @@ router.use("/items", require("./items"));
 router.use("/users", require("./users"));
 router.use("/orders", require("./orders"));
 router.use("/auth", require("./auth"));
+router.use("/payment-intent", require("./payment"));
 
 module.exports = router;

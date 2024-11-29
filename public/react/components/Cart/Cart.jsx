@@ -7,14 +7,15 @@ const Cart = () => {
   const { isLoggedIn, userId, username } = useContext(AuthContext);
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   const calculateTotal = () => {
     return cartItems
-      .reduce((total, item) => {
-        total += item.quantity * item.price;
-        return total;
-      }, 0)
-      .toFixed(2);
+        .reduce((total, item) => {
+            total += item.quantity * item.price;
+            return total;
+        }, 0)
+        .toFixed(2);
   };
 
   const expandCartItems = async (cart) => {
@@ -232,6 +233,7 @@ const Cart = () => {
       )}
     </section>
   );
+
 };
 
 export default Cart;
