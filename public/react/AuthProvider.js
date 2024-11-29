@@ -11,11 +11,9 @@ export const AuthProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
-  console.log(clientSecret);
-  
+
   const getClientSecret = async () => {
     try {
-
       const response = await fetch(`${apiURL}/payment-intent`, {
         method: "POST",
         headers: {
