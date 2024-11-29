@@ -1,71 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import apiURL from '../api';
 
 export const SearchItems = () => {
-  const [searchCriteria, setSearchCriteria] = useState({
-    name: '',
-    price: '',
-    category: '',
-  });
-
+  const [searchQuery, setSearchQuery] = useState('');  // The search query
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);  // State to track loading status
-  const [error, setError] = useState(null);  // State to handle error messages
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Handle input changes in search fields
+  // Handle search input change
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setSearchCriteria((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setSearchQuery(e.target.value);
   };
 
-  // Fetch filtered items based on search criteria
+  // Fetch items based on the search query
   const fetchItems = async () => {
-    setLoading(true);  // Start loading
-    setError(null);  // Reset error state on new search
-    try {
-      // Construct the query string and ensure it doesn't include any newline characters
-      const queryString = new URLSearchParams(searchCriteria).toString();
-      console.log(queryString);
-      
-      // Only make the API request if there are valid search criteria
-      if (queryString) {
+    setLoading(true);
+    setError(null);
+
+    // Only make the API request if there is a search query
+    if (searchQuery.trim()) {
+      try {
+        // Construct the query string with the search query
+        const queryString = new URLSearchParams({ name: searchQuery }).toString();
         const response = await fetch(`${apiURL}/items/search?${queryString}`);
-  
+
         const data = await response.json();
-        console.log("API Response Data:", data); // Log the full response to check its contents
-    
+
         if (data.error) {
-          setError(data.error);  // Handle error response from the API
+          setError(data.error);  // Handle error response from API
           setItems([]);  // Reset items on error
         } else if (Array.isArray(data)) {
           setItems(data);  // Update items if the response is an array
         } else {
-          setItems([]);  // In case the response is unexpected
-          setError('Unexpected response format');  // Set a generic error
+          setItems([]);  // Unexpected response format
+          setError('Unexpected response format');
         }
-      } else {
-        setItems([]);  // No search criteria, clear the items
+      } catch (error) {
+        console.error('Error fetching items:', error);
+        setError(error.message || 'Failed to fetch items');
+      } finally {
+        setLoading(false);  // Stop loading
       }
-    } catch (error) {
-      console.error('Error fetching items:', error);
-      setError('Failed to fetch items');
-    } finally {
-      setLoading(false);  // Stop loading
+    } else {
+      setItems([]);  // Clear items if the search query is empty
+      setLoading(false); // Stop loading if no query
     }
   };
-
-  // Trigger fetch when search criteria change, but only if there is a valid change
-  useEffect(() => {
-    // Only trigger the fetch when any search criteria are filled
-    if (searchCriteria.name || searchCriteria.price || searchCriteria.category) {
-      fetchItems();  // Trigger fetch if there are any search criteria
-    } else {
-      setItems([]);  // Reset items when search criteria is empty
-    }
-  }, [searchCriteria]);  // Trigger fetch only when search criteria change
 
   return (
     <div>
@@ -73,44 +53,22 @@ export const SearchItems = () => {
       
       <div>
         <label>
-          Name:
+          Search:
           <input
             type="text"
-            name="name"
-            value={searchCriteria.name}
+            value={searchQuery}
             onChange={handleChange}
-          />
-        </label>
-      </div>
-      
-      <div>
-        <label>
-          Price:
-          <input
-            type="number"
-            name="price"
-            value={searchCriteria.price}
-            onChange={handleChange}
+            placeholder="Search by name"
           />
         </label>
       </div>
 
+      {/* Search Button */}
       <div>
-        <label>
-          Category:
-          <input
-            type="text"
-            name="category"
-            value={searchCriteria.category}
-            onChange={handleChange}
-          />
-        </label>
+        <button onClick={fetchItems} disabled={loading || !searchQuery.trim()}>
+          {loading ? 'Searching...' : 'Search'}
+        </button>
       </div>
-
-      {/* Remove the button, because fetching happens automatically */}
-      {/* <div>
-        <button onClick={fetchItems}>Search</button>
-      </div> */}
 
       {/* Loading Spinner */}
       {loading && <p>Loading...</p>}

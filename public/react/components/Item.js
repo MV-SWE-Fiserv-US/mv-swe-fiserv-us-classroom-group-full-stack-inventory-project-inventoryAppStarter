@@ -1,5 +1,6 @@
-import { React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import apiURL from "../api";
+import "./item.css";
 
 export const Item = (props) => {
 
@@ -41,71 +42,80 @@ export const Item = (props) => {
     }
   }
 
-  return (
+  return < div className='Itemcontainer'>
+
+    <div className='row'>
+      <div className='col-3 item'>
+        <button className="itemButton">{props.item.name}</button>
+      </div>
+      <div className='col-4 item'>
+        <p className="itemDescription">{props.item.description}</p>
+      </div>
+      <div className='col-1 item'>
+
+        <p>{props.item.price}</p>
+      </div>
+      <div className='col-1 item'>
+
+        <p>{props.item.category}</p>
+      </div>
+      <div className='col-3 image item' >
+        <img src={props.item.image} alt={props.item.name} />
+
+      </div>
+    </div>
     <>
-      <h1>{props.item.name}</h1>
-      <p>{props.item.description}</p>
-      <p>{props.item.price}</p>
-      <p>{props.item.category}</p>
-      <img src={props.item.image} alt={props.item.name} />
-      {props.selectItem ? (
-        <>
-          <button onClick={() => props.setSelectItem(false)}>Back</button>
-          <button onClick={() => setViewUpdateForm(!viewUpdateForm)}>
-            {viewUpdateForm ? "Cancel" : "Update"}
-          </button>
-          {viewUpdateForm ? (
-            <form onSubmit={handleSubmit}>
-              <label>
-                Name:
-                <input
-                  type="text"
-                  name="name"
-                  value={updatedItem.name}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Description:
-                <input
-                  type="text"
-                  name="description"
-                  value={updatedItem.description}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Price:
-                <input
-                  type="text"
-                  name="price"
-                  value={updatedItem.price}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Category:
-                <input
-                  type="text"
-                  name="category"
-                  value={updatedItem.category}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Image:
-                <input
-                  type="text"
-                  name="image"
-                  value={updatedItem.image}
-                  onChange={handleChange}
-                />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          ) : null}
-        </>
+      {viewUpdateForm ? (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              value={updatedItem.name}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Description:
+            <input
+              type="text"
+              name="description"
+              value={updatedItem.description}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Price:
+            <input
+              type="text"
+              name="price"
+              value={updatedItem.price}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Category:
+            <input
+              type="text"
+              name="category"
+              value={updatedItem.category}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Image:
+            <input
+              type="text"
+              name="image"
+              value={updatedItem.image}
+              onChange={handleChange}
+            />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       ) : null}
     </>
-  );
+  </div>
+
 };

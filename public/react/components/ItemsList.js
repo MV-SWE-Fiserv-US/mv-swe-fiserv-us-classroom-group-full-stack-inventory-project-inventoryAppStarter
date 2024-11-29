@@ -12,7 +12,6 @@ export const ItemsList = ({items, setItemId, setSelectItem, setItem}) => {
 	return <>
 		{
 			items.map((item) => {
-				console.log(item);
 				return <button onClick={() => handleClick(item)}><Item item={item} key={item.id} /></button>
 			})
 		}

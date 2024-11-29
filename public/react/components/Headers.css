@@ -1,0 +1,14 @@
+.titleContainer {
+    background-color: #a3b18a;
+    position: fixed;
+    width: calc(100% - 200px); 
+    left: 100px; 
+    top: 20px; 
+    z-index: 1; 
+}
+.itemTitle {
+    justify-content: center;
+    border-color: #344e41;
+    color: white;
+
+}

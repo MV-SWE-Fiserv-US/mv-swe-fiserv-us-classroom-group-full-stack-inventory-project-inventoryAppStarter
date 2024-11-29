@@ -4,8 +4,9 @@ import { Item } from "./Item";
 import { AddItemForm } from "./AddItemForm";
 import { SearchItems } from "./SearchItems"; 
 
+
 // import and prepend the api url to any fetch calls
-import apiURL from "../api";
+import apiURL from '../api';
 
 export const App = () => {
   const [selectItem, setSelectItem] = useState(false);
@@ -14,64 +15,50 @@ export const App = () => {
   const [itemId, setItemId] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  // Fetch a single item by ID
   async function fetchItem() {
-    setLoading(true); // Start loading
     try {
-      console.log("Fetching item with ID:", itemId);
+      console.log("item id is:", itemId);
       const response = await fetch(`${apiURL}/items/${itemId}`);
       const itemData = await response.json();
       setItem(itemData);
     } catch (err) {
-      console.log("Error fetching item:", err);
-    } finally {
-      setLoading(false); // Stop loading
-    }
+      console.log("Oh no an error! ", err);
+    } 
   }
 
-  // Fetch all items from the API
   async function fetchItems() {
-    setLoading(true); // Start loading
+
     try {
       const response = await fetch(`${apiURL}/items`);
       const itemsData = await response.json();
+      console.log(itemsData);
+
       setItems(itemsData);
     } catch (err) {
-      console.log("Error fetching items:", err);
-    } finally {
-      setLoading(false); // Stop loading
+      console.log("Oh no an error! ", err);
     }
   }
 
-  // Handle item deletion
   const handleDeleteItem = async () => {
-    setLoading(true); // Start loading
     try {
       const response = await fetch(`${apiURL}/items/${itemId}`, {
         method: "DELETE",
       });
       if (response.status === 200) {
         setSelectItem(false);
-        setItem({});
-        setItemId(null);
-        setRefresh((prevState) => !prevState); // Trigger a refresh of the item list
       }
     } catch (err) {
-      console.log("Error deleting item:", err);
-    } finally {
-      setLoading(false); // Stop loading
+      console.log("Oh no an error! ", err);
     }
   };
-
   // Toggle the visibility of the AddItemForm
   const toggleForm = () => {
     setShowForm((prevState) => !prevState);
   };
 
   useEffect(() => {
-    if (selectItem && itemId) {
+    if (selectItem) {
       fetchItem();
     } else {
       fetchItems();
@@ -80,8 +67,6 @@ export const App = () => {
 
   return (
     <main>
-      {loading && <div>Loading...</div>} {/* Simple loading indicator */}
-      
       {selectItem ? (
         <>
           <Item
@@ -91,15 +76,13 @@ export const App = () => {
             setItem={setItem}
             setRefresh={setRefresh}
           />
-          <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+          <button onClick={handleDeleteItem}>Delete</button>
         </>
       ) : (
         <>
           <h1>ITEMS</h1>
-          
-          {/* Adding SearchItems component*/}
+          {/* Adding SearchItems component */}
           <SearchItems setItems={setItems} />
-
           <ItemsList
             setItemId={setItemId}
             setSelectItem={setSelectItem}
@@ -108,12 +91,9 @@ export const App = () => {
           />
         </>
       )}
+      <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
 
-      <button onClick={toggleForm}>
-        {showForm ? "Cancel" : "Add Item"}
-      </button>
-
-      {/* Conditionally render AddItemForm */}
+      {/* Render AddItemForm if showForm is true */}
       {showForm && <AddItemForm setItems={setItems} />}
     </main>
   );
