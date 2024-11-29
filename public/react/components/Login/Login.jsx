@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import apiURL from "../../api";
 
 export default function Login() {
@@ -50,10 +51,24 @@ export default function Login() {
         email: "",
         password: "",
       });
-      navigate("/");
-      location.reload();
+      toast.success("Login successful 👍", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        transition: Slide,
+      });
+      setTimeout(() => {
+        navigate("/");
+        location.reload();
+      }, 2000);
     } catch (error) {
       console.error("Error during registration:", error);
+      toast.error(`${error}`, {
+        position: "top-center",
+      });
     }
   }
 
@@ -232,6 +247,9 @@ export default function Login() {
 
   return (
     <>
+      <div className="toast-container">
+        <ToastContainer />
+      </div>
       {loginOrRegister === "login" && loginPrompts.login}
       {loginOrRegister === "register" && loginPrompts.register}
       {!loginOrRegister && (
