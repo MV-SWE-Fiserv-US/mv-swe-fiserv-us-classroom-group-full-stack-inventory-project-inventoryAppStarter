@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { toast, Slide } from "react-toastify";
+import { AuthContext } from "../../AuthProvider";
+import { Link } from "react-router";
+import apiURL from "../../api";
 
 const Dashboard = () => {
   const [disabledInputs, setDisabledInputs] = useState({
@@ -8,30 +12,88 @@ const Dashboard = () => {
     submitter: true,
   });
 
+  const { isLoggedIn, userId, username, userEmail, isAdmin } = useContext(AuthContext);
+
   const [userData, setUserData] = useState({
-    name: "Admin User",
-    email: "admin@example.com",
-    password: "adminpassword",
-    isAdmin: true,
+    name: username,
+    email: userEmail,
+    password: "fillerpassword",
+    isAdmin: isAdmin,
   });
+
+  const [updatedData, setUpdatedData] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
+    setUpdatedData({...updatedData, [name]: value});
     setDisabledInputs({
       ...disabledInputs,
       submitter: false,
     });
   };
 
+  async function updateUserInfo(userId, updatedUserInfo) {
+    try {
+      const response = await fetch(`${apiURL}/users/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUserInfo),
+      });
+      if (!response.ok) {
+        throw new Error("Cart could not be updated. Try again later.");
+      }
+      toast.success("User info successfully updated 👍", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        transition: Slide,
+      });
+    } catch (err) {
+      console.log("Oh no an error! ", err);
+      toast.error("User info could not be updated 😰 Try again later.", {
+        position: "top-center",
+      });
+    }
+  }
+
+  async function fetchUser(userId) {
+    try {
+      const response = await fetch(`${apiURL}/users/${userId}`);
+      if (!response.ok) {
+        throw new Error("Could not get user. Try again later.");
+      }
+      const data = await response.json();
+      const name = await data.name;
+      const email = await data.email;
+      setUserData({...userData, 
+        name: name,
+        email: email
+      })
+    } catch (err) {
+      console.log("Oh no an error! ", err);
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // editUser(formData);
+    updateUserInfo(userId, updatedData);
+    fetchUser(userId);
+    location.reload();
   };
 
+  useEffect(() => {
+    fetchUser(userId);
+  }, [])
+  
   return (
-    <section className="h-screen w-full flex justify-center py-12 px-12 bg-gradient-to-b from-slate-100 to-slate-300">
-      <div className="w-full rounded-lg shadow-lg border border-gray-300 py-4 px-4 bg-white">
+    <section className="h-screen w-full flex justify-center items-center py-12 px-12 bg-gradient-to-b from-slate-100 to-slate-300">
+      {isLoggedIn ? (<div className="w-full rounded-lg shadow-lg border border-gray-300 py-4 px-4 bg-white">
         <div className="px-4 sm:px-0">
           <h3 className="text-2xl font-semibold text-gray-900">
             User Dashboard
@@ -157,7 +219,15 @@ const Dashboard = () => {
             Add Store Item
           </button>
         </div>
-      </div>
+      </div>) : (
+        <h1 className="font-extrabold text-3xl">
+        Please{" "}
+        <Link to="/auth" className="text-blue-400 underline">
+          Login/Sign Up
+        </Link>{" "}
+        to View User Dashboard
+      </h1>
+      )}
     </section>
   );
 };

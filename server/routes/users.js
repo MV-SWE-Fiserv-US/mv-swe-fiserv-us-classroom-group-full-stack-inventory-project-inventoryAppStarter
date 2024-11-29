@@ -64,11 +64,11 @@ router.post(
 router.put(
   "/:id",
   [
-    check("name").notEmpty().trim(),
-    check("email").notEmpty().isEmail().trim(),
-    check("password").notEmpty().isStrongPassword(),
-    check("cart").isArray(),
-    check("isAdmin").notEmpty().isBoolean(),
+    check("name").optional().notEmpty().trim(),
+    check("email").optional().notEmpty().isEmail().trim(),
+    check("password").optional().notEmpty().isStrongPassword(),
+    check("cart").optional().isArray(),
+    check("isAdmin").optional().notEmpty().isBoolean(),
   ],
   async (req, res, next) => {
     try {
