@@ -18,14 +18,16 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <div className="flex flex-col min-h-screen ">
+      <>
         <Navbar />
-        <Outlet />
+        <div className="flex flex-col min-h-[90vh]">
+          <Outlet />
+        </div>
         <Footer />
-      </div>
+      </>
     ),
     children: [
-    {
+      {
         path: "/",
         element: <App />,
       },

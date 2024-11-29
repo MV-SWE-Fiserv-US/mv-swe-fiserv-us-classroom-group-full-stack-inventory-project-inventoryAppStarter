@@ -10,6 +10,8 @@ const stripePromise = loadStripe(
 
 const Checkout = () => {
   const { clientSecret } = useContext(AuthContext);
+  console.log(clientSecret);
+  
 
   if (!clientSecret) return null;
 

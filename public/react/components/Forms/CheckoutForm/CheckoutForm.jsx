@@ -4,11 +4,12 @@ import {
   PaymentElement,
   LinkAuthenticationElement,
 } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import apiURL from "../../../api";
+import { AuthContext } from "../../../AuthProvider";
 
-const CheckoutForm = ({ clientSecret }) => {
+const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -16,20 +17,22 @@ const CheckoutForm = ({ clientSecret }) => {
 
   const navigate = useNavigate();
 
-  // const createOrder = async () => {
-  //   const response = await fetch(`${apiURL}/orders/${userId}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   console.log(response);
+  const { userId } = useContext(AuthContext);
 
-  //   const order = await response.json();
-  //   console.log(order);
+  const createOrder = async () => {
+    const response = await fetch(`${apiURL}/orders/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
 
-  //   return order.id;
-  // };
+    const order = await response.json();
+    console.log(order);
+
+    return order.id;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,40 +44,45 @@ const CheckoutForm = ({ clientSecret }) => {
       return;
     }
 
-    // const orderId = await createOrder();
+    const orderId = await createOrder();
 
-    // const { error } = await stripe.confirmPayment({
-    //   elements,
-    //   confirmParams: {
-    //     return_url: `${window.location.origin}/success/${orderId}`,
-    //   },
-    // });
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${window.location.origin}/success/${orderId}`,
+      },
+    });
 
-    // if (error.type === "card_error" || error.type === "validation_error") {
-    //   setError(error.message);
-    // } else {
-    //   setError("An unexpected error occurred.");
-    // }
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setError(error.message);
+    } else {
+      setError("An unexpected error occurred.");
+    }
 
-    navigate(`/success/${3}`);
+    navigate(`/success/${orderId}`);
   };
 
   const paymentElementOptions = {
     layout: {
-      type: 'accordion',
+      type: "accordion",
       defaultCollapsed: false,
       radios: false,
-      spacedAccordionItems: true
+      spacedAccordionItems: true,
     },
-    
   };
 
   return (
-
     <form id="payment-form" className="payment-form" onSubmit={handleSubmit}>
-      <LinkAuthenticationElement id="link-authentication-element" className="mb-5" />
+      <LinkAuthenticationElement
+        id="link-authentication-element"
+        className="mb-5"
+      />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={loading || !stripe || !elements} id="submit" className="btn">
+      <button
+        disabled={loading || !stripe || !elements}
+        id="submit"
+        className="btn"
+      >
         <span id="button-text">
           {loading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
