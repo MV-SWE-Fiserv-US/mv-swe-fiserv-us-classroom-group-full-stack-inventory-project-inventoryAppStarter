@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { ItemsList } from "./ItemsList";
 import { Item } from "./Item";
 import { AddItemForm } from "./AddItemForm";
+import { SearchItems } from "./SearchItems"; 
 import { Headers } from "./Headers";
 import "./App.css";
 import NavBar from "./NavBar";
 
 // import and prepend the api url to any fetch calls
-import apiURL from "../api";
+import apiURL from '../api';
 
 export const App = () => {
   const [selectItem, setSelectItem] = useState(false);
@@ -16,8 +17,10 @@ export const App = () => {
   const [itemId, setItemId] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [showForm, setShowForm] = useState(false);
+
   const [user, setUser] = useState(null);
   const [viewUpdateForm, setViewUpdateForm] = useState(false);
+
 
   async function fetchItem() {
     try {
@@ -27,10 +30,11 @@ export const App = () => {
       setItem(itemData);
     } catch (err) {
       console.log("Oh no an error! ", err);
-    }
+    } 
   }
 
   async function fetchItems() {
+
     try {
       const response = await fetch(`${apiURL}/items`);
       const itemsData = await response.json();
@@ -54,7 +58,7 @@ export const App = () => {
       console.log("Oh no an error! ", err);
     }
   };
-
+  // Toggle the visibility of the AddItemForm
   const toggleForm = () => {
     setShowForm((prevState) => !prevState);
   };
@@ -68,6 +72,7 @@ export const App = () => {
   }, [selectItem, itemId, refresh, viewUpdateForm]);
 
   return (
+
 <>
 	<NavBar user={user} setUser={setUser}/>
     <main className="mainContainer">
@@ -104,11 +109,8 @@ export const App = () => {
         )}
       </div>
        <button className="addCancelItem"onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
-
       {/* Render AddItemForm if showForm is true */}
       {showForm && <AddItemForm setItems={setItems} />}
-
     </main>
-	</>
   );
 };

@@ -4,6 +4,7 @@ const User = require('./User');
 const Item = require('./Item');
 
 
+
 const Sauce = sequelize.define("sauces", {
   name: Sequelize.STRING,
   image: Sequelize.STRING,
