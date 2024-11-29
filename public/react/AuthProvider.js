@@ -10,6 +10,28 @@ export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [clientSecret, setClientSecret] = useState("");
+  console.log(clientSecret);
+  
+  const getClientSecret = async () => {
+    try {
+
+      const response = await fetch(`${apiURL}/payment-intent`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ total: 1000 }),
+      });
+      const { clientSecret } = await response.json();
+      setClientSecret(clientSecret);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getClientSecret();
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -27,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAdmin, isLoggedIn, userId, username, userEmail }}
+      value={{ isAdmin, isLoggedIn, userId, username, userEmail, clientSecret }}
     >
       {children}
     </AuthContext.Provider>
