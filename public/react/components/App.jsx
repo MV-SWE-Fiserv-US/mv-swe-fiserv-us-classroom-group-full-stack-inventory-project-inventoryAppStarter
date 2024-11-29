@@ -56,7 +56,7 @@ export default function App() {
     )
 
     return (
-        <main className="h-full w-screen bg-gradient-to-b from-slate-100 to-slate-300">
+        <main className="flex flex-col min-h-screen h-full w-screen bg-gradient-to-b from-slate-100 to-slate-300">
             {categorySection}
             {<hr className="border-t border-slate-800 mb-4"></hr>}
             <ItemCard items={filteredItems ? filteredItems : items} />
