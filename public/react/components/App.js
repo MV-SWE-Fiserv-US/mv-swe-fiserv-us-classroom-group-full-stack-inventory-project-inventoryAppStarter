@@ -3,7 +3,9 @@ import { ItemsList } from "./ItemsList";
 import { Item } from "./Item";
 import { AddItemForm } from "./AddItemForm";
 import { SearchItems } from "./SearchItems"; 
-
+import { Headers } from "./Headers";
+import "./App.css";
+import NavBar from "./NavBar";
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
@@ -15,6 +17,10 @@ export const App = () => {
   const [itemId, setItemId] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [showForm, setShowForm] = useState(false);
+
+  const [user, setUser] = useState(null);
+  const [viewUpdateForm, setViewUpdateForm] = useState(false);
+
 
   async function fetchItem() {
     try {
@@ -63,36 +69,46 @@ export const App = () => {
     } else {
       fetchItems();
     }
-  }, [selectItem, itemId, refresh]);
+  }, [selectItem, itemId, refresh, viewUpdateForm]);
 
   return (
-    <main>
-      {selectItem ? (
-        <>
-          <Item
-            item={item}
-            setSelectItem={setSelectItem}
-            selectItem={selectItem}
-            setItem={setItem}
-            setRefresh={setRefresh}
-          />
-          <button onClick={handleDeleteItem}>Delete</button>
-        </>
-      ) : (
-        <>
-          <h1>ITEMS</h1>
-          {/* Adding SearchItems component */}
-          <SearchItems setItems={setItems} />
-          <ItemsList
-            setItemId={setItemId}
-            setSelectItem={setSelectItem}
-            items={items}
-            setItem={setItem}
-          />
-        </>
-      )}
-      <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
 
+<>
+	<NavBar user={user} setUser={setUser}/>
+    <main className="mainContainer">
+      <div className="header">
+        <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+        {showForm && <AddItemForm setItems={setItems} />}
+      </div>
+      <div className="content">
+        {selectItem ? (
+          <>
+            <Item
+              item={item}
+              setSelectItem={setSelectItem}
+              selectItem={selectItem}
+              setItem={setItem}
+              setRefresh={setRefresh}
+              viewUpdateForm={viewUpdateForm}
+              setViewUpdateForm={setViewUpdateForm}
+            />
+            <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+          </>
+        ) : (
+          <>
+            <Headers />
+            <div className="itemPadding">
+            <ItemsList
+              setItemId={setItemId}
+              setSelectItem={setSelectItem}
+              items={items}
+              setItem={setItem}
+            />
+            </div>
+          </>
+        )}
+      </div>
+       <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
       {/* Render AddItemForm if showForm is true */}
       {showForm && <AddItemForm setItems={setItems} />}
     </main>
