@@ -58,7 +58,7 @@ export const Item = ({
         </div>
         <div className="col-3 image item">
           <img src={item.image} alt={item.name} />
-          {selectItem ? (
+          {selectItem  && user ? (
             <div>
               <button onClick={handleAddToCart}>Add to Cart</button>
             </div>
