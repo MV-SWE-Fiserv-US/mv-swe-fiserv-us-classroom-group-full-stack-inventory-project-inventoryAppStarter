@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, isAdmin } = useContext(AuthContext);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -112,7 +112,7 @@ export default function Navbar() {
                   className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white"
                   onClick={() => setIsOpen(false)}
                 >
-                  Dashboard
+                  {isAdmin ? "Dashboard" : "Settings"}
                 </NavLink>
               </li>
             </ul>
