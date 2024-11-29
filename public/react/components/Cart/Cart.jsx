@@ -48,7 +48,7 @@ const Cart = () => {
   }
 
   return (
-    <section className="w-full h-screen bg-white p-6 flex flex-col px-20">
+    <section className="w-full h-screen bg-gradient-to-b from-slate-100 to-slate-300 p-6 flex flex-col px-20">
       <div className="w-full flex justify-around">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Shopping Cart
@@ -57,7 +57,7 @@ const Cart = () => {
             Checkout
         </h2>
       </div>
-      <div className="w-full h-[90%] flex rounded-lg shadow-lg border border-gray-300 divide-x divide-gray-400">
+      <div className="w-full h-[90%] flex rounded-lg shadow-lg border border-gray-300 divide-x divide-gray-400 bg-white">
         <div className="w-1/2 h-full overflow-y-auto px-12 py-4">
           {cartItems.length === 0 ? (
             <p className="text-gray-600 text-center">Your cart is empty.</p>
@@ -85,81 +85,68 @@ const Cart = () => {
                       </div>
                     </div>
 
-
-                                <div className="flex items-center space-x-4">
-                                <div className="flex items-center border border-gray-300 rounded-md">
-                                    <button
-                                    onClick={() =>
-                                        updateQuantity(item.id, item.quantity - 1)
-                                    }
-                                    className="px-2 py-1 text-gray-500 hover:text-gray-800 disabled:opacity-50"
-                                    disabled={item.quantity <= 1}
-                                    >
-                                    -
-                                    </button>
-                                    <span className="px-3 py-1 text-gray-800">
-                                    {item.quantity}
-                                    </span>
-                                    <button
-                                    onClick={() =>
-                                        updateQuantity(item.id, item.quantity + 1)
-                                    }
-                                    className="px-2 py-1 text-gray-500 hover:text-gray-800"
-                                    >
-                                    +
-                                    </button>
-                                </div>
-                                <button
-                                    onClick={() => removeItem(item.id)}
-                                    className="text-red-600 hover:text-red-800"
-                                >
-                                    Remove
-                                </button>
-                                </div>
-                            </li>
-                            ))}
-                        </ul>
-                    </>
-                )}
-                </div>
-                <div className="w-1/2 h-full overflow-y-auto px-12 py-12 flex flex-col justify-start">
-                    <article className="text-pretty">
-                        {cartItems.map((item) => {
-                        return (
-                            <div className="flex justify-between w-full text-xs">
-                                <p className="w-1/2">
-                                    {item.name} x {item.quantity}
-                                </p>
-                                <p>${(item.price * item.quantity).toFixed(2)}</p>
-                            </div>
-                        );
-                        })}
-                        <div className="flex justify-between w-full font-extrabold text-sm">
-                            <p className="w-1/2">Tax</p>
-                            <p>${(0).toFixed(2)}</p>
-                        </div>
-                        <div className="flex justify-between w-full font-extrabold text-sm">
-                            <p className="w-1/2">Shipping & Handling</p>
-                            <p>${(0).toFixed(2)}</p>
-                        </div>
-                    </article>
-                    <div className="mt-6 flex justify-between items-center border-t pt-4">
-                        <span className="text-lg font-bold text-gray-800">Total:</span>
-                        <span className="text-lg font-bold text-gray-900">${total}</span>
+                    <div className="flex items-center space-x-4">
+                      <div className="flex items-center border border-gray-300 rounded-md">
+                        <button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
+                          className="px-2 py-1 text-gray-500 hover:text-gray-800 disabled:opacity-50"
+                          disabled={item.quantity <= 1}
+                        >
+                          -
+                        </button>
+                        <span className="px-3 py-1 text-gray-800">
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                          className="px-2 py-1 text-gray-500 hover:text-gray-800"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        Remove
+                      </button>
                     </div>
-
-                    <button className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        Checkout
-                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+        <div className="w-1/2 h-full overflow-y-auto px-12 py-12 flex flex-col justify-start">
+          <article className="text-pretty">
+            {cartItems.map((item) => {
+              return (
+                <div className="flex justify-between w-full text-xs">
+                  <p className="w-1/2">
+                    {item.name} x {item.quantity}
+                  </p>
+                  <p>${(item.price * item.quantity).toFixed(2)}</p>
                 </div>
+              );
+            })}
+            <div className="flex justify-between w-full font-extrabold text-sm">
+              <p className="w-1/2">Tax</p>
+              <p>${(0).toFixed(2)}</p>
+            </div>
+            <div className="flex justify-between w-full font-extrabold text-sm">
+              <p className="w-1/2">Shipping & Handling</p>
+              <p>${(0).toFixed(2)}</p>
             </div>
           </article>
           <div className="mt-6 flex justify-between items-center border-t pt-4">
             <span className="text-lg font-bold text-gray-800">Total:</span>
             <span className="text-lg font-bold text-gray-900">${total}</span>
           </div>
-
-          <button className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={handleCheckout}>
+          <button className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500">
             Checkout
           </button>
         </div>
