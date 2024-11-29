@@ -3,13 +3,12 @@ import LoginForm from "./LoginForm";
 import "./NavBar.css";
 import Cart from "./Cart";
 
-export default function NavBar({ user, setUser, viewCart, setViewCart }) {
+export default function NavBar({ user, setUser, viewCart, setViewCart, setSelectItem, selectItem }) {
   const [viewLoginForm, setViewLoginForm] = useState(false);
 
   function handleViewCart() {
-    console.log("view cart clicked");
-    console.log("view cart is", viewCart);
     setViewCart(!viewCart);
+    setSelectItem(false);
   }
   return (
     <>

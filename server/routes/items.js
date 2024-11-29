@@ -13,25 +13,20 @@ router.get("/", async (req, res) => {
 });
 //Get the specific item by ID /items/:id
 router.get("/:id", async (req, res) => {
-  try {
-    const itemId = req.params.id;
-    const item = await Item.findByPk(itemId, {
-      include: [{ model: User }],
-    });
-    console.log("Get specific item", item);
-    if (item) {
-      res.json(item);
-    } else {
-      res
-        .status(404)
-        .json({ error: "item not found." + "itemId" + itemId + error });
+    try {
+      const itemId = req.params.id;
+      const item = await Item.findByPk(itemId, {
+        include: [{ model: User, as: 'Users' }] // Use the alias 'Users'
+      });
+      if (item) {
+        res.json(item);
+      } else {
+        res.status(404).json({ error: "Item not found." });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "An error occurred while fetching the item." });
     }
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: "An error occurred while fetching the item." });
-  }
-});
+  });
 //Post An Item
 router.post("/", async (req, res) => {
   const item = await Item.create(req.body);

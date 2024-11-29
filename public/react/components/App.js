@@ -85,11 +85,13 @@ export const App = () => {
             setUser={setUser}
             viewCart={viewCart}
             setViewCart={setViewCart}
+            selectItem={selectItem}
+            setSelectItem={setSelectItem}
           />
 
           {viewCart ? (
             <>
-            <Cart />  
+            <Cart user={user}/>  
             </>
 
           ) : selectItem ? (
