@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router";
-
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -57,18 +58,33 @@ export default function Login() {
 				throw new Error('Login failed');
 			}
 
-			const data = await response.json();
-			console.log("Login successful", data);
-			setLoginOrRegister(null)
-			setLoginFormData({
-				email: "",
-				password: ""
-			})
-			navigate('/');
-		} catch (error) {
-			console.error("Error during registration:", error);
-		}
-	}
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      setLoginOrRegister(null);
+      setLoginFormData({
+        email: "",
+        password: "",
+      });
+      toast.success("Login successful 👍", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        transition: Slide,
+      });
+      setTimeout(() => {
+        navigate("/");
+        location.reload();
+      }, 2000);
+    } catch (error) {
+      console.error("Error during registration:", error);
+      toast.error(`${error}`, {
+        position: "top-center",
+      });
+    }
+  }
 
 	async function handleSubmitRegister(e) {
 		e.preventDefault();

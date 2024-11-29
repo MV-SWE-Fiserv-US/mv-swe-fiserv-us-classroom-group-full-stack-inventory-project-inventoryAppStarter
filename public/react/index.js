@@ -10,8 +10,7 @@ import ItemDescription from "./components/ItemDescription/ItemDescription";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./AuthProvider";
-import Checkout from "./components/Forms/CheckoutForm/Checkout";
-import Success from "./components/Success/Success";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -44,21 +43,14 @@ const router = createBrowserRouter([
         path: "/auth",
         element: <Login />,
       },
-      {
-        path: "/checkout",
-        element: <Checkout />,
-      },
-      {
-        path: "/success",
-        element: <Success />,
-      },
     ],
   },
 ]);
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-    <AuthProvider>
-        <RouterProvider router={router} />
-    </AuthProvider>
+  <AuthProvider>
+    <ToastContainer />
+    <RouterProvider router={router} />
+  </AuthProvider>
 );
