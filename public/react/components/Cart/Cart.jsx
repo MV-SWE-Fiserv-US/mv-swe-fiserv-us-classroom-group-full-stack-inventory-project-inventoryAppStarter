@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import seedData from "../../../../server/seedData";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
   const itemsWithIds = seedData.items.map((item, index) => ({
@@ -9,6 +10,7 @@ const Cart = () => {
   }));
   const [cartItems, setCartItems] = useState(itemsWithIds);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   const calculateTotal = () => {
     return cartItems
@@ -40,6 +42,10 @@ const Cart = () => {
       })
     );
   };
+
+  const handleCheckout = () => {
+    navigate("/checkout");
+  }
 
   return (
     <section className="w-full h-screen bg-white p-6 flex flex-col px-20">
@@ -141,7 +147,7 @@ const Cart = () => {
             <span className="text-lg font-bold text-gray-900">${total}</span>
           </div>
 
-          <button className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <button className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={handleCheckout}>
             Checkout
           </button>
         </div>
