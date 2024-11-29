@@ -5,40 +5,30 @@ import apiURL from "./api";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [clientSecret, setClientSecret] = useState("");
-
-  const getClientSecret = async () => {
-    const response = await fetch(`${apiURL}/payment-intent`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ total: 1000 }),
-    });
-
-    const { clientSecret } = await response.json();
-    setClientSecret(clientSecret);
-  };
+  const [userId, setUserId] = useState(null);
+  const [username, setUsername] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    getClientSecret();
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+      const decoded = jwtDecode(token);
+      setUserId(decoded.id);
+      setUsername(decoded.name);
+      setUserEmail(decoded.email);
+      if (decoded.isAdmin) {
+        setIsAdmin(true);
+      }
+    }
   }, []);
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            setIsLoggedIn(true);
-            const decoded = jwtDecode(token);
-            if (decoded.isAdmin) {
-            setIsAdmin(true);
-            }
-        }
-    }, []);
-
   return (
-    <AuthContext.Provider value={{ isAdmin, isLoggedIn, clientSecret }}>
+    <AuthContext.Provider
+      value={{ isAdmin, isLoggedIn, userId, username, userEmail }}
+    >
       {children}
     </AuthContext.Provider>
   );

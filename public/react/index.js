@@ -10,18 +10,17 @@ import ItemDescription from "./components/ItemDescription/ItemDescription";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./AuthProvider";
-import Checkout from "./components/Forms/CheckoutForm/Checkout";
-import Success from "./components/Success/Success";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <>
+      <div className="flex flex-col min-h-screen ">
         <Navbar />
         <Outlet />
         <Footer />
-      </>
+      </div>
     ),
     children: [
     {
@@ -58,7 +57,8 @@ const router = createBrowserRouter([
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-    <AuthProvider>
-        <RouterProvider router={router} />
-    </AuthProvider>
+  <AuthProvider>
+    <ToastContainer />
+    <RouterProvider router={router} />
+  </AuthProvider>
 );

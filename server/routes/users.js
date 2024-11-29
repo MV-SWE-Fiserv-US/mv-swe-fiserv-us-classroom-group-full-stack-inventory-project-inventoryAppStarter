@@ -62,43 +62,56 @@ router.post(
 
 // PUT /users/:id
 router.put(
-    "/:id",
-    [
-        check("name").notEmpty().trim(),
-        check("email").notEmpty().isEmail().trim(),
-        check("password").notEmpty().isStrongPassword(),
-        check("cart").isArray(),
-        check("isAdmin").notEmpty().isBoolean(),
-    ],
-    async (req, res, next) => {
-        try {
-        const errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() })
-        } else {
-            const user = await User.findByPk(req.params.id)
-            await user.update(req.body)
-            res.json(user)
-        }
-        } catch (error) {
-        next(error)
-        }
+  "/:id",
+  [
+    check("name").optional().notEmpty().trim(),
+    check("email").optional().notEmpty().isEmail().trim(),
+    check("password").optional().notEmpty().isStrongPassword(),
+    check("cart").optional().isArray(),
+    check("isAdmin").optional().notEmpty().isBoolean(),
+  ],
+  async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      } else {
+        const user = await User.findByPk(req.params.id);
+        await user.update(req.body);
+        res.json(user);
+      }
+    } catch (error) {
+      next(error);
     }
-)
+  }
+);
 
 // PUT /users/:id/addToCart
 router.put("/:id/addToCart/:itemId", async (req, res, next) => {
-    try {
-        const user = await User.findByPk(req.params.id)
-        const item = await Item.findByPk(req.params.itemId)
-        user.update({
-        cart: [...user.cart, item],
-        })
-        res.json(user)
-    } catch (error) {
-        next(error)
-    }
-})
+  try {
+    const user = await User.findByPk(req.params.id);
+    const item = await Item.findByPk(req.params.itemId);
+    await user.update({
+      cart: [...user.cart, item],
+    });
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PUT /users/:id/updateCart
+router.put("/:id/updateCart", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    await user.update({
+      cart: req.body,
+    });
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // DELETE /users/:id
 router.delete("/:id", async (req, res, next) => {
