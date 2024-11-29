@@ -5,7 +5,7 @@ import { AddItemForm } from "./AddItemForm";
 import { Headers } from "./Headers";
 import "./App.css";
 import NavBar from "./NavBar";
-import { Cart } from "./Cart";
+import Cart from "./Cart";
 
 // import and prepend the api url to any fetch calls
 import apiURL from "../api";
@@ -20,10 +20,12 @@ export const App = () => {
   const [user, setUser] = useState(null);
   const [viewUpdateForm, setViewUpdateForm] = useState(false);
   const [viewCart, setViewCart] = useState(false);
+  const [addedItem, setAddedItem] = useState(null);
+  
 
   async function fetchItem() {
     try {
-      console.log("item id is:", itemId);
+
       const response = await fetch(`${apiURL}/items/${itemId}`);
       const itemData = await response.json();
       setItem(itemData);
@@ -36,9 +38,8 @@ export const App = () => {
     try {
       const response = await fetch(`${apiURL}/items`);
       const itemsData = await response.json();
-      console.log(itemsData);
-
       setItems(itemsData);
+      console.log("view cart is in App");
     } catch (err) {
       console.log("Oh no an error! ", err);
     }
@@ -67,23 +68,31 @@ export const App = () => {
     } else {
       fetchItems();
     }
-  }, [selectItem, itemId, refresh, viewUpdateForm]);
+  }, [selectItem, itemId, refresh, viewUpdateForm, viewCart]);
 
   return (
     <>
       <main className="mainContainer">
-
         <div className="header">
-
           <button onClick={toggleForm}>
             {showForm ? "Cancel" : "Add Item"}
           </button>
           {showForm && <AddItemForm setItems={setItems} />}
         </div>
         <div className="content">
-      <NavBar user={user} setUser={setUser} viewCart={viewCart} setViewCart={setViewCart}/>
-    { viewCart ? <Cart /> : null }
-          {selectItem ? (
+          <NavBar
+            user={user}
+            setUser={setUser}
+            viewCart={viewCart}
+            setViewCart={setViewCart}
+          />
+
+          {viewCart ? (
+            <>
+            <Cart />  
+            </>
+
+          ) : selectItem ? (
             <>
               <Item
                 item={item}
@@ -93,22 +102,30 @@ export const App = () => {
                 setRefresh={setRefresh}
                 viewUpdateForm={viewUpdateForm}
                 setViewUpdateForm={setViewUpdateForm}
+                viewCart={viewCart}
+                setViewCart={setViewCart}
+                setAddedItem={setAddedItem}
+                user={user}
               />
               <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
             </>
           ) : (
             <>
               <Headers />
-              <ItemsList
-                setItemId={setItemId}
-                setSelectItem={setSelectItem}
-                items={items}
-                setItem={setItem}
-              />
+              <div className="itemPadding">
+                <ItemsList
+                  setItemId={setItemId}
+                  setSelectItem={setSelectItem}
+                  items={items}
+                  setItem={setItem}
+                />
+              </div>
+              <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
             </>
+            
           )}
         </div>{" "}
-        <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+      
         {/* Render AddItemForm if showForm is true */}
         {showForm && <AddItemForm setItems={setItems} />}
       </main>

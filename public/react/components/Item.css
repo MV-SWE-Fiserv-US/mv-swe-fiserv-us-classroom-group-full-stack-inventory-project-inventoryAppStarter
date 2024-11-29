@@ -6,17 +6,19 @@
   }
 .Itemcontainer{
     justify-content: center;
+    border: none !important;
+
     /* padding: 0 20 0 20; */
 }
 
 .item{
-    /* border: none;  */
+    border-bottom: 0 !important;
+    border-top: 0 !important;
+    /* border: none ;  */
     /* border-color: #2a4035; */
     /* border-color: rgb(0, 28, 55); */
-    background-color: #dad7cd;;
+    background-color: #bfc4aca8;
     border-style: solid;
-    border-bottom: 0ch;
-    border-top: 0ch;
     display: flex;
     flex-direction: column;
     justify-content: center; /* Center items vertically */
@@ -26,12 +28,14 @@
     border: 0;
 } */
 .itemButton {
+    border: 2px solid #ffffff;
+    outline: none;
     border-radius: 40px;
-    border-color: #b08968;
+    border-color: #ffffff00;
     background-color:#a3b18a ;
     color: white;
-    width: 350px; /* Set a fixed width */
-    height: 85px; /* Set a fixed height */
+    width: 200px; /* Set a fixed width */
+    height: 50px; /* Set a fixed height */
     display: flex;
     justify-content: center; /* Center text horizontally */
     align-items: center; /* Center text vertically */
@@ -43,4 +47,9 @@
 
 
 }
-    
+
+.row {
+    border: none !important;
+    border-bottom: 0 !important;
+    border-top: 0 !important;
+}

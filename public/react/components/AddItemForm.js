@@ -1,6 +1,7 @@
 // AddItemForm.js
 import React, { useState } from 'react';
 import apiURL from '../api';
+import './AddItemForm.css';
 
 export const AddItemForm = ({ setItems }) => {
   const [newItem, setNewItem] = useState({
@@ -41,8 +42,9 @@ export const AddItemForm = ({ setItems }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Add a New Item</h3>
+    <form className='itemForm' onSubmit={handleSubmit}>
+      <h3 className='AddItemText'>Add New Item</h3>
+      <div className='FormFont'>
       <div>
         <label>
           Name:
@@ -51,6 +53,7 @@ export const AddItemForm = ({ setItems }) => {
             name="name"
             value={newItem.name}
             onChange={handleInputChange}
+            className='formInput'
             required
           />
         </label>
@@ -63,6 +66,7 @@ export const AddItemForm = ({ setItems }) => {
             name="price"
             value={newItem.price}
             onChange={handleInputChange}
+            className='formInput'
             required
           />
         </label>
@@ -75,6 +79,7 @@ export const AddItemForm = ({ setItems }) => {
             name="description"
             value={newItem.description}
             onChange={handleInputChange}
+            className='formInput'
             required
           />
         </label>
@@ -87,6 +92,7 @@ export const AddItemForm = ({ setItems }) => {
             name="category"
             value={newItem.category}
             onChange={handleInputChange}
+            className='formInput'
             required
           />
         </label>
@@ -99,11 +105,13 @@ export const AddItemForm = ({ setItems }) => {
             name="image"
             value={newItem.image}
             onChange={handleInputChange}
+            className='formInput'
             required
           />
         </label>
       </div>
-      <button type="submit">Add Item</button>
+      <button className='AddButton' type="submit">Add Item</button>
+      </div>
     </form>
   );
 };

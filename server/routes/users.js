@@ -40,5 +40,21 @@ router.get('/', async (req, res, next) => {
       next("error creating user: ", error)
     }
   })
+
+  //add item to User (Add to Cart)
+  router.post("/:userId/addToCart/:itemId", async (req, res) => {
+    try {
+        const user = await User.findByPk(req.params.userId);
+        const item = await Item.findByPk(req.params.itemId);
+        if (user && item) {
+            await user.addItem(item);
+            res.status(200).json({ message: "Item added to cart successfully." });
+        } else {
+            res.status(404).json({ error: "User or item not found." });
+        }
+    } catch (error) {
+        res.status(500).json({ error: "An error occurred while adding the item to the cart." });
+    }
+});
   
   module.exports = router
