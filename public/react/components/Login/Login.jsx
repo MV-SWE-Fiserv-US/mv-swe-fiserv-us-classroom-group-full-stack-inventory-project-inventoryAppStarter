@@ -51,6 +51,7 @@ export default function Login() {
         password: "",
       });
       navigate("/");
+      location.reload();
     } catch (error) {
       console.error("Error during registration:", error);
     }

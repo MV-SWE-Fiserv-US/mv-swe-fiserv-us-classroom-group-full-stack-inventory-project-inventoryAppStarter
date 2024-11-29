@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
-import apiURL from '../../api'
+import React, { useState, useContext } from 'react'
+import { AuthContext } from "../../AuthProvider";
 import vaultIcon from "../../../assets/vault-icon.svg"
 import { NavLink } from 'react-router'
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
+    const { isLoggedIn } = useContext(AuthContext);
+
     const toggleMenu = () => {
         setIsOpen(!isOpen)
     }
 
-    const handleLogout = () => {
-        localStorage.removeItem('token')
-        window.location.reload()
+    const handleLogout = (e) => {
+        if(e.target.text === "Logout") {
+            localStorage.removeItem('token');
+            window.location.reload();
+        }
     }
 
     return (
@@ -42,7 +46,10 @@ export default function Navbar() {
                             <NavLink to="/cart" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" onClick={() => setIsOpen(false)}>Cart</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/auth" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" onClick={() => setIsOpen(false)}>Login / Sign Up</NavLink>
+                            <NavLink to="/auth" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" onClick={(e) => {
+                                setIsOpen(false);
+                                handleLogout(e);
+                            }}>{isLoggedIn ? "Logout" : "Login / Sign Up"}</NavLink>
                         </li>
                         <li>
                             <NavLink to="/dashboard" className="block py-2 px-3 text-slate-800 rounded hover:bg-gray-700 hover:text-white" onClick={() => setIsOpen(false)} >Dashboard</NavLink>
