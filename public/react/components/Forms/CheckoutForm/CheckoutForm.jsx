@@ -1,5 +1,4 @@
 import {
-  CardElement,
   useStripe,
   useElements,
   PaymentElement,
@@ -7,6 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import apiURL from "../../../api";
 
 const CheckoutForm = ({ clientSecret }) => {
   const stripe = useStripe();
@@ -16,8 +16,24 @@ const CheckoutForm = ({ clientSecret }) => {
 
   const navigate = useNavigate();
 
+  // const createOrder = async () => {
+  //   const response = await fetch(`${apiURL}/orders/${userId}`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   console.log(response);
+
+  //   const order = await response.json();
+  //   console.log(order);
+
+  //   return order.id;
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
@@ -25,38 +41,40 @@ const CheckoutForm = ({ clientSecret }) => {
       return;
     }
 
-    // const { error, paymentIntent } = await stripe.confirmCardPayment(
-    //   clientSecret,
-    //   {
-    //     payment_method: { card: elements.getElement(CardElement) },
-    //   }
-    // );
+    // const orderId = await createOrder();
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/success`,
-      },
-    });
+    // const { error } = await stripe.confirmPayment({
+    //   elements,
+    //   confirmParams: {
+    //     return_url: `${window.location.origin}/success/${orderId}`,
+    //   },
+    // });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setError(error.message);
-    } else {
-      setError("An unexpected error occurred.");
-    }
+    // if (error.type === "card_error" || error.type === "validation_error") {
+    //   setError(error.message);
+    // } else {
+    //   setError("An unexpected error occurred.");
+    // }
 
-    navigate("/success");
+    navigate(`/success/${3}`);
   };
 
   const paymentElementOptions = {
-    layout: "tabs",
+    layout: {
+      type: 'accordion',
+      defaultCollapsed: false,
+      radios: false,
+      spacedAccordionItems: true
+    },
+    
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <LinkAuthenticationElement id="link-authentication-element" />
+
+    <form id="payment-form" className="payment-form" onSubmit={handleSubmit}>
+      <LinkAuthenticationElement id="link-authentication-element" className="mb-5" />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={loading || !stripe || !elements} id="submit">
+      <button disabled={loading || !stripe || !elements} id="submit" className="btn">
         <span id="button-text">
           {loading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
