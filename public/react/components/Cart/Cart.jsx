@@ -31,10 +31,6 @@ const Cart = () => {
     ).then((nestedProducts => nestedProducts.flat()));
   };
 
-  const removeAllItems = (items, targetId) => {
-    return items.filter((item) => item.id !== targetId);
-  };
-
   const updateQuantity = async (id, newQuantity) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -42,14 +38,19 @@ const Cart = () => {
       )
     );
     const expandedCart = await expandCartItems(cartItems);
-    console.log(expandedCart);
-    
     updateUserCart(userId, expandedCart);
   };
 
-  const removeItem = (id) => {
-    setCartItems(removeAllItems(cartItems, id));
-    const expandedCart = expandCartItems(cartItems);
+  const removeItem = async (targetId) => {
+    const updatedCart = await new Promise((resolve) => {
+      setCartItems((prevItems) => {
+        const filteredCart = prevItems.filter((item) => item.id !== targetId);
+        resolve(filteredCart);
+        return filteredCart;
+      });
+    });
+
+    const expandedCart = await expandCartItems(updatedCart);
     updateUserCart(userId, expandedCart);
   };
 
@@ -66,7 +67,6 @@ const Cart = () => {
         throw new Error("Cart could not be updated. Try again later.");
       }
       const data = await response.json();
-      console.log(data);
     } catch (err) {
       console.log("Oh no an error! ", err);
     }

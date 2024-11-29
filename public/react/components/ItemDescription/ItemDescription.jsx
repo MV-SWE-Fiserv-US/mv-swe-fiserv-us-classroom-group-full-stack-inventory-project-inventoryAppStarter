@@ -92,7 +92,7 @@ export default function ItemDescription() {
       }
       toast.success("Item added to cart 🛒", {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
