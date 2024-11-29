@@ -72,6 +72,15 @@ export const App = () => {
 
   return (
     <>
+              <NavBar
+            user={user}
+            setUser={setUser}
+            viewCart={viewCart}
+            setViewCart={setViewCart}
+            selectItem={selectItem}
+            setSelectItem={setSelectItem}
+          />
+
       <main className="mainContainer">
         <div className="header">
           <button onClick={toggleForm}>
@@ -80,14 +89,6 @@ export const App = () => {
           {showForm && <AddItemForm setItems={setItems} />}
         </div>
         <div className="content">
-          <NavBar
-            user={user}
-            setUser={setUser}
-            viewCart={viewCart}
-            setViewCart={setViewCart}
-            selectItem={selectItem}
-            setSelectItem={setSelectItem}
-          />
 
           {viewCart ? (
             <>
@@ -122,12 +123,11 @@ export const App = () => {
                   setItem={setItem}
                 />
               </div>
-              <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
+             
             </>
-            
           )}
         </div>{" "}
-      
+        <button onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
         {/* Render AddItemForm if showForm is true */}
         {showForm && <AddItemForm setItems={setItems} />}
       </main>
