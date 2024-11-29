@@ -247,9 +247,6 @@ export default function Login() {
 
   return (
     <>
-      <div className="toast-container">
-        <ToastContainer />
-      </div>
       {loginOrRegister === "login" && loginPrompts.login}
       {loginOrRegister === "register" && loginPrompts.register}
       {!loginOrRegister && (

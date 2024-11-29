@@ -10,6 +10,7 @@ import ItemDescription from "./components/ItemDescription/ItemDescription";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./AuthProvider";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -39,9 +40,9 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-         path: "/auth",
-         element: <Login />
-      }
+        path: "/auth",
+        element: <Login />,
+      },
     ],
   },
 ]);
@@ -49,8 +50,7 @@ const router = createBrowserRouter([
 const root = createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
+    <ToastContainer />
     <RouterProvider router={router} />
   </AuthProvider>
 );
-
-

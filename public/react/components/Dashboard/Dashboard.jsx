@@ -5,7 +5,7 @@ const Dashboard = () => {
     name: true,
     email: true,
     password: true,
-    submitter: true
+    submitter: true,
   });
 
   const [userData, setUserData] = useState({
@@ -20,15 +20,14 @@ const Dashboard = () => {
     setUserData({ ...userData, [name]: value });
     setDisabledInputs({
       ...disabledInputs,
-      submitter: false
-    })
+      submitter: false,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // editUser(formData);
   };
-
 
   return (
     <section className="h-screen w-full flex justify-center py-12 px-12 bg-gradient-to-b from-slate-100 to-slate-300">
@@ -145,18 +144,18 @@ const Dashboard = () => {
             </button>
           </div>
         </form>
-        <div>
-
-        </div>
+        <div></div>
         <div className="mt-4 flex flex-col justify-center items-center">
-            <h4 className="text-2xl font-semibold text-gray-900 mb-4">Admin Only</h4>
-            <button
-              type="button"
-              className="px-4 py-2 bg-green-400 text-white rounded-lg hover:bg-green-600 w-1/4 transition disabled:bg-gray-300 disabled:transition-none disabled:cursor-not-allowed"
-              disabled={userData.isAdmin ? false : true}
-            >
-              Add Store Item
-            </button>
+          <h4 className="text-2xl font-semibold text-gray-900 mb-4">
+            Admin Only
+          </h4>
+          <button
+            type="button"
+            className="px-4 py-2 bg-green-400 text-white rounded-lg hover:bg-green-600 w-1/4 transition disabled:bg-gray-300 disabled:transition-none disabled:cursor-not-allowed"
+            disabled={userData.isAdmin ? false : true}
+          >
+            Add Store Item
+          </button>
         </div>
       </div>
     </section>

@@ -28,7 +28,7 @@ const Cart = () => {
         );
         return expanded;
       })
-    ).then((nestedProducts => nestedProducts.flat()));
+    ).then((nestedProducts) => nestedProducts.flat());
   };
 
   const updateQuantity = async (id, newQuantity) => {
@@ -152,7 +152,7 @@ const Cart = () => {
                           <div className="flex items-center border border-gray-300 rounded-md">
                             <button
                               onClick={() =>
-                                updateQuantity(item.id, item.quantity -= 1)
+                                updateQuantity(item.id, (item.quantity -= 1))
                               }
                               className="px-2 py-1 text-gray-500 hover:text-gray-800 disabled:opacity-50"
                               disabled={item.quantity <= 1}
@@ -164,7 +164,7 @@ const Cart = () => {
                             </span>
                             <button
                               onClick={() =>
-                                updateQuantity(item.id, item.quantity += 1)
+                                updateQuantity(item.id, (item.quantity += 1))
                               }
                               className="px-2 py-1 text-gray-500 hover:text-gray-800"
                             >

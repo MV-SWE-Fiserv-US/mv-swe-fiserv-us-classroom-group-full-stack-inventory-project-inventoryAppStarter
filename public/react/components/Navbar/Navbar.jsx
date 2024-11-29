@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../AuthProvider";
 import vaultIcon from "../../../assets/vault-icon.svg";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -26,16 +27,14 @@ export default function Navbar() {
       });
       setTimeout(() => {
         localStorage.removeItem("token");
-        window.location.reload();
+        navigate("/");
       }, 2000);
     }
   };
 
   return (
     <>
-      <div className="toast-container">
-        <ToastContainer />
-      </div>
+      
       <nav className="bg-white">
         <div className="flex flex-wrap items-center justify-between mx-auto p-4">
           <a

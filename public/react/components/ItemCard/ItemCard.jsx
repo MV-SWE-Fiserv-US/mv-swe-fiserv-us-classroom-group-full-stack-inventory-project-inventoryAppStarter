@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../../AuthProvider";
 import { jwtDecode } from "jwt-decode";
 import apiURL from "../../api";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ItemCard({ items }) {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function ItemCard({ items }) {
       }
       toast.success("Item added to cart 🛒", {
         position: "top-center",
-        autoClose: 1500, 
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -37,8 +37,8 @@ export default function ItemCard({ items }) {
     } catch (err) {
       console.log("Oh no an error! ", err);
       toast.error("Item could not be added to cart 😰 Try again later.", {
-        position: "top-center"
-      })
+        position: "top-center",
+      });
     }
   }
 
@@ -88,19 +88,16 @@ export default function ItemCard({ items }) {
       }
     }
   }, []);
-  
+
   return (
     <>
-      <div className="toast-container">
-        <ToastContainer />
-      </div>
       <div className="font-black flex flex-wrap justify-evenly gap-4 mx-auto pb-12 px-4">
         {items.map((item) => {
           const num = Math.floor(Math.random() * 6);
           return (
             <div
-            className="bg-white flex flex-col justify-between items-center w-80 h-[600px] rounded-lg border border-slate-200 shadow-lg"
-            key={item.id}
+              className="bg-white flex flex-col justify-between items-center w-80 h-[600px] rounded-lg border border-slate-200 shadow-lg"
+              key={item.id}
             >
               <div className="h-1/2">
                 <img

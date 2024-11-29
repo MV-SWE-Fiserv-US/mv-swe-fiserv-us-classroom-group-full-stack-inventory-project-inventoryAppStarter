@@ -40,9 +40,6 @@ export default function DeleteItem({ item }) {
 
   return (
     <>
-      <div className="toast-container">
-        <ToastContainer />
-      </div>
       <div className="flex justify-center my-8">
         <button
           className="bg-rose-600 hover:bg-rose-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

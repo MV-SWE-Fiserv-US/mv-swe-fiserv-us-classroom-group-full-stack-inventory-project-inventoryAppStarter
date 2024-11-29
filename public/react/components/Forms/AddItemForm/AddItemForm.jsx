@@ -12,18 +12,18 @@ const AddItemForm = () => {
 
   async function postItem({ item }) {
     try {
-        const response = await fetch(`${apiURL}/items`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item)
-        })
-        if(!response.ok) {
-            throw new Error("Item could not be posted..")
-        }
-    } catch(error) {
-        console.log("Oh no an error! ", error)
+      const response = await fetch(`${apiURL}/items`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      });
+      if (!response.ok) {
+        throw new Error("Item could not be posted..");
+      }
+    } catch (error) {
+      console.log("Oh no an error! ", error);
     }
   }
 
@@ -37,9 +37,15 @@ const AddItemForm = () => {
     postItem(formData);
   };
 
-  return <form className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200" onSubmit={handleSubmit}>
-    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Add Inventory Item</h2>
-    
+  return (
+    <form
+      className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200"
+      onSubmit={handleSubmit}
+    >
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+        Add Inventory Item
+      </h2>
+
       <div className="mb-4">
         <label htmlFor="name" className="text-gray-700 font-medium mb-2">
           Name
@@ -56,7 +62,6 @@ const AddItemForm = () => {
         />
       </div>
 
-    
       <div className="mb-4">
         <label htmlFor="description" className="text-gray-700 font-medium mb-2">
           Description
@@ -106,7 +111,6 @@ const AddItemForm = () => {
         />
       </div>
 
-     
       <div className="mb-6">
         <label htmlFor="imageUrl" className="text-gray-700 font-medium mb-2">
           Image URL
@@ -123,14 +127,14 @@ const AddItemForm = () => {
         />
       </div>
 
-      
       <button
         type="submit"
         className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         Add Item
       </button>
-  </form>;
+    </form>
+  );
 };
 
 export default AddItemForm;

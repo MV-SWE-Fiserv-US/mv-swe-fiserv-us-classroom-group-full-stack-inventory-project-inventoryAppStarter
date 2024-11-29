@@ -65,9 +65,6 @@ export default function UpdateItem({ item }) {
 
   return (
     <>
-      <div className="toast-container">
-        <ToastContainer />
-      </div>
       <form
         className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200"
         onSubmit={handleSubmit}

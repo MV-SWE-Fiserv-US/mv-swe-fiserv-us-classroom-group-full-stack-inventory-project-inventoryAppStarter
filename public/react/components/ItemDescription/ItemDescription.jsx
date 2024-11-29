@@ -125,9 +125,6 @@ export default function ItemDescription() {
 
   return (
     <>
-      <div className="toast-container">
-        <ToastContainer />
-      </div>
       <section className="max-w-6xl h-full mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border border-gray-200 flex mt-4">
         <div className="w-1/2 h-full flex flex-col p-4 items-center justify-center">
           <div className="w-full">
