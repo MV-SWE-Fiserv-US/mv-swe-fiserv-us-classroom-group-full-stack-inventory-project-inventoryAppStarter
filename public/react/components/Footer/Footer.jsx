@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 export default function Footer() {
   const [click, setClick] = useState(false);
-    const [click, setClick] = useState(false);
 
   return (
     <footer className="bg-gray-800 text-white py-4">

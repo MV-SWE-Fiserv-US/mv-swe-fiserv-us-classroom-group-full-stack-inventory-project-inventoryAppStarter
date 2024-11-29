@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider";
 import { Link } from "react-router";
 import apiURL from "../../api";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
   const { isLoggedIn, userId, username } = useContext(AuthContext);
