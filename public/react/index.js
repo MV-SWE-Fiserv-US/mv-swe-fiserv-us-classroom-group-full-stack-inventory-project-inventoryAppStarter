@@ -14,17 +14,7 @@ import Checkout from "./components/Forms/CheckoutForm/Checkout";
 import Success from "./components/Success/Success";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <>
-        <Navbar />
-        <Outlet />
-        <Footer />
-      </>
-    ),
-    children: [
-      {
+    {
         path: "/",
         element: <App />,
       },
@@ -58,7 +48,7 @@ const router = createBrowserRouter([
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-  <AuthProvider>
-    <RouterProvider router={router} />
-  </AuthProvider>
+    <AuthProvider>
+        <RouterProvider router={router} />
+    </AuthProvider>
 );

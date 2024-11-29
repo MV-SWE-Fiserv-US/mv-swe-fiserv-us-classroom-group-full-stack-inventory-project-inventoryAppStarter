@@ -26,16 +26,16 @@ export const AuthProvider = ({ children }) => {
     getClientSecret();
   }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-      const decoded = jwtDecode(token);
-      if (decoded.isAdmin) {
-        setIsAdmin(true);
-      }
-    }
-  }, []);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setIsLoggedIn(true);
+            const decoded = jwtDecode(token);
+            if (decoded.isAdmin) {
+            setIsAdmin(true);
+            }
+        }
+    }, []);
 
   return (
     <AuthContext.Provider value={{ isAdmin, isLoggedIn, clientSecret }}>
