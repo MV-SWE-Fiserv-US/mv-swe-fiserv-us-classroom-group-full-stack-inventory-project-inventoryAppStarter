@@ -1,6 +1,6 @@
 .titleContainer {
     margin-top: 30px; /* Add units to padding values */
-    background-color: #a3b18a;
+    background-color: #346579;
     position: fixed;
     width: calc(100% - 300px); 
     left: 150px; 
@@ -12,7 +12,7 @@
 .itemTitle {
     justify-content: center;
     border-color: #344e41;
-    color: white;
+    color: #ffff;
     font-family: "Funnel Sans", sans-serif;
     /* font-weight:lighter; */
     /* font-style: normal; */
