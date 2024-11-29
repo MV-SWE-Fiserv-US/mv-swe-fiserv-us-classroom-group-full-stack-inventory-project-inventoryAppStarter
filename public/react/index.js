@@ -43,6 +43,14 @@ const router = createBrowserRouter([
         path: "/auth",
         element: <Login />,
       },
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "/success/:id",
+        element: <Success />,
+      },
     ],
   },
 ]);

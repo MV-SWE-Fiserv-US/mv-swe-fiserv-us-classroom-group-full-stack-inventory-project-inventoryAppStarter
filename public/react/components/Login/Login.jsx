@@ -44,7 +44,6 @@ export default function Login() {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		console.log(loginFormData)
 		try {
 			const response = await fetch(`${apiURL}/auth/login`, {
 				method: 'POST',
@@ -57,6 +56,7 @@ export default function Login() {
 			if (!response.ok) {
 				throw new Error('Login failed');
 			}
+
 
       const data = await response.json();
       localStorage.setItem("token", data.token);
