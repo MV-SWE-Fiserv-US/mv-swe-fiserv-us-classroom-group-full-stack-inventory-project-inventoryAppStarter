@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import seedData from "../../../../server/seedData";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
   const itemsWithIds = seedData.items.map((item, index) => ({
@@ -9,6 +10,7 @@ const Cart = () => {
   }));
   const [cartItems, setCartItems] = useState(itemsWithIds);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   const calculateTotal = () => {
     return cartItems
@@ -41,43 +43,48 @@ const Cart = () => {
         );
     };
 
-    return (
-        <section className="w-full h-screen bg-gradient-to-b from-slate-100 to-slate-300 p-6 flex flex-col px-20">
-            <div className="w-full flex justify-around">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                    Shopping Cart
-                </h2>
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                    Checkout
-                </h2>
-            </div>
-            <div className="w-full h-[90%] flex rounded-lg shadow-lg border border-gray-300 divide-x divide-gray-400 bg-white">
-                <div className="w-1/2 h-full overflow-y-auto px-12 py-4">
-                {cartItems.length === 0 ? (
-                    <p className="text-gray-600 text-center">Your cart is empty.</p>
-                ) : (
-                    <>
-                        <ul className="divide-y divide-gray-200">
-                            {cartItems.map((item) => (
-                            <li
-                                key={item.id}
-                                className="py-4 flex items-center justify-between"
-                            >
-                                <div className="flex items-center">
-                                <img
-                                    src={item.image}
-                                    alt={item.name}
-                                    className="w-16 h-16 rounded-md object-cover"
-                                />
-                                <div className="ml-4">
-                                    <h3 className="text-lg font-medium text-gray-800">
-                                    {item.name}
-                                    </h3>
-                                    <p className="text-sm text-gray-600">
-                                    ${item.price.toFixed(2)} each
-                                    </p>
-                                </div>
-                                </div>
+  const handleCheckout = () => {
+    navigate("/checkout");
+  }
+
+  return (
+    <section className="w-full h-screen bg-white p-6 flex flex-col px-20">
+      <div className="w-full flex justify-around">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            Shopping Cart
+        </h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            Checkout
+        </h2>
+      </div>
+      <div className="w-full h-[90%] flex rounded-lg shadow-lg border border-gray-300 divide-x divide-gray-400">
+        <div className="w-1/2 h-full overflow-y-auto px-12 py-4">
+          {cartItems.length === 0 ? (
+            <p className="text-gray-600 text-center">Your cart is empty.</p>
+          ) : (
+            <>
+              <ul className="divide-y divide-gray-200">
+                {cartItems.map((item) => (
+                  <li
+                    key={item.id}
+                    className="py-4 flex items-center justify-between"
+                  >
+                    <div className="flex items-center">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-16 h-16 rounded-md object-cover"
+                      />
+                      <div className="ml-4">
+                        <h3 className="text-lg font-medium text-gray-800">
+                          {item.name}
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          ${item.price.toFixed(2)} each
+                        </p>
+                      </div>
+                    </div>
+
 
                                 <div className="flex items-center space-x-4">
                                 <div className="flex items-center border border-gray-300 rounded-md">
@@ -146,8 +153,20 @@ const Cart = () => {
                     </button>
                 </div>
             </div>
-        </section>
-    );
+          </article>
+          <div className="mt-6 flex justify-between items-center border-t pt-4">
+            <span className="text-lg font-bold text-gray-800">Total:</span>
+            <span className="text-lg font-bold text-gray-900">${total}</span>
+          </div>
+
+          <button className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={handleCheckout}>
+            Checkout
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+
 };
 
 export default Cart;
