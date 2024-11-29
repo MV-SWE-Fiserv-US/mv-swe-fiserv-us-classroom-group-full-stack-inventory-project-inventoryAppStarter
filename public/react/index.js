@@ -17,11 +17,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <>
+      <div className="flex flex-col min-h-screen ">
         <Navbar />
         <Outlet />
         <Footer />
-      </>
+      </div>
     ),
     children: [
     {
