@@ -61,8 +61,7 @@ router.post("/:userId/addToCart/:itemId", async (req, res) => {
 router.get("/:userId/items", async (req, res) => {
   try {
     const user = await User.findByPk(req.params.userId, {
-      include: { model: Item, as: 'Items' }
-    
+      include: { model: Item, as: "Items" },
     });
     if (user) {
       console.log("User found:", user);
@@ -72,7 +71,9 @@ router.get("/:userId/items", async (req, res) => {
       res.status(404).json({ error: "User not found." });
     }
   } catch (error) {
-    res.status(500).json({ error: "An error occurred while fetching the items." });
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching the items." });
   }
 });
 

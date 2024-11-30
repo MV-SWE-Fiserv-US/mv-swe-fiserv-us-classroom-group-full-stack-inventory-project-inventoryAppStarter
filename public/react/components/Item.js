@@ -11,9 +11,6 @@ export const Item = ({
   setRefresh,
   viewUpdateForm,
   setViewUpdateForm,
-  viewCart,
-  setViewCart,
-  setAddedItem,
   user,
 }) => {
 
