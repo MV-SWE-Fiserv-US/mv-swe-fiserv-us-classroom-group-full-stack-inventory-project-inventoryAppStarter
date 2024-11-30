@@ -81,10 +81,6 @@ export const App = () => {
 
       <main className="mainContainer">
         <div className="header">
-          {/* <button onClick={toggleForm}>
-            {showForm ? "Cancel" : "Add Item"}
-          </button>
-          {showForm && <AddItemForm setItems={setItems} />} */}
         </div>
         <div className="content">
           {viewCart ? (
