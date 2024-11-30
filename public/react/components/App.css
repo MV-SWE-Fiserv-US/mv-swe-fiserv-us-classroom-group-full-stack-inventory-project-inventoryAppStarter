@@ -9,7 +9,7 @@
     right: 0; 
     bottom: 0; 
     overflow: hidden;
-    background-color: #dad7cd;
+    background-color: #bbd0d8;
 }
 
 .header {
@@ -30,12 +30,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #3a5a40; /* Set the color of the scrollbar thumb */
+    background-color: #CBBE83; /* Set the color of the scrollbar thumb */
     border-radius: 10px; /* Round the corners of the scrollbar thumb */
 }
 
 ::-webkit-scrollbar-track {
-    background-color:#dad7cd; /* Set the color of the scrollbar track */
+    background-color:#ced6dc; /* Set the color of the scrollbar track */
     border-radius: 10px; /* Round the corners of the scrollbar track */
 }
 
@@ -58,3 +58,10 @@ input{
     
 }
 
+.addCancelItem{
+    background-color: #346579;
+    color: white;
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
