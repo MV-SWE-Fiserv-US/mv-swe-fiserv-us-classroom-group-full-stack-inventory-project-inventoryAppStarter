@@ -11,22 +11,23 @@ export const Item = ({
   setRefresh,
   viewUpdateForm,
   setViewUpdateForm,
-  viewCart,
-  setViewCart,
-  setAddedItem,
   user,
 }) => {
 
+  const [clicked, setClicked] = useState(null);
+
   async function handleAddToCart() {
-    console.log(user.id, item.id);
+    setClicked(true);
     try {
-    
-      const response = await fetch(`${apiURL}/users/${user.id}/addToCart/${item.id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${apiURL}/users/${user.id}/addToCart/${item.id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         console.log(data.message);
@@ -44,12 +45,12 @@ export const Item = ({
   return (
     <div className="Itemcontainer">
       <div className="row">
-        <div  className="col-3 item">
-          <button  className="itemButton">{item.name}</button>
+        <div className="col-3 item">
+          <button className="itemButton">{item.name}</button>
         </div>
         <div className="col-4 item">
-        <p>{item.description}</p>
-       </div>
+          <p>{item.description}</p>
+        </div>
         <div className="col-1 item">
           <p>{item.price}</p>
         </div>
@@ -58,9 +59,9 @@ export const Item = ({
         </div>
         <div className="col-3 image item">
           <img src={item.image} alt={item.name} />
-          {selectItem  && user ? (
+          {selectItem && user ? (
             <div>
-              <button onClick={handleAddToCart}>Add to Cart</button>
+              <button onClick={handleAddToCart}>{clicked ? "Added to Cart" : "Add to Cart"}</button>
             </div>
           ) : (
             ""

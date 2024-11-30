@@ -22,7 +22,6 @@ export const App = () => {
   const [viewCart, setViewCart] = useState(false);
   const [addedItem, setAddedItem] = useState(null);
 
-
   async function fetchItem() {
     try {
       const response = await fetch(`${apiURL}/items/${itemId}`);
@@ -123,12 +122,14 @@ export const App = () => {
             </>
           )}
         </div>{" "}
-        {viewCart === false && selectItem === false ? <button onClick={() => setShowForm(!showForm)}>{showForm ? "Cancel" : "Add Item"}</button> : ""}
-        {showForm ? (
-          <AddItemForm setItems={setItems} />
+        {viewCart === false && selectItem === false ? (
+          <button onClick={() => setShowForm(!showForm)}>
+            {showForm ? "Cancel" : "Add Item"}
+          </button>
         ) : (
           ""
         )}
+        {showForm ? <AddItemForm setItems={setItems} /> : ""}
       </main>
     </>
   );
