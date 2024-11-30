@@ -16,7 +16,7 @@ export default function Cart({ user }) {
   async function fetchUsersItems() {
     console.log("fetchUsersItems called");
     try {
-        console.log(user.id)
+      console.log(user.id);
       const response = await fetch(`${apiURL}/users/${user.id}/items`);
       console.log("Response status:", response.status);
       if (!response.ok) {
@@ -27,7 +27,10 @@ export default function Cart({ user }) {
       console.log("Fetched items:", userItems);
       setItems(userItems);
     } catch (error) {
-      console.error("An error occurred while fetching the user's items:", error);
+      console.error(
+        "An error occurred while fetching the user's items:",
+        error
+      );
     }
   }
 
@@ -35,10 +38,14 @@ export default function Cart({ user }) {
     <div>
       <h1>{user ? `${user.username}'s Cart` : "Loading..."}</h1>
       <ul>
-        {items.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
+  {items.length > 0 ? (
+    items.map((item) => (
+      <li key={item.id}>{item.name}</li>
+    ))
+  ) : (
+    "You haven't added any items to your Cart yet!"
+  )}
+</ul>
     </div>
   );
 }
