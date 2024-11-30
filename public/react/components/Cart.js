@@ -35,9 +35,9 @@ export default function Cart({ user }) {
     <div>
       <h1>{user ? `${user.username}'s Cart` : "Loading..."}</h1>
       <ul>
-        {items.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
+        {items.length > 0
+          ? items.map((item) => <li key={item.id}>{item.name}</li>)
+          : "You haven't added any items to your Cart yet!"}
       </ul>
     </div>
   );
