@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { ItemsList } from "./ItemsList";
 import { Item } from "./Item";
 import { AddItemForm } from "./AddItemForm";
-import { SearchItems } from "./SearchItems"; 
 import { Headers } from "./Headers";
 import "./App.css";
 import NavBar from "./NavBar";
 import Cart from "./Cart";
 
 // import and prepend the api url to any fetch calls
-import apiURL from '../api';
+import apiURL from "../api";
 
 export const App = () => {
   const [selectItem, setSelectItem] = useState(false);
@@ -18,27 +17,23 @@ export const App = () => {
   const [itemId, setItemId] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [showForm, setShowForm] = useState(false);
-
   const [user, setUser] = useState(null);
   const [viewUpdateForm, setViewUpdateForm] = useState(false);
   const [viewCart, setViewCart] = useState(false);
   const [addedItem, setAddedItem] = useState(null);
-  
 
 
   async function fetchItem() {
     try {
-
       const response = await fetch(`${apiURL}/items/${itemId}`);
       const itemData = await response.json();
       setItem(itemData);
     } catch (err) {
       console.log("Oh no an error! ", err);
-    } 
+    }
   }
 
   async function fetchItems() {
-
     try {
       const response = await fetch(`${apiURL}/items`);
       const itemsData = await response.json();
@@ -61,7 +56,7 @@ export const App = () => {
       console.log("Oh no an error! ", err);
     }
   };
-  // Toggle the visibility of the AddItemForm
+
   const toggleForm = () => {
     setShowForm((prevState) => !prevState);
   };
@@ -76,28 +71,27 @@ export const App = () => {
 
   return (
     <>
-       <NavBar
-                user={user}
-                setUser={setUser}
-                viewCart={viewCart}
-                setViewCart={setViewCart}
-                selectItem={selectItem}
-                setSelectItem={setSelectItem}
-        />
+      <NavBar
+        user={user}
+        setUser={setUser}
+        viewCart={viewCart}
+        setViewCart={setViewCart}
+        selectItem={selectItem}
+        setSelectItem={setSelectItem}
+      />
+
       <main className="mainContainer">
         <div className="header">
-          <button onClick={toggleForm}>
+          {/* <button onClick={toggleForm}>
             {showForm ? "Cancel" : "Add Item"}
           </button>
-          {showForm && <AddItemForm setItems={setItems} />}
+          {showForm && <AddItemForm setItems={setItems} />} */}
         </div>
         <div className="content">
-
           {viewCart ? (
             <>
-            <Cart user={user}/>  
+              <Cart user={user} />
             </>
-
           ) : selectItem ? (
             <>
               <Item
@@ -127,14 +121,15 @@ export const App = () => {
                 />
               </div>
             </>
-            
           )}
         </div>{" "}
-      <button className="addCancelItem"onClick={toggleForm}>{showForm ? "Cancel" : "Add Item"}</button>
-        {/* Render AddItemForm if showForm is true */}
-        {showForm && <AddItemForm setItems={setItems} />}
+        {viewCart === false && selectItem === false ? <button onClick={() => setShowForm(!showForm)}>{showForm ? "Cancel" : "Add Item"}</button> : ""}
+        {showForm ? (
+          <AddItemForm setItems={setItems} />
+        ) : (
+          ""
+        )}
       </main>
-
     </>
   );
 };
