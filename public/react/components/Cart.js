@@ -6,7 +6,6 @@ export default function Cart({ user }) {
 
   useEffect(() => {
     if (user) {
-      console.log("User is defined, calling fetchUsersItems");
       fetchUsersItems();
     } else {
       console.log("User is not defined");
@@ -14,31 +13,56 @@ export default function Cart({ user }) {
   }, [user]);
 
   async function fetchUsersItems() {
-    console.log("fetchUsersItems called");
     try {
-        console.log(user.id)
       const response = await fetch(`${apiURL}/users/${user.id}/items`);
-      console.log("Response status:", response.status);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const text = await response.text();
       const userItems = text ? JSON.parse(text) : [];
-      console.log("Fetched items:", userItems);
+
       setItems(userItems);
     } catch (error) {
-      console.error("An error occurred while fetching the user's items:", error);
+      console.error(
+        "An error occurred while fetching the user's items:",
+        error
+      );
     }
+  }
+
+  function getTotal() {
+    return items.reduce((acc, current) => acc + current.price, 0);
   }
 
   return (
     <div>
-      <h1>{user ? `${user.username}'s Cart` : "Loading..."}</h1>
-      <ul>
-        {items.length > 0
-          ? items.map((item) => <li key={item.id}>{item.name}</li>)
-          : "You haven't added any items to your Cart yet!"}
-      </ul>
+      <h1>{user ? `${user.username}'s Cart` : "Log in to start shopping"}</h1>
+      {items.length > 0 && user
+        ? items.map((item) => (
+            <>
+              <div className="Itemcontainer">
+                <div className="row">
+                  <div className="col-3 item">
+                    <button className="itemButton">{item.name}</button>
+                  </div>
+                  <div className="col-4 item">
+                    <p>{item.description}</p>
+                  </div>
+                  <div className="col-1 item">
+                    <p>{item.price}</p>
+                  </div>
+                  <div className="col-1 item">
+                    <p>{item.category}</p>
+                  </div>
+                  <div className="col-3 image item">
+                    <img src={item.image} alt={item.name} />
+                  </div>
+                </div>
+              </div>
+            </>
+          ))
+        : "You haven't added any items to your Cart yet!"}
+      <div>{user ? <h3>Total: ${getTotal()}</h3> : ""}</div>
     </div>
   );
 }

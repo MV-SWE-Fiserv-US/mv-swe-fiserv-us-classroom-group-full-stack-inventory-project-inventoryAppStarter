@@ -80,8 +80,7 @@ export const App = () => {
       />
 
       <main className="mainContainer">
-        <div className="header">
-        </div>
+        <div className="header"></div>
         <div className="content">
           {viewCart ? (
             <>
@@ -102,7 +101,11 @@ export const App = () => {
                 setAddedItem={setAddedItem}
                 user={user}
               />
-              <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+              {user ? (
+                <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+              ) : (
+                ""
+              )}
             </>
           ) : (
             <>
@@ -118,14 +121,14 @@ export const App = () => {
             </>
           )}
         </div>{" "}
-        {viewCart === false && selectItem === false ? (
+        {viewCart === false && selectItem === false && user ? (
           <button onClick={() => setShowForm(!showForm)}>
             {showForm ? "Cancel" : "Add Item"}
           </button>
         ) : (
           ""
         )}
-        {showForm ? <AddItemForm setItems={setItems} /> : ""}
+        {showForm && user ? <AddItemForm setItems={setItems} /> : ""}
       </main>
     </>
   );
