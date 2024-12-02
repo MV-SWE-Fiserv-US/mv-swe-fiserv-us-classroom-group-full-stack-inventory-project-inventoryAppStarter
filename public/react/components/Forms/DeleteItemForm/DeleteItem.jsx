@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import apiURL from "../../../api";
 import { toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router";
 
 export default function DeleteItem({ item }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate()
 
   function handleDelete() {
     const url = `${apiURL}/items/${item.id}`;
@@ -34,6 +36,7 @@ export default function DeleteItem({ item }) {
           position: "top-center",
         });
       });
+      navigate('/')
   }
 
   useEffect(() => {}, [item]);

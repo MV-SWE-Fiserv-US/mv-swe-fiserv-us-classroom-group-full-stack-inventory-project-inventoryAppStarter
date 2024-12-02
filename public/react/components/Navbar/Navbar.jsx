@@ -28,6 +28,7 @@ export default function Navbar() {
       setTimeout(() => {
         localStorage.removeItem("token");
         navigate("/");
+        location.reload()
       }, 2000);
     }
   };

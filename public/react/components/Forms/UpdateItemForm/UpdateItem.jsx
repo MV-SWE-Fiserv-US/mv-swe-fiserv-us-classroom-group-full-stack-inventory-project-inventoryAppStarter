@@ -51,6 +51,7 @@ export default function UpdateItem({ item }) {
         position: "top-center",
       });
     }
+    location.reload()
   }
 
   function handleSubmit(e) {
