@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     margin: 20px;
-    color: #3a5a40;
+    color: #346579;
     margin-right: 20px;
 }
 
@@ -33,7 +33,7 @@ text-wrap-mode: nowrap ;
     outline: none;
     border-radius: 40px;
     /* border-color: #ffffff; */;
-    background-color:#a3b18a ;
+    background-color:#346579 ;
     color: white;
     width: 120px;
     height: 40px;

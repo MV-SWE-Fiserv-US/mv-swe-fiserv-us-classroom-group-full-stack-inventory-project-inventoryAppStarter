@@ -54,3 +54,34 @@
     border-bottom: 0 !important;
     border-top: 0 !important;
 }
+
+.buttonThree {
+    border: 2px solid #ffffff00;
+    outline: none;
+    border-radius: 40px;
+    /* border-color: #ffffff; */;
+    background-color:#CBBE83 ;
+    color: #336679;
+    width: 100px;
+    height: 40px;
+    margin-left: 10px;
+    justify-content: center;
+    display: flex;
+    align-items: flex-start;
+    /* align-items: center; */
+    margin-top: 10px;
+}
+
+.buttonFour {
+    border: 2px solid #ffffff00;
+    outline: none;
+    border-radius: 40px;
+    /* border-color: #ffffff; */;
+    background-color:#cbbe8300 ;
+    color: #336679;
+    width: 120px;
+    height: 40px;
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+}

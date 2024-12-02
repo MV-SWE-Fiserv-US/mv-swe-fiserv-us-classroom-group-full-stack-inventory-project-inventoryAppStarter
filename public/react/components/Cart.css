@@ -1,0 +1,16 @@
+.mainContainer {
+    text-align: center;
+    font-family: "Funnel Sans", sans-serif;
+    font-size: larger;
+    padding: 120px 150px 70px 150px; /* Add units to padding values */
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    position: fixed; 
+    top: 0; 
+    left: 0;  
+    right: 0; 
+    bottom: 0; 
+    overflow: hidden;
+    background-color: #bbd0d8;
+}
