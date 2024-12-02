@@ -13,7 +13,6 @@ export const Item = ({
   setViewUpdateForm,
   user,
 }) => {
-
   const [clicked, setClicked] = useState(null);
 
   async function handleAddToCart() {
@@ -61,7 +60,9 @@ export const Item = ({
           <img src={item.image} alt={item.name} />
           {selectItem && user ? (
             <div>
-              <button onClick={handleAddToCart}>{clicked ? "Added to Cart" : "Add to Cart"}</button>
+              <button onClick={handleAddToCart}>
+                {clicked ? "Added to Cart" : "Add to Cart"}
+              </button>
             </div>
           ) : (
             ""
@@ -72,15 +73,19 @@ export const Item = ({
         {setSelectItem ? (
           <>
             <button onClick={() => setSelectItem(false)}>Back</button>
-            <button onClick={() => setViewUpdateForm((prev) => !prev)}>
-              {viewUpdateForm ? "Cancel" : "Update"}
-            </button>
+            {user ? (
+              <button onClick={() => setViewUpdateForm((prev) => !prev)}>
+                {viewUpdateForm ? "Cancel" : "Update"}
+              </button>
+            ) : (
+              ""
+            )}
           </>
         ) : (
           ""
         )}
 
-        {viewUpdateForm && (
+        {viewUpdateForm && user ? (
           <UpdateForm
             item={item}
             setItem={setItem}
@@ -88,6 +93,8 @@ export const Item = ({
             setViewUpdateForm={setViewUpdateForm}
             setRefresh={setRefresh}
           />
+        ) : (
+          ""
         )}
       </div>
     </div>
