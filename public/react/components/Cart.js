@@ -36,9 +36,8 @@ export default function Cart({ user }) {
 
   return (
     <div>
-      <h1>{user ? `${user.username}'s Cart` : "Loading..."}</h1>
-      {console.log("items: ", items)}
-      {items.length > 0
+      <h1>{user ? `${user.username}'s Cart` : "Log in to start shopping"}</h1>
+      {items.length > 0 && user
         ? items.map((item) => (
             <>
               <div className="Itemcontainer">
@@ -63,9 +62,7 @@ export default function Cart({ user }) {
             </>
           ))
         : "You haven't added any items to your Cart yet!"}
-      <div>
-        <h3>Total: ${getTotal()}</h3>
-      </div>
+      <div>{user ? <h3>Total: ${getTotal()}</h3> : ""}</div>
     </div>
   );
 }
