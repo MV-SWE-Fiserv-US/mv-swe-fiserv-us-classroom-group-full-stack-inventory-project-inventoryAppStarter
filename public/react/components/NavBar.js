@@ -33,7 +33,7 @@ export default function NavBar({
         ) : (
           <>
           <a className="navbar-brand flex-fill text-center nav-link" href="#" style={{ color: 'white', fontSize: '2em' }}>Thread & Trend</a>
-          <button className="loginbutton" onClick={() => setViewLoginForm(!viewLoginForm)}>{viewLoginForm ? "Cancel" : "Login"}</button>
+          <button className="buttonLogin" onClick={() => setViewLoginForm(!viewLoginForm)}>{viewLoginForm ? "Cancel" : "Login"}</button>
           </>
         )
       }
