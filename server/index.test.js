@@ -3,6 +3,7 @@ execSync("npm install");
 const { sequelize } = require("./db");
 const request = require("supertest");
 const app = require("./app");
+const { Order, User, Item } = require("./models");
 
 describe("Items", () => {
   beforeEach(async () => {
@@ -18,11 +19,13 @@ describe("Items", () => {
   test("GET /items should return an array", async () => {
     const response = await request(app).get("/items");
     expect(response.body).toBeInstanceOf(Array);
+    expect(response.body).toHaveLength(20);
   });
 
-  test("GET /items should return correct number of restaurants", async () => {
+  test("GET /items should return correct data for all items", async () => {
     const response = await request(app).get("/items");
-    expect(response.body).toHaveLength(20);
+    const items = JSON.parse(JSON.stringify(await Item.findAll()));
+    expect(response.body).toEqual(expect.objectContaining(items));
   });
 
   test("GET /items should return the correct data", async () => {
@@ -53,7 +56,12 @@ describe("Items", () => {
     );
   });
 
-  test("POST /items/:id should return a correct data for single item", async () => {
+  test("GET items/:id to throw a 404 error for unfound items", async () => {
+    const response = await request(app).get("/items/201");
+    expect(response.status).toBe(404);
+  });
+
+  test("POST /items should return a correct data for single item", async () => {
     const body = {
       name: "Sample Item",
       description: "This is a sample item description.",
@@ -64,6 +72,14 @@ describe("Items", () => {
     const response = await request(app).post("/items/").send(body);
     expect(response.status).toBe(201);
     expect(response.body).toMatchObject(body);
+  });
+
+  test("POST /items should return an error for invalid data", async () => {
+    const body = {
+      name: "Sample Item",
+    };
+    const response = await request(app).post("/items/").send(body);
+    expect(response.body).toHaveProperty("errors");
   });
 
   test("PUT /items/:id should return a correct data for single item", async () => {
@@ -80,6 +96,14 @@ describe("Items", () => {
     expect(response.body).toMatchObject(body);
   });
 
+  test("PUT /items/:id to throw an error for invalid data", async () => {
+    const body = {
+      name: "Sample Item",
+    };
+    const response = await request(app).put("/items/20").send(body);
+    expect(response.body).toHaveProperty("errors");
+  });
+
   test("DELETE /items/:id should delete an item", async () => {
     const body = {
       name: "Sample Item",
@@ -88,15 +112,21 @@ describe("Items", () => {
       price: 19.99,
       image: "http://example.com/sample-image.jpg",
     };
-    const newItem = await request(app).post("/items/").send(body);
+    await request(app).post("/items/").send(body);
     await request(app).get("/items/21");
     const response = await request(app).get("/items/21");
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject(body);
+  });
 
-    const deletedItem = await request(app).delete("/items/21").send(body);
-    const deletedResponse = await request(app).get("/items/21");
-    expect(deletedResponse.status).toBe(404);
+  test("DELETE items/:id to throw a 404 error for unfound items", async () => {
+    const response = await request(app).delete("/items/201");
+    expect(response.status).toBe(404);
+  });
+
+  test("DELETE /items/:id should return a confirmation string", async () => {
+    const response = await request(app).delete("/items/1");
+    expect(response.text).toBe("Item deleted");
   });
 });
 
@@ -114,11 +144,13 @@ describe("Users", () => {
   test("GET /users should return an array", async () => {
     const response = await request(app).get("/users");
     expect(response.body).toBeInstanceOf(Array);
+    expect(response.body).toHaveLength(3);
   });
 
-  test("GET /users should return correct number of users", async () => {
+  test("GET /users should return correct data for all users", async () => {
     const response = await request(app).get("/users");
-    expect(response.body).toHaveLength(3);
+    const users = JSON.parse(JSON.stringify(await User.findAll()));
+    expect(response.body).toEqual(expect.objectContaining(users));
   });
 
   test("GET /users/:id should return a correct data for single user", async () => {
@@ -154,6 +186,16 @@ describe("Users", () => {
     expect(response.body).toHaveProperty("isAdmin");
   });
 
+  test("POST /users should return an error for invalid data", async () => {
+    const body = {
+      name: "Michael Scott",
+      email: "",
+      password: "Password1@",
+    };
+    const response = await request(app).post("/users/").send(body);
+    expect(response.body).toHaveProperty("errors");
+  });
+
   test("PUT /items/:id should return a correct data for single item", async () => {
     const body = {
       name: "Michael Scott",
@@ -167,10 +209,53 @@ describe("Users", () => {
     expect(response.body).toMatchObject(body);
   });
 
+  test("PUT /users/:id to throw an error for invalid data", async () => {
+    const body = {
+      name: "Michael Scott",
+      email: "",
+      password: "DunderMifflin12@",
+      cart: "",
+    };
+    const response = await request(app).put("/users/3").send(body);
+    expect(response.body).toHaveProperty("errors");
+  });
+
   test("PUT /users/:id/addToCart/:itemId should add an item to the cart", async () => {
     await request(app).put("/users/1/addToCart/1");
     const response = await request(app).get("/users/1");
     expect(response.body.cart).toHaveLength(1);
+  });
+
+  test("PUT /users/:id/updateCart", async () => {
+    const newCart = [
+      {
+        category: "jewelery",
+        createdAt: "2024-12-02T19:10:40.595Z",
+        description:
+          "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+        id: 5,
+        image:
+          "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+        name: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+        price: 695,
+        updatedAt: "2024-12-02T19:10:40.595Z",
+      },
+      {
+        category: "jewelery",
+        createdAt: "2024-12-02T19:10:40.595Z",
+        description:
+          "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+        id: 5,
+        image:
+          "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+        name: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+        price: 695,
+        updatedAt: "2024-12-02T19:10:40.595Z",
+      },
+    ];
+    await request(app).put("/users/1/updateCart").send(newCart);
+    const response = await request(app).get("/users/1");
+    expect(response.body.cart).toHaveLength(2);
   });
 
   test("DELETE /users/:id should delete an user", async () => {
@@ -194,11 +279,13 @@ describe("Orders", () => {
   test("GET /orders should return an array", async () => {
     const response = await request(app).get("/orders");
     expect(response.body).toBeInstanceOf(Array);
+    expect(response.body).toHaveLength(3);
   });
 
-  test("GET /orders should return correct number of orders", async () => {
+  test("GET /orders should return correct data for all orders", async () => {
     const response = await request(app).get("/orders");
-    expect(response.body).toHaveLength(3);
+    const orders = JSON.parse(JSON.stringify(await Order.findAll()));
+    expect(response.body).toEqual(expect.objectContaining(orders));
   });
 
   test("GET /orders/:id should return a correct data for single order", async () => {
@@ -247,6 +334,21 @@ describe("Orders", () => {
 });
 
 describe("Auth", () => {
+  beforeEach(async () => {
+    await sequelize.sync({ force: true });
+    execSync("npm run seed");
+  });
+
+  test("POST /auth/register should return a 201 status code", async () => {
+    const body = {
+      name: "Test User",
+      email: "test@test.com",
+      password: "Password123!",
+    };
+    const response = await request(app).post("/auth/register").send(body);
+    expect(response.status).toBe(201);
+  });
+
   test("POST /auth/register should hash the password", async () => {
     const body = {
       name: "Test User",
@@ -266,6 +368,15 @@ describe("Auth", () => {
     const response = await request(app).post("/auth/login").send(body);
     expect(response.body).toHaveProperty("token");
   });
+
+  test("POST /auth/login should return a 400 status code for invalid credentials", async () => {
+    const body = {
+      email: "john.doe@example.com",
+      password: "hashedPassword123!",
+    };
+    const response = await request(app).post("/auth/login").send(body);
+    expect(response.status).toBe(400);
+  });
 });
 
 describe("Payment", () => {
@@ -274,5 +385,33 @@ describe("Payment", () => {
       .post("/payment-intent")
       .send({ total: 1000 });
     expect(response.body).toHaveProperty("clientSecret");
+  });
+
+  test("POST /payment-intent should return with a 500 status code for invalid request", async () => {
+    const response = await request(app).post("/payment-intent").send({});
+    expect(response.status).toBe(500);
+  });
+});
+
+describe("404", () => {
+  test("GET /404 should return a 404 status code", async () => {
+    const response = await request(app).get("/404");
+    expect(response.status).toBe(404);
+  });
+});
+
+describe("Error handling middleware", () => {
+  it("should handle an error thrown in the existing route", async () => {
+    const originalHandler = app._router.stack[1].handle;
+
+    app._router.stack[1].handle = (req, res, next) => {
+      const error = new Error("Simulated error in existing route");
+      next(error);
+    };
+
+    const response = await request(app).get("/users");
+
+    expect(response.status).toBe(500);
+    app._router.stack[1].handle = originalHandler;
   });
 });

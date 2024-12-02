@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --verbose --collect-coverage",
     "client-dev": "parcel public/index.html --open",
     "server-dev": "nodemon server.js",
     "seed": "node server/seed.js",
