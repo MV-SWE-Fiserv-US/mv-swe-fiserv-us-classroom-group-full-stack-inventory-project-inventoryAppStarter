@@ -24,6 +24,7 @@
     justify-content: center; /* Center items vertically */
     align-items: center; 
     color: #346579;
+    min-height: 200px;
 }
 /* .row{
     border: 0;
@@ -108,3 +109,15 @@
     margin-top: 10px;
     margin-right: 10px;
 }
+.collapse {
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 60s ease, opacity 2s ease; 
+    opacity: 0;
+  }
+  
+  .panel-collapse.show {
+    /* transition: max-height 10s ease, opacity 2s ease;  */
+    max-height: 500px; 
+    opacity: 10; 
+  }

@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import UpdateForm from "./UpdateForm";
 import apiURL from "../api";
 import "./item.css";
@@ -14,6 +14,24 @@ export const Item = ({
   user,
 }) => {
   const [clicked, setClicked] = useState(null);
+  useEffect(() => {
+    const panels = document.querySelectorAll('.panel');
+    panels.forEach(panel => {
+      panel.addEventListener('mouseenter', () => {
+        panel.querySelector('.panel-collapse').classList.add('show');
+      });
+      panel.addEventListener('mouseleave', () => {
+        panel.querySelector('.panel-collapse').classList.remove('show');
+      });
+    });
+
+    return () => {
+      panels.forEach(panel => {
+        panel.removeEventListener('mouseenter', () => {});
+        panel.removeEventListener('mouseleave', () => {});
+      });
+    };
+  }, []);
 
   async function handleAddToCart() {
     setClicked(true);
@@ -51,7 +69,23 @@ export const Item = ({
           </button>
         </div>
         <div className="col-4 item">
-          <p>{item.description}</p>
+          <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div className="panel panel-default">
+              <div className="panel-heading" role="tab" id={`heading${item.id}`}>
+                <h4 className="panel-title">
+                  <a role="button">
+                  Description
+                  <br></br>⌵
+                  </a>
+                </h4>
+              </div>
+              <div id={`collapse${item.id}`} className="panel-collapse collapse" role="tabpanel" aria-labelledby={`heading${item.id}`}>
+                <div className="panel-body">
+                  {item.description}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="col-1 item">
           <p>{item.price}</p>
@@ -75,6 +109,7 @@ export const Item = ({
       <div>
         {setSelectItem ? (
           <>
+          
             <button className="buttonThree" onClick={() => setSelectItem(false)}>Back</button>
             {user ? (
               <button className="buttonThree" onClick={() => setViewUpdateForm((prev) => !prev)}>

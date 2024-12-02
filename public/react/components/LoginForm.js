@@ -53,7 +53,7 @@ export default function LoginForm({ setUser, setViewLoginForm }) {
             password:
             <input
             className="userpassinput"
-            type="text"
+            type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
