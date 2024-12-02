@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { toast, ToastContainer, Slide } from "react-toastify";
+import { toast, Slide } from "react-toastify";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../AuthProvider";
 import { jwtDecode } from "jwt-decode";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { useParams, useNavigate } from "react-router";
-import { toast, ToastContainer, Slide } from "react-toastify";
+import { toast, Slide } from "react-toastify";
 import { AuthContext } from "../../AuthProvider";
 import { jwtDecode } from "jwt-decode";
 import UpdateItem from "../Forms/UpdateItemForm/UpdateItem";

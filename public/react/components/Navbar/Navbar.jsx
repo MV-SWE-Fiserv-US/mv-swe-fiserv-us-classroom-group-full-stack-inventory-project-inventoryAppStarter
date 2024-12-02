@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../../AuthProvider";
 import vaultIcon from "../../../assets/vault-icon.svg";
 import { NavLink, useNavigate } from "react-router";
-import { toast, ToastContainer, Slide } from "react-toastify";
+import { toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Navbar() {
@@ -34,7 +34,6 @@ export default function Navbar() {
 
   return (
     <>
-      
       <nav className="bg-white">
         <div className="flex flex-wrap items-center justify-between mx-auto p-4">
           <a
