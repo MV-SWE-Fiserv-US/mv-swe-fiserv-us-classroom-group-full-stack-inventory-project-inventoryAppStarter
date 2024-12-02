@@ -203,17 +203,13 @@ const Cart = () => {
                 })}
                 <div className="flex justify-between w-full font-extrabold text-sm">
                   <p className="w-1/2">Tax</p>
-                  <p>${(0).toFixed(2)}</p>
-                </div>
-                <div className="flex justify-between w-full font-extrabold text-sm">
-                  <p className="w-1/2">Shipping & Handling</p>
-                  <p>${(0).toFixed(2)}</p>
+                  <p>${(total * .07).toFixed(2)}</p>
                 </div>
               </article>
               <div className="mt-6 flex justify-between items-center border-t pt-4">
                 <span className="text-lg font-bold text-gray-800">Total:</span>
                 <span className="text-lg font-bold text-gray-900">
-                  ${total}
+                  ${(total * 1.07).toFixed(2)}
                 </span>
               </div>
 
