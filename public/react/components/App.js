@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { ItemsList } from "./ItemsList";
 import { Item } from "./Item";
 import { AddItemForm } from "./AddItemForm";
-import { SearchItems } from "./SearchItems"; 
 import { Headers } from "./Headers";
 import "./App.css";
 import NavBar from "./NavBar";
 import Cart from "./Cart";
 
 // import and prepend the api url to any fetch calls
-import apiURL from '../api';
+import apiURL from "../api";
 
 export const App = () => {
   const [selectItem, setSelectItem] = useState(false);
@@ -18,27 +17,22 @@ export const App = () => {
   const [itemId, setItemId] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [showForm, setShowForm] = useState(false);
-
   const [user, setUser] = useState(null);
   const [viewUpdateForm, setViewUpdateForm] = useState(false);
   const [viewCart, setViewCart] = useState(false);
   const [addedItem, setAddedItem] = useState(null);
-  
-
 
   async function fetchItem() {
     try {
-
       const response = await fetch(`${apiURL}/items/${itemId}`);
       const itemData = await response.json();
       setItem(itemData);
     } catch (err) {
       console.log("Oh no an error! ", err);
-    } 
+    }
   }
 
   async function fetchItems() {
-
     try {
       const response = await fetch(`${apiURL}/items`);
       const itemsData = await response.json();
@@ -61,7 +55,7 @@ export const App = () => {
       console.log("Oh no an error! ", err);
     }
   };
-  // Toggle the visibility of the AddItemForm
+
   const toggleForm = () => {
     setShowForm((prevState) => !prevState);
   };
@@ -86,12 +80,7 @@ export const App = () => {
       />
 
       <main className="mainContainer">
-        <div className="header">
-          {/* <button onClick={toggleForm}>
-            {showForm ? "Cancel" : "Add Item"}
-          </button>
-          {showForm && <AddItemForm setItems={setItems} />} */}
-        </div>
+        <div className="header"></div>
         <div className="content">
           {viewCart ? (
             <>
@@ -112,7 +101,16 @@ export const App = () => {
                 setAddedItem={setAddedItem}
                 user={user}
               />
-              <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+              {user ? (
+                <button
+                  className="buttonThree"
+                  onClick={() => handleDeleteItem(itemId)}
+                >
+                  Delete
+                </button>
+              ) : (
+                ""
+              )}
             </>
           ) : (
             <>
@@ -128,14 +126,17 @@ export const App = () => {
             </>
           )}
         </div>{" "}
-        {viewCart === false && selectItem === false ? (
-          <button onClick={() => setShowForm(!showForm)}>
+        {viewCart === false && selectItem === false && user ? (
+          <button
+            className="AddItemCancel"
+            onClick={() => setShowForm(!showForm)}
+          >
             {showForm ? "Cancel" : "Add Item"}
           </button>
         ) : (
           ""
         )}
-        {showForm ? <AddItemForm setItems={setItems} /> : ""}
+        {showForm && user ? <AddItemForm setItems={setItems} /> : ""}
       </main>
     </>
   );

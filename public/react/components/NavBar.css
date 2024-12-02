@@ -1,6 +1,5 @@
 .navbar {
-   background-color: #346579;
-   position: fixed;
+   background-color: #346679;
    color: aliceblue;
    position: fixed;
    top: 0;
@@ -13,10 +12,40 @@
   }
   
   .navbar-brand {
-    color: aliceblue;
+    color: rgb(240, 248, 255);
+    /* position: fixed; */
     /* font-size: small; */
    /* background-color: blueviolet; */
    /* text-align: center; */
 
   }
+
+  .welcomebar {
+    padding-top: 13px;
+    font-family: "Funnel Sans", sans-serif;
+    font-size: larger;
+    padding-left: 50px;
+    background-color: rgba(127, 255, 212, 0);
+  }
   
+  .logoutbutton {
+    padding-right: 50px;
+  }
+
+  .loginbutton {
+    margin-right: 50px;
+  }
+
+  .ViewLogButton {
+    border: 2px solid #ffffff00;
+    outline: none;
+    border-radius: 40px;
+    /* border-color: #ffffff; */;
+    background-color:#CBBE83 ;
+    color: #336679;
+    width: 120px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+  }
