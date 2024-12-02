@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import apiURL from "../../../api";
-import { toast, ToastContainer, Slide } from "react-toastify";
+import { toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function DeleteItem({ item }) {
