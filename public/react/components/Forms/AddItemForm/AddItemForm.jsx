@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import apiURL from "../../../api";
 
-const AddItemForm = () => {
+const AddItemForm = ({ setShowForm }) => {
     const [formData, setFormData] = useState({
         name: "",
         description: "",
         category: "",
         price: "",
-        imageUrl: "",
+        image: "",
     });
 
-    async function postItem({ item }) {
+    async function postItem(item) {
+        console.log(item);
+        
         try {
             const response = await fetch(`${apiURL}/items`, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(item)
             })
+            console.log(response.body)
+            console.log(response)
             if(!response.ok) {
                 throw new Error("Item could not be posted..")
             }
@@ -35,9 +39,10 @@ const AddItemForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         postItem(formData);
+        setShowForm(false)
     };
 
-    return <form className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200" onSubmit={handleSubmit}>
+    return <form className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200 absolute left-[41vw]" onSubmit={handleSubmit}>
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Add Inventory Item</h2>
         
         <div className="mb-4">
@@ -108,14 +113,14 @@ const AddItemForm = () => {
 
         
         <div className="mb-6">
-            <label htmlFor="imageUrl" className="text-gray-700 font-medium mb-2">
+            <label htmlFor="image" className="text-gray-700 font-medium mb-2">
             Image URL
             </label>
             <input
             type="url"
-            id="imageUrl"
-            name="imageUrl"
-            value={formData.imageUrl}
+            id="image"
+            name="image"
+            value={formData.image}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
             placeholder="Enter image URL"
