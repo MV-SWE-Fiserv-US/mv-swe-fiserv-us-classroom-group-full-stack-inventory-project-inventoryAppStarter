@@ -586,3 +586,79 @@ describe("DELETE /orders/:id", () => {
       expect(response.body.error).toBe('Test error');
   });
 });
+
+describe("GET /users", () => {
+  it("should call next(error) when an error occurs", async () => {
+      const error = new Error('Test error');
+      jest.spyOn(User, 'findAll').mockImplementation(() => { throw error; });
+
+      const response = await request(app).get('/users')
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('Test error');
+  });
+});
+
+describe("GET /users/:id", () => {
+  it("should call next(error) when an error occurs", async () => {
+      const error = new Error('Test error');
+      jest.spyOn(User, 'findByPk').mockImplementation(() => { throw error; });
+
+      const response = await request(app).get('/users/1')
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('Test error');
+  });
+});
+
+describe("GET /:id/orders", () => {
+  it("should call next(error) when an error occurs", async () => {
+      const error = new Error('Test error');
+      jest.spyOn(User, 'findByPk').mockImplementation(() => { throw error; });
+
+      const response = await request(app).get('/users/1/orders')
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('Test error');
+  });
+});
+
+describe("POST /users", () => {
+  it("should call next(error) when an error occurs", async () => {
+      const error = new Error('Test error');
+      jest.spyOn(User, 'create').mockImplementation(() => { throw error; });
+
+      const response = await request(app)
+          .post('/users')
+          .send({
+              name: 'Test User',
+              email: 'test@example.com',
+              password: 'StrongPassword123!',
+              cart: [],
+              isAdmin: false
+          });
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('Test error');
+  });
+});
+
+describe("PUT /users/:id", () => {
+  it("should call next(error) when an error occurs", async () => {
+      const error = new Error('Test error');
+      jest.spyOn(User, 'findByPk').mockImplementation(() => { throw error; });
+
+      const response = await request(app)
+          .put('/users/1')
+          .send({
+              name: 'Test User',
+              email: 'test@example.com',
+              password: 'StrongPassword123!',
+              cart: [],
+              isAdmin: false
+          });
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('Test error');
+  });
+});
