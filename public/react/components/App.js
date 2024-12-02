@@ -102,7 +102,12 @@ export const App = () => {
                 user={user}
               />
               {user ? (
-                <button className="buttonThree" onClick={() => handleDeleteItem(itemId)}>Delete</button>
+                <button
+                  className="buttonThree"
+                  onClick={() => handleDeleteItem(itemId)}
+                >
+                  Delete
+                </button>
               ) : (
                 ""
               )}
@@ -122,7 +127,10 @@ export const App = () => {
           )}
         </div>{" "}
         {viewCart === false && selectItem === false && user ? (
-          <button className="AddItemCancel" onClick={() => setShowForm(!showForm)}>
+          <button
+            className="AddItemCancel"
+            onClick={() => setShowForm(!showForm)}
+          >
             {showForm ? "Cancel" : "Add Item"}
           </button>
         ) : (

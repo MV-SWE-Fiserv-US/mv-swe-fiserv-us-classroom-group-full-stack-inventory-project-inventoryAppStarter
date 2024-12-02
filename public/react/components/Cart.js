@@ -31,6 +31,25 @@ export default function Cart({ user }) {
     }
   }
 
+  function handleDelete(item) {
+    console.log("in")
+    const itemId = item.id;
+    console.log("itemID: ", itemId);
+    fetch(`${apiURL}/users/${user.id}/removeFromCart/${itemId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          setItems(items.filter((item) => item.id !== itemId));
+        } else {
+          console.error("Failed to delete item");
+        }
+      })
+      .catch((error) => {
+        console.error("An error occurred while deleting the item:", error);
+      });
+  }
+
   function getTotal() {
     return items.reduce((acc, current) => acc + current.price, 0);
   }
@@ -57,7 +76,9 @@ export default function Cart({ user }) {
                   </div>
                   <div className="col-3 image item">
                     <img src={item.image} alt={item.name} />
+                    <button onClick={() => handleDelete(item)} className="itemButton">X</button>
                   </div>
+
                 </div>
               </div>
             </>
