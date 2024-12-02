@@ -60,7 +60,7 @@ export const Item = ({
           <img src={item.image} alt={item.name} />
           {selectItem && user ? (
             <div>
-              <button onClick={handleAddToCart}>
+              <button className="buttonFour" onClick={handleAddToCart}>
                 {clicked ? "Added to Cart" : "Add to Cart"}
               </button>
             </div>
@@ -72,9 +72,9 @@ export const Item = ({
       <div>
         {setSelectItem ? (
           <>
-            <button onClick={() => setSelectItem(false)}>Back</button>
+            <button className="buttonThree" onClick={() => setSelectItem(false)}>Back</button>
             {user ? (
-              <button onClick={() => setViewUpdateForm((prev) => !prev)}>
+              <button className="buttonThree" onClick={() => setViewUpdateForm((prev) => !prev)}>
                 {viewUpdateForm ? "Cancel" : "Update"}
               </button>
             ) : (
