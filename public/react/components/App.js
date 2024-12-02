@@ -101,7 +101,11 @@ export const App = () => {
                 setAddedItem={setAddedItem}
                 user={user}
               />
-              <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+              {user ? (
+                <button onClick={() => handleDeleteItem(itemId)}>Delete</button>
+              ) : (
+                ""
+              )}
             </>
           ) : (
             <>
