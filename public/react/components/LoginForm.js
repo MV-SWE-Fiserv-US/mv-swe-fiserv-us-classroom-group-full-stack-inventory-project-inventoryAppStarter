@@ -11,16 +11,16 @@ export default function LoginForm({ setUser, setViewLoginForm }) {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-        const response = await fetch(`${apiURL}/users/login`, {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        setUser(data);
-        setViewLoginForm(false);
+      const response = await fetch(`${apiURL}/users/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      setUser(data);
+      setViewLoginForm(false);
     } catch (error) {
       console.error("Error creating user:", error);
     }
@@ -38,7 +38,6 @@ export default function LoginForm({ setUser, setViewLoginForm }) {
     <>
     <div>
       <form onSubmit={handleSubmit}>
-        <label>
             Username:
             <input 
                 className="userpassinput"
@@ -47,17 +46,17 @@ export default function LoginForm({ setUser, setViewLoginForm }) {
                 value={formData.username}
                 onChange={handleChange}
             />
-            
         </label>
         <label>
             password:
             <input
             className="userpassinput"
             type="password"
+
             name="password"
             value={formData.password}
             onChange={handleChange}
-            />
+          />
         </label>
         <button className="buttonLogin" type="submit">Login</button>
       </form>

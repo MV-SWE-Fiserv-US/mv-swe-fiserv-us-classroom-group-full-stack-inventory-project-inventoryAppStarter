@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import apiURL from '../api';
+import React, { useState } from "react";
+import apiURL from "../api";
 
 export const SearchItems = () => {
-  const [searchQuery, setSearchQuery] = useState('');  // The search query
+  const [searchQuery, setSearchQuery] = useState(""); // The search query
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -21,28 +21,30 @@ export const SearchItems = () => {
     if (searchQuery.trim()) {
       try {
         // Construct the query string with the search query
-        const queryString = new URLSearchParams({ name: searchQuery }).toString();
+        const queryString = new URLSearchParams({
+          name: searchQuery,
+        }).toString();
         const response = await fetch(`${apiURL}/items/search?${queryString}`);
 
         const data = await response.json();
 
         if (data.error) {
-          setError(data.error);  // Handle error response from API
-          setItems([]);  // Reset items on error
+          setError(data.error); // Handle error response from API
+          setItems([]); // Reset items on error
         } else if (Array.isArray(data)) {
-          setItems(data);  // Update items if the response is an array
+          setItems(data); // Update items if the response is an array
         } else {
-          setItems([]);  // Unexpected response format
-          setError('Unexpected response format');
+          setItems([]); // Unexpected response format
+          setError("Unexpected response format");
         }
       } catch (error) {
-        console.error('Error fetching items:', error);
-        setError(error.message || 'Failed to fetch items');
+        console.error("Error fetching items:", error);
+        setError(error.message || "Failed to fetch items");
       } finally {
-        setLoading(false);  // Stop loading
+        setLoading(false); // Stop loading
       }
     } else {
-      setItems([]);  // Clear items if the search query is empty
+      setItems([]); // Clear items if the search query is empty
       setLoading(false); // Stop loading if no query
     }
   };
@@ -50,7 +52,7 @@ export const SearchItems = () => {
   return (
     <div>
       <h3>Search Items</h3>
-      
+
       <div>
         <label>
           Search:
@@ -66,7 +68,7 @@ export const SearchItems = () => {
       {/* Search Button */}
       <div>
         <button onClick={fetchItems} disabled={loading || !searchQuery.trim()}>
-          {loading ? 'Searching...' : 'Search'}
+          {loading ? "Searching..." : "Search"}
         </button>
       </div>
 
@@ -74,7 +76,7 @@ export const SearchItems = () => {
       {loading && <p>Loading...</p>}
 
       {/* Error Message */}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <div>
         <h4>Search Results</h4>
