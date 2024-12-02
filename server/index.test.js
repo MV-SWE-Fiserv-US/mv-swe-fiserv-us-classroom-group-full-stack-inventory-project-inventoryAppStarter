@@ -662,3 +662,40 @@ describe("PUT /users/:id", () => {
       expect(response.body.error).toBe('Test error');
   });
 });
+
+describe("PUT /users/:id/addToCart/:itemId", () => {
+  it("should call next(error) when an error occurs", async () => {
+    const error = new Error('Test error');
+    jest.spyOn(User, 'findByPk').mockImplementation(() => { throw error; });
+
+    const response = await request(app).put('/users/1/addToCart/1');
+
+    expect(response.status).toBe(500);
+    expect(response.body.error).toBe('Test error');
+  });
+});
+
+describe("PUT /users/:id/updateCart", () => {
+  it("should call next(error) when an error occurs", async () => {
+    const error = new Error('Test error');
+    jest.spyOn(User, 'findByPk').mockImplementation(() => { throw error; });
+
+    const response = await request(app).put('/users/1/updateCart');
+
+    expect(response.status).toBe(500);
+    expect(response.body.error).toBe('Test error');
+  });
+});
+
+describe("DELETE /users/:id/", () => {
+  it("should call next(error) when an error occurs", async () => {
+    const error = new Error('Test error');
+    jest.spyOn(User, 'destroy').mockImplementation(() => { throw error; });
+
+    const response = await request(app).delete('/users/1');
+
+    expect(response.status).toBe(500);
+    expect(response.body.error).toBe('Test error');
+  });
+});
+
