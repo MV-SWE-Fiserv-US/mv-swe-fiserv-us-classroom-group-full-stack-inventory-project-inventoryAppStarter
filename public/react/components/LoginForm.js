@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import apiURL from "../api";
+import "./LoginForm.css";
 
 export default function LoginForm({ setUser, setViewLoginForm }) {
   const [formData, setFormData] = useState({
@@ -35,10 +36,12 @@ export default function LoginForm({ setUser, setViewLoginForm }) {
 
   return (
     <>
+    <div>
       <form onSubmit={handleSubmit}>
         <label>
             Username:
-            <input
+            <input 
+                className="userpassinput"
                 type="text"
                 name="username"
                 value={formData.username}
@@ -49,14 +52,16 @@ export default function LoginForm({ setUser, setViewLoginForm }) {
         <label>
             password:
             <input
+            className="userpassinput"
             type="text"
             name="password"
             value={formData.password}
             onChange={handleChange}
             />
         </label>
-        <button type="submit">Login</button>
+        <button className="buttonLogin" type="submit">Login</button>
       </form>
+      </div>
     </>
   );
 }
