@@ -550,3 +550,39 @@ describe("POST /orders/", () => {
       expect(response.body.error).toBe('Test error');
   });
 });
+
+describe("POST /orders/:userId", () => {
+  it("should call next(error) when an error occurs", async () => {
+      const error = new Error('Test error');
+      jest.spyOn(Order, 'findByPk').mockImplementation(() => { throw error; });
+
+      const response = await request(app).post('/orders/1')
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('Test error');
+  });
+});
+
+describe("PUT /orders/:id", () => {
+  it("should call next(error) when an error occurs", async () => {
+      const error = new Error('Test error');
+      jest.spyOn(Order, 'findByPk').mockImplementation(() => { throw error; });
+
+      const response = await request(app).put('/orders/1')
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('Test error');
+  });
+});
+
+describe("DELETE /orders/:id", () => {
+  it("should call next(error) when an error occurs", async () => {
+      const error = new Error('Test error');
+      jest.spyOn(Order, 'destroy').mockImplementation(() => { throw error; });
+
+      const response = await request(app).delete('/orders/1')
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('Test error');
+  });
+});
