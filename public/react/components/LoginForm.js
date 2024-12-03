@@ -38,6 +38,7 @@ export default function LoginForm({ setUser, setViewLoginForm }) {
     <>
     <div>
       <form onSubmit={handleSubmit}>
+        <label>
             Username:
             <input 
                 className="userpassinput"
