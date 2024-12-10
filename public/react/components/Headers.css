@@ -1,0 +1,19 @@
+.titleContainer {
+    margin-top: 30px; /* Add units to padding values */
+    background-color: #346579;
+    position: fixed;
+    width: calc(100% - 300px); 
+    left: 150px; 
+    top: 86px; 
+    z-index: 1; 
+
+    /* margin-top:30px ; */
+}
+.itemTitle {
+    justify-content: center;
+    border-color: #344e41;
+    color: #ffff;
+    font-family: "Funnel Sans", sans-serif;
+    /* font-weight:lighter; */
+    /* font-style: normal; */
+}
