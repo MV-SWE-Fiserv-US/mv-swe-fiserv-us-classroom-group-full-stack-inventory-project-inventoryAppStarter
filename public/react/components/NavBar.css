@@ -1,0 +1,22 @@
+.navbar {
+   background-color: #346579;
+   position: fixed;
+   color: aliceblue;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   z-index: 1000;
+   color: #D1DFE3; 
+   padding: 10px 20px;
+   box-shadow: 2 2 10 rgb(114, 114, 114);
+  }
+  
+  .navbar-brand {
+    color: aliceblue;
+    /* font-size: small; */
+   /* background-color: blueviolet; */
+   /* text-align: center; */
+
+  }
+  

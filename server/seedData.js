@@ -1,9 +1,22 @@
 module.exports = {
-  sauces: [
-    {"name" : "Sriracha", "image" : "https://64.media.tumblr.com/12cd128183713bf928bda87a24f22487/tumblr_ne6jee85PM1tha1vgo1_250.gif"},
-    {"name" : "Franks", "image": "https://cdn.streamelements.com/uploads/1887a0da-3642-4795-b5f5-774d5b377e52.gif"},
-    {"name" : "Tobasco", "image": "https://64.media.tumblr.com/1564fcf74adc3fe6542c34b6a1f05de1/tumblr_na9lew0bNS1tha1vgo1_r1_250.gif"}
-  ],
+  users: [
+   {
+     "username": "John Doe",
+     "password": "$2a$12$KIXG79ZKkmuQDP9fFkxzOeh1jklZ2pyrLprKvQk.bxYr1pQsbmjCq" 
+   },
+   {
+     "username": "Jane Smith",
+     "password": "$2a$12$KIXG79ZKkmuQDP9fFkxzOeh1jklZ2pyrLprKvQk.bxYr1pQsbmjCq"
+   },
+   {
+     "username": "Alice Brown",
+     "password": "$2a$12$6F.JG5yfjINzQkSyF82YMe9r74g8K3uFXVuayBG.vHRL14/d3Tr4u"
+   },
+   {
+     "username": "Bob Johnson",
+     "password": "$2a$12$G3YyZ9d2U7LtFhrJ3Pb4x.T1GpAwJ54lSoZBlt4e1Vt7evyO3S8A6"
+   }
+ ],
   items: [
     {
        "name":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
