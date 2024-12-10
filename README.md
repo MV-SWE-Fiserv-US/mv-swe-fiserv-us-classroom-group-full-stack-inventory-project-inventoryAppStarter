@@ -1,53 +1,109 @@
 ![logo](https://user-images.githubusercontent.com/44912347/202296600-c5f247d6-9616-49db-88f0-38433429d781.jpg)
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+  </ol>
+</details>
 
-# Inventory App
-You are a team of developers for an e-commerce company. The Engineering team  is rebuilding their inventory tracking app from the ground up. Your team has been tasked with creating a Full-Sack (front and back end) RESTful CRUD application to track the items.
+<!-- ABOUT THE PROJECT -->
+# Full-Stack Inventory App - Multiverse Unit 8
+## About The Project
 
+This project aims to demonstrate the culmination of our learning throughout the bootcamp so far by building a full-stack web application to solve them problem of tracking inventory. We are a team of developers for an e-commerce company. The Engineering team is rebuilding the inventory tracking app from the ground up. Our team has been tasked with creating a Full-Sack (front and back end) RESTful CRUD application to track the items.
+
+
+### Built With
+* [![React.js]][React-url]
+* [![Express.js]][Express-url]
+* [![Sequelize]][Sequelize-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- GETTING STARTED -->
 ## Getting Started
+The following applies if you are a developer trying to run this project locally. Otherwise visit the deployed version at: 
 
-1. `npm install`
-2. `npm run seed`
-3. `npm run server-dev`
-4. In a seperate terminal, `npm run client-dev`
+### Installation
+1. Clone the repo
+   ```sh
+   git clone https://github.com/MV-SWE-Fiserv-US/group-full-stack-inventory-project-cos
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Seed database
+   ```sh
+   npm run seed
+   ```
+4. In separate terminal tabs, run the server and client
+   ```sh
+   npm run client-dev
+   npm run server-dev
+   ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Inventory App “Tiers”
 
-The tiers describe different levels of functionality in your application with the difficulty becoming more complex as you advance through the tiers. Start with Tier I, and complete everything you can, moving as quickly as possible as you can to Tier II. They are described as user stories.
+<!-- USAGE EXAMPLES -->
+## Usage
 
-Your team should strive to finish at least the first 4 tiers (a CRUD application) and attempt some of the bonus material.
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-### Tier I: MVP Application
-- As a User, I want to view all items in inventory
-  - Sequelize Model for Item
-  - Name, Description, Price, Category, Image
-  - Express Route to GET all Items
-  - Front-end View for all Items
-- As a User, I want to view any individual item
-  - Express Route to GET one Item
-  - Front-end view for one item (click to see)
+_For more examples, please refer to the [Documentation](https://example.com)_
 
-### Tier II: Adding an Item
-- As a User, I want to add an item by completing a form
-  - Add Item front-end form
-  - Express Route to ADD the Item
-  - Form or Fetch request to add item when form is submitted
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Tier III: Deleting an Item
-- As a User, I want to  remove an item from inventory
-  - Delete button on Single Item View
-  - Express Route to DELETE the Item
-  - Fetch request to delete item when button is clicked
+<!-- CONTRIBUTING -->
+## Contributors
 
-### Tier IV: Updating an Item
-- As a User, I want to edit an item by filling a form
-  - Edit form on Single Item View
-  - Express Route to UPDATE the Item
-  - Fetch request to update item when form is submitted
+This project was build by Codey Gallup, John Arocha, and David Kwon.
 
-### Tier V: Bonus Stuff
-- Models, Routes for Users and Orders
-- As a User, I want my Inventory site to be visually stunning
-- As a User, I want to be able to search through data based on search criteria
-- As a User, I want to add items to a cart and purchase
-- As a User, I want to use the application on a mobile browser
-- As an Admin, I want all Add and Edit item requests to have server-side validations
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Top contributors:
+
+<a href="https://github.com/MV-SWE-Fiserv-US/group-full-stack-inventory-project-cos/graphs/contributors">
+
+  ![image](https://github.com/user-attachments/assets/7638f6c6-0605-4a78-ba40-802eac9acd2b)
+</a>
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Express.js]: https://img.shields.io/badge/Express.js-000000?logo=express&logoColor=fff&style=flat
+[Express-url]: https://expressjs.com/
+[Sequelize]: https://img.shields.io/badge/-Sequelize-52B0E7?style=flat-square&logo=sequelize&labelColor=52B0E7&logoColor=FFF
+[Sequelize-url]: https://sequelize.org/
+
+
