@@ -1,0 +1,67 @@
+.mainContainer {
+    padding: 120px 150px 70px 150px; /* Add units to padding values */
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    position: fixed; 
+    top: 0; 
+    left: 0;  
+    right: 0; 
+    bottom: 0; 
+    overflow: hidden;
+    background-color: #bbd0d8;
+}
+
+.header {
+    flex: 0 0 auto; 
+}
+
+.content {
+    border: none;
+    flex: 1 1 auto; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    box-shadow: 10px 40px 40px rgb(130, 130, 130);
+}
+/* Customize the scrollbar */
+::-webkit-scrollbar {
+    width: 8px; /* Set the width of the vertical scrollbar */
+    height: 8px; /* Set the height of the horizontal scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #CBBE83; /* Set the color of the scrollbar thumb */
+    border-radius: 10px; /* Round the corners of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-track {
+    background-color:#ced6dc; /* Set the color of the scrollbar track */
+    border-radius: 10px; /* Round the corners of the scrollbar track */
+}
+
+.itemPadding {
+    padding-top: 30px; /* Add units to padding values */
+}
+
+.addItem{
+    background-color: #3a5a40;
+    color: white;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+input{
+    /* border-radius: 15px; */
+    border: none; 
+    border-bottom: 2px solid #3a5a40; 
+    border-radius: 0;
+    outline: none; /* Remove the default outline */
+    
+}
+
+.AddItemCancel {
+    background-color: #346579;
+    color: white;
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}

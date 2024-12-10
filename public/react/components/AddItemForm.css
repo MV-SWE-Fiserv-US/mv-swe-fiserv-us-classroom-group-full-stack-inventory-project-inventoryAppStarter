@@ -1,0 +1,47 @@
+.itemForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    color: #346579;
+    margin-right: 20px;
+}
+
+.AddItemText {
+font-size: 20px;
+margin-top: 27px;
+margin-left: 10px;
+padding-right: 15px;
+margin-right: 10px;
+font-family: "Funnel Sans", sans-serif;
+text-wrap-mode: nowrap ;
+}
+
+.FormFont {
+    font-family: "Funnel Sans", sans-serif;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    
+}
+
+.AddButton {
+    border: 2px solid #ffffff00;
+    outline: none;
+    border-radius: 40px;
+    /* border-color: #ffffff; */;
+    background-color:#346579 ;
+    color: white;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formInput {
+    background-color: #ffffff00; ;
+}
